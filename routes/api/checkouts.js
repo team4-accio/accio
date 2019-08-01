@@ -12,6 +12,7 @@ router.route('/')
     // GET route for listing all checkouts sorted by id, with the most recent checkouts appearing first
     .get(function (req, res) {
         db.Checkout.find(req.body)
+            .populate({ path: 'items', options: { sort: { _id: -1 } } })
             .sort({ _id: -1 })
             .then(function (checkout) {
                 res.status(200).json(checkout);
@@ -57,6 +58,7 @@ router.route('/:_id')
     // GET route for retrieving a checkout by id
     .get(function (req, res) {
         db.Checkout.findById(req.params._id)
+            .populate({ path: 'items', options: { sort: { _id: -1 } } })
             .then(function (checkout) {
                 res.status(200).json(checkout);
             })
@@ -67,6 +69,7 @@ router.route('/:_id')
     // PATCH route for updating a checkout by id
     .patch(function (req, res) {
         db.Checkout.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
+            .populate({ path: 'items', options: { sort: { _id: -1 } } })
             .then(function (checkout) {
                 res.status(200).json(checkout);
             })
