@@ -52,4 +52,37 @@ router.route('/')
             });
     });
 
+// Matches with /api/checkouts/:_id
+router.route('/:_id')
+    // GET route for retrieving a checkout by id
+    .get(function (req, res) {
+        db.Checkout.findById(req.params._id)
+            .then(function (checkout) {
+                res.status(200).json(checkout);
+            })
+            .catch(function (err) {
+                res.status(500).json(err);
+            });
+    })
+    // PATCH route for updating a checkout by id
+    .patch(function (req, res) {
+        db.Checkout.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
+            .then(function (checkout) {
+                res.status(200).json(checkout);
+            })
+            .catch(function (err) {
+                res.status(500).json(err);
+            });
+    })
+    // DELETE route for deleting a checkout by id
+    .delete(function (req, res) {
+        db.Checkout.deleteOne({ _id: req.params._id })
+            .then(function (checkout) {
+                res.status(200).json(checkout);
+            })
+            .catch(function (err) {
+                res.status(500).json(err);
+            });
+    });
+
 module.exports = router;
