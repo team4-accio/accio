@@ -36,12 +36,31 @@ router.route('/')
                 } else {
                     db.Checkout.create(req.body)
                         .then(function (checkout) {
-                            res.status(200).json(checkout);
+                            let populateItems = true; // Enables items to populate in response
 
-                            // Update a user with the new checkout
-                            return db.User.findOneAndUpdate(
-                                { _id: user._id },
-                                { $push: { checkouts: checkout._id } });
+                            if (populateItems) {
+                                db.Checkout.findById(checkout._id)
+                                    .populate({ path: 'items', options: { sort: { _id: -1 } } })
+                                    .then(function (dbCheckout) {
+                                        res.status(200).json(dbCheckout);
+                                        console.log(user._id)
+                                        console.log(dbCheckout._id)
+                                        // Update a user with the new checkout
+                                        return db.User.findOneAndUpdate(
+                                            { _id: user._id },
+                                            { $push: { checkouts: dbCheckout._id } });
+                                    })
+                                    .catch(function (err) {
+                                        res.status(500).json(err);
+                                    });
+                            } else {
+                                res.status(200).json(checkout);
+
+                                // Update a user with the new checkout
+                                return db.User.findOneAndUpdate(
+                                    { _id: user._id },
+                                    { $push: { checkouts: checkout._id } });
+                            }
                         })
                         .catch(function (err) {
                             res.status(500).json(err);
