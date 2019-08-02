@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import CollapseBody from "./local-components/CollapseBody";
 
-const testObj = [
+const testArr = [
     {
         category: 'Laptop - PC',
         serialNumber: '11111',
@@ -82,7 +82,7 @@ class AdminInventory extends Component {
     }
 
     componentDidMount() {
-        this.sortItems(testObj)
+        this.sortItems(testArr)
         M.AutoInit();
     }
 
