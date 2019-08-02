@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import "./style.css";
 import StatusChanger from "../StatusChanger"
+import Axios from "axios";
 
 class UserElem extends Component {
     constructor(props) {
@@ -19,16 +20,32 @@ class UserElem extends Component {
 
     //TESTING FUNCTION
     updateUserState(field) {
+        let val = ""
        if  (field == "status") {
             let obj = this.state.user
-            obj.status == "active" ? obj.status = "inactive" : obj.status = "active"
+            obj.status == "active" ? val = "inactive" : val = "active"
+            //changes state to update page
+            //  not best practice in case patch req fails
+            obj.status=val
             this.setState({ user: obj })
         }
         else{
             let obj = this.state.user
-            obj.role == "user" ? obj.role = "admin" : obj.role = "user"
+            obj.role == "user" ? val = "admin" : val = "user"
+            //changes state to update page
+            //  not best practice in case patch req fails
+            obj.role=val
             this.setState({ user: obj })
         }
+
+        Axios({
+            method: 'patch',
+            url: '/api/users/'+this.state.user._id,
+            data: {
+              [field]: val
+            }
+          });
+          //.patch('/api/users/'+this.state.user._id)
     }
     render() {
         return (
