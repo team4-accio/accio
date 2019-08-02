@@ -1,72 +1,81 @@
 [
     {
         "category": "Laptop - PC",
-        "serialNumber": "11111",
-        "condition": "Good",
+        "name": "Laptop - PC",
+        "sn": "11111",
+        "condition": "good",
         "available": true,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []
     },
     {
         "category": "Laptop - PC",
-        "serialNumber": "22222",
-        "condition": "Okay",
+        "name": "Laptop - PC",
+        "sn": "22222",
+        "condition": "okay",
         "available": false,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []
     },
     {
         "category": "Laptop - PC",
-        "serialNumber": "33333",
-        "condition": "Bad",
+        "name": "Laptop - PC",
+        "sn": "33333",
+        "condition": "bad",
         "available": true,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []
     },
     {
         "category": "Laptop - Mac",
-        "serialNumber": "44444",
-        "condition": "Good",
+        "name": "Laptop - Mac",
+        "sn": "44444",
+        "condition": "good",
         "available": true,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []
     },
     {
         "category": "Laptop - Mac",
-        "serialNumber": "55555",
-        "condition": "Okay",
+        "name": "Laptop - Mac",
+        "sn": "55555",
+        "condition": "okay",
         "available": true,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []
     },
     {
         "category": "Laptop - Mac",
-        "serialNumber": "66666",
-        "condition": "Bad",
+        "name": "Laptop - Mac",
+        "sn": "66666",
+        "condition": "bad",
         "available": false,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []
     },
     {
         "category": "iPad",
-        "serialNumber": "77777",
-        "condition": "Good",
+        "name": "iPad",
+        "sn": "77777",
+        "condition": "good",
         "available": true,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []
     },
     {
         "category": "iPad",
-        "serialNumber": "88888",
-        "condition": "Okay",
+        "name": "iPad",
+        "sn": "88888",
+        "condition": "okay",
         "available": true,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []
     },
     {
         "category": "iPad",
-        "serialNumber": "99999",
-        "condition": "Bad",
+        "name": "iPad",
+        "sn": "99999",
+        "condition": "bad",
         "available": false,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "tags": []

@@ -8,17 +8,33 @@ class AdminInventory extends Component {
     state = {
         sortedItems: {}
     }
+    
+    // constructor (props){
+    //     super(props);
+      
+    //     this.state = {
+    //         sortedItems: {}
+    //       };
+      
+    //     this.sortItems = this.sortItems.bind(this);
+      
+    //   }
 
     componentDidMount() {
-        // axios.get('/items')
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-        this.sortItems(testArr)
+        this.getItems()
+        //this.sortItems(testArr)
         M.AutoInit();
+    }
+
+    getItems(){
+        axios.get('/api/items')
+        .then( (response) => {
+            console.log(response);
+            this.sortItems(response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     sortItems(items) {
