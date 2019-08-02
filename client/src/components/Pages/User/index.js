@@ -1,4 +1,8 @@
 import React from 'react';
+import M from "materialize-css";
+import Card from "./local-components/Card";
+
+
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -25,11 +29,21 @@ var items = [
     }
 ]
 
+
+
+
 class User extends React.Component {
 
     state = {
         items: items,
         filteredItems: []
+    }
+
+    // Auto Init allows you to initialize all of the Materialize Components with a single function call. It is important to note that you cannot pass in options using this method.
+
+    componentDidMount() {
+        this.changeFilter(items)
+        M.AutoInit();
     }
 
     changeFilter = (action) => {
@@ -63,7 +77,8 @@ class User extends React.Component {
                     return (
                         <div key={index}>
                             {/* <p>{each.name}</p> */}
-                            <div class="row">
+                            <Card />
+                            {/* <div class="row">
                                 <div class="col s12 m6">
                                     <div class="card blue-grey darken-1">
                                         <div class="card-content white-text">
@@ -76,7 +91,7 @@ class User extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     )
                 })}
