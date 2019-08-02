@@ -13,6 +13,7 @@ router.use('/api', api);
 
 // User authentication routes
 router.use('/login', auth.login);
+router.use('/logout', auth.logout);
 
 // If no API routes are hit, send React app
 router.use(function (req, res) {
