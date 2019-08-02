@@ -67,37 +67,32 @@ class User extends React.Component {
     render() {
         return (
             <div className="App">
+                <ul className="collapsible">
+                    <li>
+                        <div class="collapsible-header" onClick={() => this.changeFilter('checkedIn')}>
+                            <i class="material-icons">filter_drama</i>Laptop
+                        </div>
+                        <div class="collapsible-body">
+                            <span>
+                                {this.state.filteredinventory.map((item, index) => {
 
+                                    return (
+                                        <div key={index}>
+                                            {/* <p>{each.name}</p> */}
+                                            <Card product={item} />
+                                        </div>
+                                    )
+                                })}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
 
                 <button onClick={() => this.changeFilter('checkedIn')}>Checked in</button>
                 <button onClick={() => this.changeFilter('checkedOut')}>Checked out</button>
                 <button onClick={() => this.changeFilter('electronics')}>Electronics</button>
 
-                {this.state.filteredinventory.map((item, index) => {
 
-                    return (
-                        <div key={index}>
-                            {/* <p>{each.name}</p> */}
-
-                            <Card product={item} />
-
-                            {/* <div class="row">
-                                <div class="col s12 m6">
-                                    <div class="card blue-grey darken-1">
-                                        <div class="card-content white-text">
-                                            <span class="card-title">Card Title</span>
-                                            <p>{each.name}</p>
-                                        </div>
-                                        <div class="card-action">
-                                            <a href="#">This is a link</a>
-                                            <a href="#">This is a link</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
-                        </div>
-                    )
-                })}
             </div>
         );
     }
