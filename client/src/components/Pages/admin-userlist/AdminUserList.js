@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import CollapseBody from "./local-components/CollapseBody";
-
+import axios from "axios";
 import testArr from "./testArr.json"
 
 
@@ -12,10 +12,20 @@ class AdminUserList extends Component {
     }
 
     componentDidMount() {
-        this.sortUsers(testArr)
+        this.getUsers();
+        //this.sortUsers(testArr)
         M.AutoInit();
     }
-
+    getUsers(){
+        axios.get('/api/users')
+        .then( (response) => {
+            console.log(response);
+            this.sortUsers(response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
     sortUsers(arr) {
         let users = [];
         let admins = [];
