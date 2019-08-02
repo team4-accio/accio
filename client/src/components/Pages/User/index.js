@@ -6,7 +6,7 @@ import Card from "./local-components/Card";
 // import logo from './logo.svg';
 // import './App.css';
 
-var items = [
+var inventory = [
     {
         name: 'projector',
         type: 'electronic',
@@ -35,31 +35,31 @@ var items = [
 class User extends React.Component {
 
     state = {
-        items: items,
-        filteredItems: []
+        inventory: inventory,
+        filteredinventory: []
     }
 
     // Auto Init allows you to initialize all of the Materialize Components with a single function call. It is important to note that you cannot pass in options using this method.
 
     componentDidMount() {
-        this.changeFilter(items)
+        this.changeFilter(inventory)
         M.AutoInit();
     }
 
     changeFilter = (action) => {
         if (action === 'checkedIn') {
             this.setState({
-                filteredItems: this.state.items.filter(each => each.checkedOut === false)
+                filteredinventory: this.state.inventory.filter(each => each.checkedOut === false)
             })
         } else if (action === 'checkedOut') {
             this.setState({
-                filteredItems: this.state.items.filter(each => each.checkedOut === true)
+                filteredinventory: this.state.inventory.filter(each => each.checkedOut === true)
             })
         }
 
         else if (action === 'electronics') {
             this.setState({
-                filteredItems: this.state.items.filter(each => each.type === 'electronics')
+                filteredinventory: this.state.inventory.filter(each => each.type === 'electronics')
             })
         }
     }
@@ -73,11 +73,14 @@ class User extends React.Component {
                 <button onClick={() => this.changeFilter('checkedOut')}>Checked out</button>
                 <button onClick={() => this.changeFilter('electronics')}>Electronics</button>
 
-                {this.state.filteredItems.map((each, index) => {
+                {this.state.filteredinventory.map((item, index) => {
+
                     return (
                         <div key={index}>
                             {/* <p>{each.name}</p> */}
-                            <Card />
+
+                            <Card product={item} />
+
                             {/* <div class="row">
                                 <div class="col s12 m6">
                                     <div class="card blue-grey darken-1">
