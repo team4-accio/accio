@@ -7,19 +7,8 @@ const hashPass = require('hashPass');
 // Require all models
 const db = require('../../models');
 
-// Format the JSON response by removing sensitive data
-const formatResponse = function (res) {
-    return {
-        _id: res._id,
-        checkouts: res.checkouts,
-        createdAt: res.createdAt,
-        email: res.email,
-        name: res.name,
-        role: res.role,
-        status: res.status,
-        updatedAt: res.updatedAt
-    };
-};
+// Require all utilities
+const utils = require('../../utils');
 
 // Routes
 // Matches with /api/users
@@ -31,7 +20,7 @@ router.route('/')
             .sort({ _id: -1 })
             .then(function (users) {
                 res.status(200).json(
-                    users.map(user => formatResponse(user))
+                    users.map(user => utils.format.usersResponse(user))
                 );
             })
             .catch(function (err) {
@@ -60,7 +49,7 @@ router.route('/')
 
             db.User.create(request)
                 .then(function (user) {
-                    res.status(200).json(formatResponse(user));
+                    res.status(200).json(utils.format.usersResponse(user));
                 })
                 .catch(function (err) {
                     res.status(500).json(err);
@@ -75,7 +64,7 @@ router.route('/:_id')
         db.User.findById(req.params._id)
             .populate({ path: 'checkouts', options: { sort: { _id: -1 } } })
             .then(function (user) {
-                res.status(200).json(formatResponse(user));
+                res.status(200).json(utils.format.usersResponse(user));
             })
             .catch(function (err) {
                 res.status(500).json(err);
@@ -86,7 +75,7 @@ router.route('/:_id')
         db.User.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
             .populate({ path: 'checkouts', options: { sort: { _id: -1 } } })
             .then(function (user) {
-                res.status(200).json(formatResponse(user));
+                res.status(200).json(utils.format.usersResponse(user));
             })
             .catch(function (err) {
                 res.status(500).json(err);
