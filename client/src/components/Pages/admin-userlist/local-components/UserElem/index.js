@@ -38,19 +38,19 @@ class UserElem extends Component {
                 <div>
                     {this.state.user.email}
                     <br />
-                    {this.state.user.status.charAt(0).toUpperCase() + this.state.user.status.slice(1) + " "}
+                    {this.state.user.role.charAt(0).toUpperCase() + this.state.user.role.slice(1) + " "}
                     <StatusChanger
-                        field="status"
-                        status={this.state.user.status}
+                        field="role"
+                        status={this.state.user.role}
                         editStatus={false}
                         userName={this.state.user.name}
                         parent={this}
                     />
                     <br />
-                    {this.state.user.role.charAt(0).toUpperCase() + this.state.user.role.slice(1) + " "}
+                    {this.state.user.status.charAt(0).toUpperCase() + this.state.user.status.slice(1) + " "}
                     <StatusChanger
-                        field="role"
-                        status={this.state.user.role}
+                        field="status"
+                        status={this.state.user.status}
                         editStatus={false}
                         userName={this.state.user.name}
                         parent={this}
