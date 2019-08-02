@@ -2,9 +2,13 @@
 
 // Dependencies
 const router = require('express').Router(); // Create a Router instance
+const hashPass = require('hashPass');
 
 // Require all models
 const db = require('../../models');
+
+// Require all utilities
+const utils = require('../../utils');
 
 // Routes
 // Matches with /api/users
@@ -14,8 +18,10 @@ router.route('/')
         db.User.find(req.body)
             .populate({ path: 'checkouts', options: { sort: { _id: -1 } } })
             .sort({ _id: -1 })
-            .then(function (user) {
-                res.status(200).json(user);
+            .then(function (users) {
+                res.status(200).json(
+                    users.map(user => utils.format.usersResponse(user))
+                );
             })
             .catch(function (err) {
                 res.status(500).json(err);
@@ -23,13 +29,32 @@ router.route('/')
     })
     // POST route for creating a user
     .post(function (req, res) {
-        db.User.create(req.body)
-            .then(function (user) {
-                res.status(200).json(user);
-            })
-            .catch(function (err) {
-                res.status(500).json(err);
+        if (req.body.password !== req.body.passwordConfirm) {
+            res.status(400).json({
+                error: {
+                    code: 400,
+                    message: 'Passwords do not match'
+                }
             });
+        } else {
+            const password = hashPass(req.body.password);
+            const request = {
+                email: req.body.email,
+                name: req.body.name,
+                password: password.hash,
+                role: req.body.role,
+                salt: password.salt,
+                status: req.body.status
+            };
+
+            db.User.create(request)
+                .then(function (user) {
+                    res.status(200).json(utils.format.usersResponse(user));
+                })
+                .catch(function (err) {
+                    res.status(500).json(err);
+                });
+        }
     });
 
 // Matches with /api/users/:_id
@@ -39,7 +64,7 @@ router.route('/:_id')
         db.User.findById(req.params._id)
             .populate({ path: 'checkouts', options: { sort: { _id: -1 } } })
             .then(function (user) {
-                res.status(200).json(user);
+                res.status(200).json(utils.format.usersResponse(user));
             })
             .catch(function (err) {
                 res.status(500).json(err);
@@ -50,7 +75,7 @@ router.route('/:_id')
         db.User.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
             .populate({ path: 'checkouts', options: { sort: { _id: -1 } } })
             .then(function (user) {
-                res.status(200).json(user);
+                res.status(200).json(utils.format.usersResponse(user));
             })
             .catch(function (err) {
                 res.status(500).json(err);
