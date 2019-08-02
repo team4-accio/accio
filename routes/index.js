@@ -6,9 +6,13 @@ const router = require('express').Router(); // Create a Router instance
 
 // Require all API routes
 const api = require('./api');
+const auth = require('./auth');
 
-// API Routes
+// API routes
 router.use('/api', api);
+
+// User authentication routes
+router.use('/login', auth.login);
 
 // If no API routes are hit, send React app
 router.use(function (req, res) {
