@@ -3,16 +3,17 @@ import "./style.css";
 
 function Card(props) {
     return (
-        <div class="row">
-            <div class="col s12 m6">
-                <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
-                        <span class="card-title"><p>{props.product.name}</p></span>
+        <div className="row">
+            <div className="col s12 m6">
+                <div className="card blue-grey darken-1">
+                    <div className="card-content white-text">
+                        <span className="card-title"><p>{props.category}</p></span>
 
                     </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                        <a href="#">This is a link</a>
+                    <div className="card-action">
+                        <p>{props.condition}</p>
+                        {/* <a href="#">This is a link</a>
+                        <a href="#">This is a link</a> */}
                     </div>
                 </div>
             </div>
