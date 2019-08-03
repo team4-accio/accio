@@ -24,6 +24,9 @@ class StatusChanger extends Component {
     changeUserStatus() {
         //CALL TO CHANGE USER STATUS
         //    //determine field to change based on this.state.field
+        
+        
+        
         // Might add password verification instead of switch
 
         this.setState({ editStatus: !this.state.editStatus });

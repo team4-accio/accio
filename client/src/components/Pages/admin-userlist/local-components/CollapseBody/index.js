@@ -33,7 +33,6 @@ class CollapseBody extends Component {
     }
     // fired when child's history onclick is triggered 
     updateModalContent(userName) {
-        //Should make call to get history/checkouts here
         //console.log(userName)
         // Testing arr search
         let user = this.state.users.find(obj => {
@@ -66,7 +65,7 @@ class CollapseBody extends Component {
                         <div className="modal-content">
                             <h4>{this.state.modalContent.userName}'s History:</h4>
                             <ul className="collection">
-                                {this.state.modalContent.history.reverse().map((item) => (
+                                {this.state.modalContent.history.map((item) => (
                                     <HistoryElem
                                         {...item}
                                     />
