@@ -1,0 +1,22 @@
+.card{
+    height: 100%;
+    width: 100%;
+    /* background-color: transparent; */
+}
+.card-image{
+    height: 100%;
+    width: 100%;
+}
+img{
+    height: 100%;
+    width: 100%;
+    /* border-radius: 50% !important;
+    background-color: transparent; */
+} 
+.circle{
+    
+    border-radius: 50% !important;
+}
+.card-container{
+    align-items: center;
+}
