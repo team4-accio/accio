@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import M from "materialize-css";
+import {Autocomplete} from "react-materialize";
 import CollapseBody from "./local-components/CollapseBody";
 import axios from "axios";
 import testArr from "./testArr.json"

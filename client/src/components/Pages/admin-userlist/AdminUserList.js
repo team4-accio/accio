@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import M from "react-materialize";
+import M from "materialize-css";
 import CollapseBody from "./local-components/CollapseBody";
-import Autocomplete from "./local-components/Autocomplete";
+//import Autocomplete from "./local-components/Autocomplete";
 import axios from "axios";
 import testArr from "./testArr.json"
 
@@ -17,7 +17,6 @@ class AdminUserList extends Component {
         //this.sortUsers(testArr)
         M.AutoInit();
 
-        
     }
     getUsers() {
         axios.get('/api/users')
@@ -32,10 +31,10 @@ class AdminUserList extends Component {
     sortUsers(arr) {
         // sorts data for autocomplete to use
         let data = {};
-        for(let i in arr){
-            data[arr[i].name]= null // can set to img link if we add profile images   'https://placehold.it/250x250'
+        for (let i in arr) {
+            data[arr[i].name] = null // can set to img link if we add profile images   'https://placehold.it/250x250'
         }
-        this.setState({ searchData:data })
+        this.setState({ searchData: data })
 
         // sorts data for this page to use
         let users = [];
@@ -51,31 +50,31 @@ class AdminUserList extends Component {
         }
         this.setState({ userList: users, adminList: admins })
 
-        //this.createSearchData()
+        this.createSearchData()
     }
 
-    // //creates obj of user names for autocomplete field to use
-    // createSearchData(){
-    //     let userList = this.state.userList;
-    //     let adminList = this.state.adminList;
-    //     let list = userList.concat(adminList);
-    //     let tempObj = {};
+    //creates obj of user names for autocomplete field to use
+    createSearchData() {
+        let userList = this.state.userList;
+        let adminList = this.state.adminList;
+        let list = userList.concat(adminList);
+        let tempObj = {};
 
-    //     for(let i in list){
-    //         tempObj[list[i].name]= null // can set to img link if we add profile images   'https://placehold.it/250x250'
-    //     }
-    //     let options = {
-    //         data: tempObj
-    //     };
+        for (let i in list) {
+            tempObj[list[i].name] = null // can set to img link if we add profile images   'https://placehold.it/250x250'
+        }
+        let options = {
+            data: tempObj
+        };
 
-    //     this.initAutoComplete(options);
-    // }
-    // initAutoComplete(options){
-    //     let autocomplete = document.querySelectorAll('.autocomplete');
+        this.initAutoComplete(options);
+    }
+    initAutoComplete(options) {
+        let autocomplete = document.querySelectorAll('.autocomplete');
 
 
-    //     M.Autocomplete.init(autocomplete, options);
-    // }
+        M.Autocomplete.init(autocomplete, options);
+    }
     render() {
         return (
             <div>
@@ -84,7 +83,26 @@ class AdminUserList extends Component {
                         <a className="waves-effect waves-light btn-large disabled">All</a>
                     </div>
 
-                    <Autocomplete searchData={this.state.searchData}/>
+                    <div className="col s4 right">
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <a className='dropdown-trigger btn-flat prefix left' href='#' data-target='dropdown1'><i className="material-icons prefix left ">search</i><i className="material-icons prefix" style={{fontSize: "20px", paddingTop: "10px"}}>expand_more</i></a>
+
+
+                                <ul id='dropdown1' className='dropdown-content'>
+                                    <li><a href="#!" className="waves-effect waves-teal btn-flat">Name</a></li>
+                                    <li><a href="#!" className='waves-effect waves-teal btn-flat disabled'>Email</a></li>
+                                    <li className="divider" tabIndex="-1"></li>
+                                    <li><a href="#!" className='waves-effect waves-teal btn-flat disabled'>Status</a></li>
+                                    <li><a href="#!" className='waves-effect waves-teal btn-flat disabled'>Overdue</a></li>
+                                </ul>
+                                <input type="text" id="autocomplete-input" className="autocomplete" />
+                                <label htmlFor="autocomplete-input">Autocomplete</label>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <ul className="collapsible">
