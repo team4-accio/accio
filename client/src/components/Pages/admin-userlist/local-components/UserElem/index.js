@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import M from "materialize-css";
+import M from "react-materialize";
 import "./style.css";
 import StatusChanger from "../StatusChanger"
 import Axios from "axios";

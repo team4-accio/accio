@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./style.css";
-import M from "materialize-css";
+import M from "react-materialize";
 import UserElem from "../UserElem";
 import HistoryElem from "../HistoryElem";
 
