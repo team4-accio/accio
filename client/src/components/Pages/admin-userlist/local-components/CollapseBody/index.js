@@ -55,13 +55,13 @@ class CollapseBody extends Component {
                         this.state.users.map((user) => (
                             <UserElem
                                 user={user}
-                                userType = {this.state.listType}
+                                userType={this.state.listType}
                                 parent={this}
                             />
                         ))
                     }
                 </ul>
-                {this.state.listType == "users" ?
+                {this.state.listType === "users" ?
                     <div id="modal1" className="modal bottom-sheet">
                         <div className="modal-content">
                             <h4>{this.state.modalContent.userName}'s History:</h4>
@@ -73,7 +73,7 @@ class CollapseBody extends Component {
                                 ))}
                             </ul>
                         </div>
-                        
+
                     </div>
                     : null
                 }

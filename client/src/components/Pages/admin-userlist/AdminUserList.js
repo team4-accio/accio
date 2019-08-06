@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import CollapseBody from "./local-components/CollapseBody";
 import axios from "axios";
-import testArr from "./testArr.json"
+// import testArr from "./testArr.json"
 
 
 class AdminUserList extends Component {
@@ -16,22 +16,22 @@ class AdminUserList extends Component {
         //this.sortUsers(testArr)
         M.AutoInit();
     }
-    getUsers(){
+    getUsers() {
         axios.get('/api/users')
-        .then( (response) => {
-            console.log(response);
-            this.sortUsers(response.data)
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .then((response) => {
+                console.log(response);
+                this.sortUsers(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     sortUsers(arr) {
         let users = [];
         let admins = [];
 
         for (let i in arr) {
-            if (arr[i].role == "user") {
+            if (arr[i].role === "user") {
                 users.push(arr[i])
             }
             else {
@@ -49,7 +49,7 @@ class AdminUserList extends Component {
                     <li key="admins-li">
                         <div className="collapsible-header"><i className="material-icons">build</i>Admins</div>
                         <CollapseBody key="admins"
-                        listType="admins" users={this.state.adminList} >
+                            listType="admins" users={this.state.adminList} >
                         </CollapseBody>
                     </li>
                     <li key="users-li" className="active">
@@ -59,7 +59,7 @@ class AdminUserList extends Component {
                     </li>
 
                 </ul>
-                
+
             </div>
         );
     }

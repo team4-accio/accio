@@ -1,8 +1,8 @@
 // import React, { Component } from "react";
 import React from "react";
 import M from "materialize-css";
-import Card from "./local-components/Card";
-// import CollapseBody from "./local-components/CollapseBody";
+// import Card from "./local-components/Card";
+import CollapseBody from "./local-components/CollapseBody";
 import axios from "axios";
 // import testArr from "./testArr.json"
 
@@ -84,6 +84,21 @@ class User extends React.Component {
         //         })
         //     }
     }
+    // render() {
+    //     return (
+    //         <div>
+    //             <ul className="collapsible">
+    //                 {Object.keys(this.state.filteredinventory).map((keyName, keyIndex) => (
+    //                     <li key={keyIndex + '-li'}>
+    //                         <div className="collapsible-header"><i className="material-icons">create</i>{keyName}</div>
+    //                         <CollapseBody category={keyName} key={keyIndex} items={this.state.filteredinventory[keyName]} >
+    //                         </CollapseBody>
+    //                     </li>
+    //                 ))}
+    //             </ul>
+    //         </div>
+    //     )
+    // }
     render() {
         console.log("rendered")
         return (
@@ -94,19 +109,20 @@ class User extends React.Component {
                         <div className="collapsible-header" onClick={() => this.changeFilter('Laptop - Mac')}>
                             <i className="material-icons">filter_drama</i>Laptop - Mac
                         </div>
-                        <div className="collapsible-body">
+                        <CollapseBody category={item.category} condition={item.condition} />;
+                        {/* <div className="collapsible-body">
                             <span>
                                 {this.state.filteredinventory.map((item, index) => {
 
                                     return (
                                         <div key={index}>
-                                            {/* <p>{each.name}</p> */}
+                                           
                                             <Card category={item.category} condition={item.condition} />
                                         </div>
                                     )
                                 })}
                             </span>
-                        </div>
+                        </div> */}
                     </li>
                 </ul>
 
