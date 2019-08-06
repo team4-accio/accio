@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const accio = require('./config');
 
 // Require all routes
-const routes = require('./routes');
+const routes = require('./app');
 
 // Initialize Express
 const app = express();

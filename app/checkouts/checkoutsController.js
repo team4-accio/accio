@@ -3,15 +3,18 @@
 // Dependencies
 const router = require('express').Router(); // Create a Router instance
 
-// Require all models
-const db = require('../../models');
+// Require Checkout model
+const Checkout = require('./checkoutsModel');
+
+// Require User model
+const User = require('../users').model;
 
 // Routes
 // Matches with /api/checkouts
 router.route('/')
     // GET route for listing all checkouts sorted by id, with the most recent checkouts appearing first
     .get(function (req, res) {
-        db.Checkout.find(req.body)
+        Checkout.find(req.query)
             .populate({ path: 'items', options: { sort: { _id: -1 } } })
             .sort({ _id: -1 })
             .then(function (checkout) {
@@ -24,7 +27,7 @@ router.route('/')
     // POST route for creating a checkout
     .post(function (req, res) {
         // Check if user exists before creating a checkout
-        db.User.findById(req.body.user)
+        User.findById(req.body.user)
             .then(function (user) {
                 if (user === null) {
                     res.status(404).json({
@@ -34,19 +37,18 @@ router.route('/')
                         }
                     });
                 } else {
-                    db.Checkout.create(req.body)
+                    Checkout.create(req.body)
                         .then(function (checkout) {
                             let populateItems = true; // Enables items to populate in response
 
                             if (populateItems) {
-                                db.Checkout.findById(checkout._id)
+                                Checkout.findById(checkout._id)
                                     .populate({ path: 'items', options: { sort: { _id: -1 } } })
                                     .then(function (dbCheckout) {
                                         res.status(200).json(dbCheckout);
-                                        console.log(user._id)
-                                        console.log(dbCheckout._id)
+
                                         // Update a user with the new checkout
-                                        return db.User.findOneAndUpdate(
+                                        return User.findOneAndUpdate(
                                             { _id: user._id },
                                             { $push: { checkouts: dbCheckout._id } });
                                     })
@@ -57,7 +59,7 @@ router.route('/')
                                 res.status(200).json(checkout);
 
                                 // Update a user with the new checkout
-                                return db.User.findOneAndUpdate(
+                                return User.findOneAndUpdate(
                                     { _id: user._id },
                                     { $push: { checkouts: checkout._id } });
                             }
@@ -76,7 +78,7 @@ router.route('/')
 router.route('/:_id')
     // GET route for retrieving a checkout by id
     .get(function (req, res) {
-        db.Checkout.findById(req.params._id)
+        Checkout.findById(req.params._id)
             .populate({ path: 'items', options: { sort: { _id: -1 } } })
             .then(function (checkout) {
                 res.status(200).json(checkout);
@@ -87,7 +89,7 @@ router.route('/:_id')
     })
     // PATCH route for updating a checkout by id
     .patch(function (req, res) {
-        db.Checkout.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
+        Checkout.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
             .populate({ path: 'items', options: { sort: { _id: -1 } } })
             .then(function (checkout) {
                 res.status(200).json(checkout);
@@ -98,7 +100,7 @@ router.route('/:_id')
     })
     // DELETE route for deleting a checkout by id
     .delete(function (req, res) {
-        db.Checkout.deleteOne({ _id: req.params._id })
+        Checkout.deleteOne({ _id: req.params._id })
             .then(function (checkout) {
                 res.status(200).json(checkout);
             })

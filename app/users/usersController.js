@@ -4,18 +4,18 @@
 const router = require('express').Router(); // Create a Router instance
 const hashPass = require('hashPass');
 
-// Require all models
-const db = require('../../models');
+// Require User model
+const User = require('./usersModel');
 
-// Require all utilities
-const utils = require('../../utils');
+// Require utilities
+const utils = require('../utils');
 
 // Routes
 // Matches with /api/users
 router.route('/')
     // GET route for listing all users sorted by id, with the most recent users appearing first
     .get(function (req, res) {
-        db.User.find(req.body)
+        User.find(req.query)
             .populate({
                 path: 'checkouts',
                 populate: { path: 'items' },
@@ -51,7 +51,7 @@ router.route('/')
                 status: req.body.status
             };
 
-            db.User.create(request)
+            User.create(request)
                 .then(function (user) {
                     res.status(200).json(utils.format.usersResponse(user));
                 })
@@ -65,7 +65,7 @@ router.route('/')
 router.route('/:_id')
     // GET route for retrieving a user by id
     .get(function (req, res) {
-        db.User.findById(req.params._id)
+        User.findById(req.params._id)
             .populate({
                 path: 'checkouts',
                 populate: { path: 'items' },
@@ -80,7 +80,7 @@ router.route('/:_id')
     })
     // PATCH route for updating a user by id
     .patch(function (req, res) {
-        db.User.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
+        User.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
             .populate({
                 path: 'checkouts',
                 populate: { path: 'items' },
@@ -95,7 +95,7 @@ router.route('/:_id')
     })
     // DELETE route for deleting a user by id
     .delete(function (req, res) {
-        db.User.deleteOne({ _id: req.params._id })
+        User.deleteOne({ _id: req.params._id })
             .then(function (user) {
                 res.status(200).json(user);
             })
