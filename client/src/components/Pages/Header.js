@@ -1,4 +1,3 @@
-import React fromm "react"
 function Header() {
   return (
     <nav class="navbar">
@@ -20,5 +19,6 @@ function Header() {
       </div>
     </nav>
   );
+}
 
 export default Header;
