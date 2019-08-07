@@ -8,38 +8,38 @@ import axios from "axios";
 
 class User extends React.Component {
 
-    state = {
+    // state = {
 
-        filteredInventory: [],
-        inventory: []
-    }
+    //     filteredInventory: [],
+    //     inventory: []
+    // }
 
-    componentDidMount() {
-        this.getItems()
-        console.log("component mount")
-        // this.changeFilter(inventory)
-        M.AutoInit();
-    };
+    // componentDidMount() {
+    //     this.getItems()
+    //     console.log("component mount")
+    //     // this.changeFilter(inventory)
+    //     M.AutoInit();
+    // };
 
-    getItems() {
-        console.log("get items")
-        axios.get('/api/items')
-            .then((response) => {
-                console.log("axios");
-                this.setState({
-                    inventory: response.data
-                })
+    // getItems() {
+    //     console.log("get items")
+    //     axios.get('/api/items')
+    //         .then((response) => {
+    //             console.log("axios");
+    //             this.setState({
+    //                 inventory: response.data
+    //             })
 
-                // const inventoryItem = response.data;
-                // console.log(inventoryItem);
-                // this.changeFilter();
-                //this.sortItems(response.data)
+    //             // const inventoryItem = response.data;
+    //             // console.log(inventoryItem);
+    //             // this.changeFilter();
+    //             //this.sortItems(response.data)
 
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    };
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         })
+    // };
 
     // changeFilter = (action) => {
     //     console.log("change filter")
@@ -63,10 +63,14 @@ class User extends React.Component {
 
     render() {
         console.log("rendered")
-        console.log(this.state.inventory)
+        // console.log(this.props.inventory)
         return (
             <div className="App">
-                <CollapseBody inventory={this.state.inventory} />
+
+                <CollapseBody
+                    inventory={this.props.inventory}
+                    handleRequest={this.props.handleRequest}
+                />
 
 
                 {/* <button onClick={() => this.changeFilter('checkedIn')}>Checked in</button>
