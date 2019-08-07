@@ -9,12 +9,16 @@ const Checkout = require('./checkoutsModel');
 // Require User model
 const User = require('../users').model;
 
+// Require utilities
+const utils = require('../utils');
+
 // Routes
 // Matches with /api/checkouts
 router.route('/')
     // GET route for listing all checkouts sorted by id, with the most recent checkouts appearing first
     .get(function (req, res) {
-        Checkout.find(req.query)
+        const query = utils.format.query(req.query);
+        Checkout.find(query)
             .populate({ path: 'items', options: { sort: { _id: -1 } } })
             .sort({ _id: -1 })
             .then(function (checkout) {

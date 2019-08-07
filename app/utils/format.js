@@ -12,5 +12,18 @@ module.exports = {
             status: res.status,
             updatedAt: res.updatedAt
         };
+    },
+    query: function (query) {
+        const keys = Object.keys(query);
+        keys.forEach(key => {
+            if ((key === 'createdAt') ||
+                (key === 'updatedAt') ||
+                (key === 'out') ||
+                (key === 'return')) {
+                query[key] = JSON.parse(query[key]);
+            }
+        });
+
+        return query;
     }
 };
