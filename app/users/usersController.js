@@ -15,7 +15,8 @@ const utils = require('../utils');
 router.route('/')
     // GET route for listing all users sorted by id, with the most recent users appearing first
     .get(function (req, res) {
-        User.find(req.query)
+        const query = utils.format.query(req.query);
+        User.find(query)
             .populate({
                 path: 'checkouts',
                 populate: { path: 'items' },

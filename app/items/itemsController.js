@@ -6,12 +6,16 @@ const router = require('express').Router(); // Create a Router instance
 // Require Item model
 const Item = require('./itemsModel');
 
+// Require utilities
+const utils = require('../utils');
+
 // Routes
 // Matches with /api/items
 router.route('/')
     // GET route for listing all items sorted by id, with the most recent items appearing first
     .get(function (req, res) {
-        Item.find(req.query)
+        const query = utils.format.query(req.query);
+        Item.find(query)
             .sort({ _id: -1 })
             .then(function (item) {
                 res.status(200).json(item);
