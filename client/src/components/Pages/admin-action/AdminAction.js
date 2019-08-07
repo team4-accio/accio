@@ -125,9 +125,9 @@ class AdminAction extends Component {
         }
 
         let obj = {
-            "pending": pending,
-            "out": out,
-            "overdue": overdue
+            "Pending": pending,
+            "Out": out,
+            "Overdue": overdue
         }
         console.log(obj)
         this.setState({ sortedActions: obj })

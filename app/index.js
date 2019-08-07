@@ -5,15 +5,20 @@ const path = require('path');
 const router = require('express').Router(); // Create a Router instance
 
 // Require all API routes
-const api = require('./api');
+const checkouts = require('./checkouts');
+const items = require('./items');
+const users = require('./users');
+
+// Require authentication routes
 const auth = require('./auth');
 
 // API routes
-router.use('/api', api);
+router.use('/api/checkouts', checkouts.controller);
+router.use('/api/items', items.controller);
+router.use('/api/users', users.controller);
 
-// User authentication routes
+// Authentication routes
 router.use('/login', auth.login);
-router.use('/logout', auth.logout);
 
 // If no API routes are hit, send React app
 router.use(function (req, res) {

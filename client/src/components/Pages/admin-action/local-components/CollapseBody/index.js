@@ -14,15 +14,6 @@ class CollapseBody extends Component {
 
 
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log(nextProps)
-    //     this.setState(
-    //         {
-    //             type: nextProps.category
-    //         }
-    //     );
-    // }
-
 
     // Need to tie in information from adminaction below
     render() {
@@ -34,6 +25,7 @@ class CollapseBody extends Component {
                     this.state.actions.map((action) => (
                         <ListAction 
                             action={action}
+                            type={this.state.type}
                         />
                     ))
                 }
