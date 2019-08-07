@@ -5,7 +5,7 @@ import CollapseBody from "./local-components/CollapseBody";
 import axios from "axios";
 import API from "../../../utils/API"
 import testArr from "./testArr.json"
-import { Query } from "mongoose";
+
 
 
 class AdminUserList extends Component {
@@ -20,7 +20,7 @@ class AdminUserList extends Component {
 
     componentDidMount() {
         this.getUsers("all");
-        
+
         M.AutoInit();
     }
 
