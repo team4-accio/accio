@@ -3,7 +3,10 @@ import M from "materialize-css";
 import CollapseBody from "./local-components/CollapseBody";
 //import Autocomplete from "./local-components/Autocomplete";
 import axios from "axios";
+import API from "../../../utils/API"
 import testArr from "./testArr.json"
+import { Query } from "mongoose";
+
 
 class AdminUserList extends Component {
     state = {
@@ -17,44 +20,30 @@ class AdminUserList extends Component {
 
     componentDidMount() {
         this.getUsers("all");
-        //this.sortUsers(testArr)
+        
         M.AutoInit();
+    }
 
-    }
+    //Gets users based on passed filter state
     getUsers(filter, query) {
-        console.log(filter, query)
-        filter === "all"
-            ? axios.get('/api/users')
-                .then((response) => {
-                    console.log(response);
-                    this.sortUsers(response.data)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-            : filter === "Name"
-                ? axios.get('/api/users', {
-                    data: {
-                      [filter]: query
-                    }
-                  }) //cant have body in get req w/ axios
-                    .then((response) => {
-                        console.log(response);
-                        this.sortUsers(response.data)
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-                : filter === "Email"
-                    ? console.log("Email: " + query)
-                    : filter === "Status"
-                        ? console.log("Status: " + query)
-                        : filter === "Overdue"
-                            ? console.log("Overdue: " + query)
-                            : console.log("Not a valid filter")
+        //console.log(filter, query)
+        (filter === "all"
+            ? API.getAllUsers()
+            : ["Name", "Email", "Status"].includes(filter)
+                ? API.getFilteredUsers(filter, query) //cant have body in get req w/ axios
+                : filter === "Overdue"
+                    ? API.getOverdueUsers()
+                    : console.log("Not a valid filter")
+        ).then((response) => {
+            console.log(response);
+            this.sortUsers(response.data)
+        })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
+    // sorts data from getUsers for autocomplete to use
     sortUsers(arr) {
-        // sorts data for autocomplete to use
         let data = {};
         for (let i in arr) {
             data[arr[i].name] = null // can set to img link if we add profile images   'https://placehold.it/250x250'
@@ -91,7 +80,7 @@ class AdminUserList extends Component {
         let options = {
             data: tempObj,
             onAutocomplete: (val) => {
-                //this.setState({value:val})
+                this.setState({ value: val })
                 this.getUsers(this.state.searchFilter, val)
             }
         };
@@ -125,8 +114,8 @@ class AdminUserList extends Component {
     }
     handleFormSubmit = event => {
         event.preventDefault();
-        
-        
+
+
     }
     render() {
         return (
@@ -155,7 +144,7 @@ class AdminUserList extends Component {
                                     <li><a href="#!" onClick={() => this.changeSearchFilter("Status")} className='waves-effect waves-teal btn-flat disabled'>Status</a></li>
                                     <li><a href="#!" onClick={() => this.changeSearchFilter("Overdue")} className='waves-effect waves-teal btn-flat disabled'>Overdue</a></li>
                                 </ul>
-                                <input type="text" id="autocomplete-input" className="autocomplete" value={this.state.value} onChange={this.handleInputChange} onClick={this.handleInputChange}/>
+                                <input type="text" id="autocomplete-input" className="autocomplete" value={this.state.value} onChange={this.handleInputChange} onClick={this.handleInputChange} />
                                 <label htmlFor="autocomplete-input">{this.state.searchFilter}</label>
 
                             </div>

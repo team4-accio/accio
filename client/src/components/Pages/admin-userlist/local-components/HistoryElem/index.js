@@ -20,24 +20,24 @@ function HistoryElem(props) {
         )
     }
 
-    function returnDates(){
-        
+    function returnDates() {
+
         let outDate = moment(props.out)
         let returnDate = moment(props.return)
         let isOut = props.status === "approved";
         let textColor = "";
 
         isOut && returnDate.isBefore(moment())
-        ? textColor = "#770001" //red
-        : isOut
-        ? textColor = "#228B22" // green
-        : textColor = "black"
+            ? textColor = "#770001" //red
+            : isOut
+                ? textColor = "#228B22" // green
+                : textColor = "black"
 
         return (
             <p style={{ color: textColor }}>{outDate.format("DD MMM YYYY")} to {returnDate.format("DD MMM YYYY")}</p>
         )
     }
-    
+
 
     return (
 
