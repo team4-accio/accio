@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import "./style.css";
 
 
-function AddToCartButton(props) {
+function AddToCartButton() {
     return (
-        <button>Request</button>
+
+        <button onClick={() => { }}>Request</button>
+
     )
 }
 
