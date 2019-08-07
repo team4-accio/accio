@@ -1,39 +1,16 @@
 // import React, { Component } from "react";
 import React from "react";
 import M from "materialize-css";
-import Card from "./local-components/Card";
-// import CollapseBody from "./local-components/CollapseBody";
+// import Card from "./local-components/Card";
+import CollapseBody from "./local-components/CollapseBody";
 import axios from "axios";
 // import testArr from "./testArr.json"
-
-// var inventory = [
-//     {
-//         name: 'projector',
-//         type: 'electronic',
-//         checkedOut: false,
-//     },
-//     {
-//         name: 'laptop',
-//         type: 'electronics',
-//         checkedOut: true,
-//     },
-//     {
-//         name: 'A great day',
-//         type: 'book',
-//         checkedOut: false,
-//     },
-//     {
-//         name: 'A great winter',
-//         type: 'book',
-//         checkedOut: true,
-//     }
-// ]
 
 class User extends React.Component {
 
     state = {
 
-        filteredinventory: [],
+        filteredInventory: [],
         inventory: []
     }
 
@@ -64,51 +41,33 @@ class User extends React.Component {
             })
     };
 
-    changeFilter = (action) => {
-        console.log("change filter")
-        var currentInventory = this.state.inventory;
-        if (action === 'Laptop - Mac') {
-            console.log("conditional laptop")
-            console.log(currentInventory.filter(each => each.category === 'Laptop - Mac'))
-            this.setState({
-                filteredinventory: currentInventory.filter(each => each.category === 'Laptop - Mac')
-            })
-            // } else if (action === 'checkedOut') {
-            //     this.setState({
-            //         filteredinventory: this.state.inventory.filter(each => each.checkedOut === true)
-            //     })
-        }
-        //     else if (action === 'electronics') {
-        //         this.setState({
-        //             filteredinventory: this.state.inventory.filter(each => each.type === 'electronics')
-        //         })
-        //     }
-    }
+    // changeFilter = (action) => {
+    //     console.log("change filter")
+    //     var currentInventory = this.state.inventory;
+    //     if (action === 'Laptop - Mac') {
+    //         console.log("conditional laptop")
+    //         console.log(currentInventory.filter(each => each.category === 'Laptop - Mac'))
+    //         this.setState({
+    //             filteredinventory: currentInventory.filter(each => each.category === 'Laptop - Mac')
+    //         })
+    //         // } else if (action === 'checkedOut') {
+    //         //     this.setState({
+    //         //         filteredinventory: this.state.inventory.filter(each => each.checkedOut === true)
+    //         //     })
+    //     }
+    //     else if (action === 'electronics') {
+    //         this.setState({
+    //             filteredinventory: this.state.inventory.filter(each => each.type === 'electronics')
+    //         })
+    //     }
+
     render() {
         console.log("rendered")
+        console.log(this.state.inventory)
         return (
             <div className="App">
+                <CollapseBody inventory={this.state.inventory} />
 
-                <ul className="collapsible">
-                    <li>
-                        <div className="collapsible-header" onClick={() => this.changeFilter('Laptop - Mac')}>
-                            <i className="material-icons">filter_drama</i>Laptop - Mac
-                        </div>
-                        <div className="collapsible-body">
-                            <span>
-                                {this.state.filteredinventory.map((item, index) => {
-
-                                    return (
-                                        <div key={index}>
-                                            {/* <p>{each.name}</p> */}
-                                            <Card category={item.category} condition={item.condition} />
-                                        </div>
-                                    )
-                                })}
-                            </span>
-                        </div>
-                    </li>
-                </ul>
 
                 {/* <button onClick={() => this.changeFilter('checkedIn')}>Checked in</button>
                     <button onClick={() => this.changeFilter('checkedOut')}>Checked out</button>
