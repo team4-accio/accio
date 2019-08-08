@@ -3,29 +3,41 @@ import axios from "axios";
 
 export default class Login extends React.Component {
   state = {
-    useremail: "",
-    userpassword: ""
+    email: "",
+    password: ""
   };
 
+  // handleChange = event => {
+  //   this.setState({ email: event.target.value, password: event.target.value });
+  //   console.log(event.target.value);
+  // };
+
   handleChange = event => {
-    this.setState({ useremail: event.target.value });
-    this.setState({ userpassword: event.target.value });
+    // Getting the value and name of the input which triggered the change
+    const { name, value } = event.target;
+    // Updating the input's state
+    this.setState({
+      [name]: value
+    });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
     const user = {
-      useremail: this.state.useremail,
-      userpassword: this.state.userpassword
+      email: this.state.email,
+      password: this.state.password
     };
+    console.log(user);
 
     axios
-      .post(`https://jsonplaceholder.typicode.com/users`, { user })
+      .post(`/login`, user)
+      // set session storage below
       .then(res => {
         console.log(res);
         console.log(res.data);
-      });
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -37,12 +49,22 @@ export default class Login extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <label>
                 Email <span class="req">*</span>
-                <input type="email" name="useremail" class="width-50" />
+                <input
+                  type="email"
+                  name="email"
+                  class="width-50"
+                  onChange={this.handleChange}
+                />
               </label>
 
               <label>
                 Password
-                <input type="password" name="userpassword" class="width-50" />
+                <input
+                  type="password"
+                  name="password"
+                  class="width-50"
+                  onChange={this.handleChange}
+                />
               </label>
               <p>
                 <button button type="submit" class="btn btn-blue">
