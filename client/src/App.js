@@ -82,6 +82,18 @@ class App extends React.Component {
                                 />
                             }
                         />
+                        {/* <Route
+                            exact
+                            path={`/user-cart`}
+                            render={(props) =>
+                                <UserCart
+                                    {...props}
+                                    inventory={this.state.inventory}
+                                    handleRequest={this.handleRequest}
+                                // key={this.state.key}
+                                />
+                            }
+                        /> */}
                     </Wrapper>
                 </div>
             </Router>
