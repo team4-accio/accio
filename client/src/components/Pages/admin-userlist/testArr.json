@@ -1,0 +1,224 @@
+[
+    {
+        "checkouts": [
+            {
+            "items": [{
+                "category": "Laptop - PC",
+                "serialNumber": "11111",
+                "condition": "Good",
+                "available": true,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019", 
+            "status": "approved",
+            "user": "user.1@email.com"
+        },
+        {
+            "items": [{
+                "category": "Laptop - Mac",
+                "serialNumber": "123456",
+                "condition": "Good",
+                "available": true,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019", 
+            "status": "approved",
+            "user": "user.11@email.com"
+        },
+        {
+            "items": [{
+                "category": "Laptop - PC",
+                "serialNumber": "11111",
+                "condition": "Good",
+                "available": true,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "07-29-2019", 
+            "status": "approved",
+            "user": "user.1@email.com"
+        },
+        {
+            "items": [{
+                "category": "Laptop - PC",
+                "serialNumber": "22222",
+                "condition": "Okay",
+                "available": false,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019",
+            "status": "closed",
+            "user": "user.1@email.com"
+        },
+        {
+            "items": [{
+                "category": "Laptop - Mac",
+                "serialNumber": "66666",
+                "condition": "Bad",
+                "available": false,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019",
+            "status": "pending",
+            "user": "user.1@email.com"
+        },
+        {
+            "items": [{
+                "category": "iPad",
+                "serialNumber": "88888",
+                "condition": "Okay",
+                "available": true,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019",
+            "status": "rejected",
+            "user": "user.1@email.com"
+        }],
+        "email": "user.1@email.com",
+        "name": "User One",
+        "password": "WILL NOT BE IN THIS VIEW",
+        "role": "user",
+        "salt": "WILL NOT BE IN THIS VIEW",
+        "session": "Not sure of this value or if needed in view",
+        "status": "active"
+    },
+    {
+        "checkouts": [],
+        "email": "user.2@email.com",
+        "name": "User Two",
+        "password": "WILL NOT BE IN THIS VIEW",
+        "role": "user",
+        "salt": "WILL NOT BE IN THIS VIEW",
+        "session": "Not sure of this value or if needed in view",
+        "status": "active"
+    },
+    {
+        "checkouts": [
+            {
+            "items": [{
+                "category": "Laptop - PC",
+                "serialNumber": "11111",
+                "condition": "Good",
+                "available": true,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019", 
+            "status": "approved",
+            "user": "user.3@email.com"
+        },
+        {
+            "items": [{
+                "category": "Laptop - Mac",
+                "serialNumber": "123456",
+                "condition": "Good",
+                "available": true,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019", 
+            "status": "approved",
+            "user": "user.31@email.com"
+        },
+        {
+            "items": [{
+                "category": "Laptop - PC",
+                "serialNumber": "11111",
+                "condition": "Good",
+                "available": true,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "07-29-2019", 
+            "status": "approved",
+            "user": "user.3@email.com"
+        },
+        {
+            "items": [{
+                "category": "Laptop - PC",
+                "serialNumber": "22222",
+                "condition": "Okay",
+                "available": false,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019",
+            "status": "closed",
+            "user": "user.3@email.com"
+        },
+        {
+            "items": [{
+                "category": "Laptop - Mac",
+                "serialNumber": "66666",
+                "condition": "Bad",
+                "available": false,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019",
+            "status": "pending",
+            "user": "user.3@email.com"
+        },
+        {
+            "items": [{
+                "category": "iPad",
+                "serialNumber": "88888",
+                "condition": "Okay",
+                "available": true,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "tags": []
+            }],
+            "out": "07-20-2019",
+            "return": "08-10-2019",
+            "status": "rejected",
+            "user": "user.3@email.com"
+        }],
+        "email": "user.3@email.com",
+        "name": "User Three",
+        "password": "WILL NOT BE IN THIS VIEW",
+        "role": "user",
+        "salt": "WILL NOT BE IN THIS VIEW",
+        "session": "Not sure of this value or if needed in view",
+        "status": "inactive"
+    },
+    {
+        "checkouts": [],
+        "email": "admin.1@email.com",
+        "name": "Admin One",
+        "password": "WILL NOT BE IN THIS VIEW",
+        "role": "admin",
+        "salt": "WILL NOT BE IN THIS VIEW",
+        "session": "Not sure of this value or if needed in view",
+        "status": "active"
+    },
+    {
+        "checkouts": [],
+        "email": "admin.2@email.com",
+        "name": "Admin Two",
+        "password": "WILL NOT BE IN THIS VIEW",
+        "role": "admin",
+        "salt": "WILL NOT BE IN THIS VIEW",
+        "session": "Not sure of this value or if needed in view",
+        "status": "active"
+    }
+]
+
+
+
+
