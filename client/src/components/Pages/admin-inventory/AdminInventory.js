@@ -41,6 +41,8 @@ class AdminInventory extends Component {
 
     sortItems(items) {
         let obj = {}
+        let tags = {}
+
         for (let i in items) {
             if (obj[items[i].category]) {
                 obj[items[i].category].push(items[i])
@@ -48,15 +50,23 @@ class AdminInventory extends Component {
             else {
                 obj[items[i].category] = [items[i]]
             }
+            //add to tags if item has tags and tag hasn't been added yet 
+            if(items[i].tags.length >0){
+                for(let j in items[i].tags){
+                    if (!tags[items[i].tags[j]]) {
+                        tags[items[i].tags[j]] = null
+                    }
+                }
+            }
         }
-        //console.log(obj)
-        this.setState({ sortedItems: obj })
+        console.log(tags)
+        this.setState({ sortedItems: obj, tagList: tags })
     }
 
     render() {
         return (
             <div>
-                <NewItemBtn />
+                <NewItemBtn tags={this.state.tagList} />
                 <ul className="collapsible">
 
                     {Object.keys(this.state.sortedItems).map((keyName, keyIndex) => (
