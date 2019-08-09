@@ -17,23 +17,23 @@ class CollapseBody extends Component {
     }
 
     changeFilter = (action) => {
-        console.log("change filter" + action)
-        console.log("this.props.inventory" + this.props.inventory)
+        // console.log("change filter" + action)
+        // console.log("this.props.inventory" + this.props.inventory)
         var currentInventory = this.props.inventory;
         if (action === 'Laptop - Mac') {
-            console.log("conditional laptop")
+            console.log("conditional laptop Mac")
             console.log(currentInventory.filter(each => each.category === 'Laptop - Mac'))
             this.setState({
                 filteredInventory: currentInventory.filter(each => each.category === 'Laptop - Mac')
             })
         } else if (action === 'Laptop - PC') {
-            console.log("conditional laptop")
+            console.log("conditional laptop PC")
             console.log(currentInventory.filter(each => each.category === 'Laptop - PC'))
             this.setState({
                 filteredInventory: currentInventory.filter(each => each.category === 'Laptop - PC')
             })
         } else if (action === 'iPad') {
-            console.log("conditional laptop")
+            console.log("conditional ipad")
             console.log(currentInventory.filter(each => each.category === 'iPad'))
             this.setState({
                 filteredInventory: currentInventory.filter(each => each.category === 'iPad')
@@ -42,7 +42,7 @@ class CollapseBody extends Component {
     }
 
     render() {
-        console.log(this.props.filteredInventory)
+        // console.log(this.props.filteredInventory)
         return (
 
             <div className="row">
