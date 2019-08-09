@@ -18,7 +18,7 @@ function App() {
                     <Route exact path="/admin/action" component={AdminAction} />
                     <Route exact path="/admin/inventory" component={AdminInventory} />
                     <Route exact path="/admin/users" component={AdminUsers} />
-                    <Route exact path="/admin/user-checkout" component={UserCheckout} />
+                    <Route exact path="/user-checkout" component={UserCheckout} />
                 </Wrapper>
             </div>
         </Router>
