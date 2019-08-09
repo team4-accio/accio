@@ -37,19 +37,16 @@ class AdminUserList extends Component {
                     : console.log("Not a valid filter")
         ).then((response) => {
             console.log(response);
-            this.sortUsers(response.data)
+            this.sortUsers(response.data, filter)
         })
             .catch(function (error) {
                 console.log(error);
             })
     }
-    // sorts data from getUsers for autocomplete to use
-    sortUsers(arr) {
-        let data = {};
-        for (let i in arr) {
-            data[arr[i].name] = null // can set to img link if we add profile images   'https://placehold.it/250x250'
-        }
-        this.setState({ searchData: data })
+
+    sortUsers(arr, filter) {
+        
+
 
         // sorts data for this page to use
         let users = [];
@@ -65,7 +62,16 @@ class AdminUserList extends Component {
         }
         this.setState({ userList: users, adminList: admins })
 
-        this.createSearchData()
+        // sorts data from getUsers for autocomplete to use, only if updating all
+        if (filter === "all"){
+            this.createSearchData()
+            //  // Redundant code below
+            // let data = {};
+            // for (let i in arr) {
+            //     data[arr[i].name] = null // can set to img link if we add profile images   'https://placehold.it/250x250'
+            // }
+            // this.setState({ searchData: data })
+        }        
     }
     // Gets all users from DB, 
     getOverdueUsers() {
