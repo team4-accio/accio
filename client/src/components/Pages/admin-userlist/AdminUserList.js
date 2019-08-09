@@ -73,7 +73,7 @@ class AdminUserList extends Component {
             // this.setState({ searchData: data })
         }        
     }
-    // Gets all users from DB, 
+    // Gets overdue users from state, 
     getOverdueUsers() {
         let today = moment();
         let allUsers = API.getAllUsers()
