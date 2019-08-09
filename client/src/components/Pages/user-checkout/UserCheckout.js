@@ -8,58 +8,52 @@ import axios from "axios";
 
 class User extends React.Component {
 
-    // state = {
+    state = {
 
-    //     filteredInventory: [],
-    //     inventory: []
-    // }
+        filteredInventory: [],
+        inventory: [],
+        cart: []
+    }
 
-    // componentDidMount() {
-    //     this.getItems()
-    //     console.log("component mount")
-    //     // this.changeFilter(inventory)
-    //     M.AutoInit();
-    // };
+    componentDidMount() {
+        this.getItems()
+        console.log("component mount")
+        // this.changeFilter(inventory)
+        M.AutoInit();
+    };
 
-    // getItems() {
-    //     console.log("get items")
-    //     axios.get('/api/items')
-    //         .then((response) => {
-    //             console.log("axios");
-    //             this.setState({
-    //                 inventory: response.data
-    //             })
+    getItems() {
+        console.log("get items")
+        axios.get('/api/items')
+            .then((response) => {
+                console.log("axios");
+                this.setState({
+                    inventory: response.data
+                })
 
-    //             // const inventoryItem = response.data;
-    //             // console.log(inventoryItem);
-    //             // this.changeFilter();
-    //             //this.sortItems(response.data)
+                // const inventoryItem = response.data;
+                // console.log(inventoryItem);
+                // this.changeFilter();
+                //this.sortItems(response.data)
 
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         })
-    // };
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    };
 
-    // changeFilter = (action) => {
-    //     console.log("change filter")
-    //     var currentInventory = this.state.inventory;
-    //     if (action === 'Laptop - Mac') {
-    //         console.log("conditional laptop")
-    //         console.log(currentInventory.filter(each => each.category === 'Laptop - Mac'))
-    //         this.setState({
-    //             filteredinventory: currentInventory.filter(each => each.category === 'Laptop - Mac')
-    //         })
-    //         // } else if (action === 'checkedOut') {
-    //         //     this.setState({
-    //         //         filteredinventory: this.state.inventory.filter(each => each.checkedOut === true)
-    //         //     })
-    //     }
-    //     else if (action === 'electronics') {
-    //         this.setState({
-    //             filteredinventory: this.state.inventory.filter(each => each.type === 'electronics')
-    //         })
-    //     }
+    handleRequest = (id) => {
+        console.log(id);
+        // console.log(this.state.inventory);
+        const chosenItemForRequest = this.state.inventory.filter(each => each._id === id)
+        console.log(chosenItemForRequest)
+        var cart = this.state.cart
+        cart.push(chosenItemForRequest[0])
+        this.setState({
+            cart: cart
+        })
+
+    }
 
     render() {
         console.log("rendered")
@@ -68,8 +62,8 @@ class User extends React.Component {
             <div className="App">
 
                 <CollapseBody
-                    inventory={this.props.inventory}
-                    handleRequest={this.props.handleRequest}
+                    inventory={this.state.inventory}
+                    handleRequest={this.handleRequest}
                 />
 
 
