@@ -18,34 +18,43 @@ class UserElem extends Component {
         M.AutoInit();
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState(
+            {
+                user: nextProps.user,
+                userType: nextProps.userType
+            }
+        );
+    }
+
     //TESTING FUNCTION
     updateUserState(field) {
         let val = ""
-       if  (field == "status") {
+        if (field == "status") {
             let obj = this.state.user
             obj.status == "active" ? val = "inactive" : val = "active"
             //changes state to update page
             //  not best practice in case patch req fails
-            obj.status=val
+            obj.status = val
             this.setState({ user: obj })
         }
-        else{
+        else {
             let obj = this.state.user
             obj.role == "user" ? val = "admin" : val = "user"
             //changes state to update page
             //  not best practice in case patch req fails
-            obj.role=val
+            obj.role = val
             this.setState({ user: obj })
         }
 
         Axios({
             method: 'patch',
-            url: '/api/users/'+this.state.user._id,
+            url: '/api/users/' + this.state.user._id,
             data: {
-              [field]: val
+                [field]: val
             }
-          });
-          //.patch('/api/users/'+this.state.user._id)
+        });
+        //.patch('/api/users/'+this.state.user._id)
     }
     render() {
         return (

@@ -5,6 +5,7 @@ import CollapseBody from "./local-components/CollapseBody";
 import axios from "axios";
 import API from "../../../utils/API"
 import testArr from "./testArr.json"
+import moment from "moment"
 
 
 
@@ -32,7 +33,7 @@ class AdminUserList extends Component {
             : ["Name", "Email", "Status"].includes(filter)
                 ? API.getFilteredUsers(filter, query) //cant have body in get req w/ axios
                 : filter === "Overdue"
-                    ? API.getOverdueUsers()
+                    ? this.getOverdueUsers()
                     : console.log("Not a valid filter")
         ).then((response) => {
             console.log(response);
@@ -65,6 +66,26 @@ class AdminUserList extends Component {
         this.setState({ userList: users, adminList: admins })
 
         this.createSearchData()
+    }
+    // Gets all users from DB, 
+    getOverdueUsers() {
+        let today = moment();
+        let allUsers = API.getAllUsers()
+        return allUsers.then((response) => {
+            // console.log(allUsers)
+            let overdueUsers = response.data.filter((val) => {
+                return (
+                    val.checkouts.length > 0
+                        ? val.checkouts.filter((checkout) => {
+                            let returnDate = moment(checkout.return)
+                            return returnDate.isBefore(today)
+                        })
+                        : false
+                )
+            })
+            console.log(overdueUsers)
+            return { data: overdueUsers }
+        })
     }
 
     //creates obj of user names for autocomplete field to use
@@ -142,10 +163,10 @@ class AdminUserList extends Component {
                                     <li><a href="#!" onClick={() => this.changeSearchFilter("Email")} className='waves-effect waves-teal btn-flat disabled'>Email</a></li>
                                     <li className="divider" tabIndex="-1"></li>
                                     <li><a href="#!" onClick={() => this.changeSearchFilter("Status")} className='waves-effect waves-teal btn-flat disabled'>Status</a></li>
-                                    <li><a href="#!" onClick={() => this.changeSearchFilter("Overdue")} className='waves-effect waves-teal btn-flat disabled'>Overdue</a></li>
+                                    <li><a href="#!" onClick={() => this.changeSearchFilter("Overdue")} className='waves-effect waves-teal btn-flat'>Overdue</a></li>
                                 </ul>
                                 <input type="text" id="autocomplete-input" className="autocomplete" value={this.state.value} onChange={this.handleInputChange} onClick={this.handleInputChange} />
-                                <label htmlFor="autocomplete-input">{this.state.searchFilter}</label>
+                                <label htmlFor="autocomplete-input">Search By {this.state.searchFilter}</label>
 
                             </div>
                         </form>
