@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Wrapper from "./components/Wrapper";
 import AdminInventory from "./components/Pages/admin-inventory/AdminInventory";
-import TestPage from "./components/Pages/Home";
+import Home from "./components/Pages/Home";
 import AdminAction from "./components/Pages/admin-action/AdminAction";
 
 function App() {
