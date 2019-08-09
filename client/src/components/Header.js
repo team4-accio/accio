@@ -2,13 +2,13 @@ import React from "react";
 
 function Header() {
   return (
-    <nav class="navbar">
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo">
+    <nav className="navbar">
+      <div className="nav-wrapper">
+        <a href="#" className="brand-logo">
           Logo
         </a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li class="active">
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li className="active">
             <a href="#">Links</a>
           </li>
           <li>

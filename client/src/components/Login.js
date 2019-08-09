@@ -33,10 +33,11 @@ export default class Login extends React.Component {
 
     axios
       .post(`/login`, user)
-      // set session storage below
       .then(res => {
+        console.log(res.headers["x-session-token"]);
         console.log(res);
-        console.log(res.data);
+        // console.log(res.headers);
+        // console.log(res.data);
       })
       .catch(err => console.log(err));
   };
@@ -44,16 +45,16 @@ export default class Login extends React.Component {
   render() {
     return (
       <div>
-        <div class="container">
-          <div class="row">
-            <div class="col s10" />
+        <div className="container">
+          <div className="row">
+            <div className="col s10" />
             <form onSubmit={this.handleSubmit}>
               <label>
-                Email <span class="req">*</span>
+                Email <span className="req">*</span>
                 <input
                   type="email"
                   name="email"
-                  class="width-50"
+                  className="width-50"
                   onChange={this.handleChange}
                 />
               </label>
@@ -63,15 +64,15 @@ export default class Login extends React.Component {
                 <input
                   type="password"
                   name="password"
-                  class="width-50"
+                  className="width-50"
                   onChange={this.handleChange}
                 />
               </label>
               <p>
-                <button button type="submit" class="btn btn-blue">
+                <button type="submit" className="btn btn-blue">
                   Log in
                 </button>
-                <button class="btn">Cancel</button>
+                <button className="btn">Cancel</button>
               </p>
             </form>
           </div>
