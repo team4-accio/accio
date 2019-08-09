@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import {Autocomplete} from "react-materialize";
 import CollapseBody from "./local-components/CollapseBody";
+import NewItemBtn from "./local-components/NewItemBtn";
 import axios from "axios";
 import testArr from "./testArr.json"
 
@@ -55,7 +56,7 @@ class AdminInventory extends Component {
     render() {
         return (
             <div>
-
+                <NewItemBtn />
                 <ul className="collapsible">
 
                     {Object.keys(this.state.sortedItems).map((keyName, keyIndex) => (
