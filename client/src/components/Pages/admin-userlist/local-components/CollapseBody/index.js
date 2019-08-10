@@ -51,8 +51,9 @@ class CollapseBody extends Component {
             <div className="collapsible-body">
                 <ul className="collection">
                     {
-                        this.state.users.map((user) => (
+                        this.state.users.map((user, i) => (
                             <UserElem
+                                key={i}
                                 user={user}
                                 userType = {this.state.listType}
                                 parent={this}

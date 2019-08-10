@@ -19,6 +19,7 @@ router.use('/api/users', users.controller);
 
 // Authentication routes
 router.use('/login', auth.login);
+router.use('/session', auth.session);
 
 // If no API routes are hit, send React app
 router.use(function (req, res) {

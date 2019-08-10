@@ -6,7 +6,7 @@ const hashPass = require('hashPass');
 const uuidv1 = require('uuid/v1');
 
 // Require User model
-const User = require('../users').model;
+const User = require('../users/usersModel').model;
 
 // Require utilities
 const utils = require('../utils');
