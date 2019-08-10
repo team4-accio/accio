@@ -63,19 +63,18 @@ class NewItemBtn extends Component {
         this.forceUpdate()
     }
     handleFormSubmit = event => {
-        if (!this.canBeSubmitted()) {
-            event.preventDefault();
-            return;
+        event.preventDefault();
+        if (this.canBeSubmitted()) {
+            console.log("submitted")
+            API.addNewItem(this.state.formData)
+            // close modal
+            // toast item added
+            //refresh parent
+
         }
         else{
-
+            console.log("give validation error here")
         }
-        //event.preventDefault();
-        //verify required fields
-        //if good close modal (add class to button?)
-        //let autocomplete = document.querySelectorAll('.chips');
-        // console.log(M.Chips.getInstance(document.querySelectorAll('.chips')));
-
     }
     canBeSubmitted() {
         const errors = validate(this.state.formData);
@@ -132,7 +131,7 @@ class NewItemBtn extends Component {
                                 <div className="row">
                                     <div className="input-field col s4">
                                         <select id="category" className="category-select" onChange={this.handleInputChange}>
-                                            <option selected value="" disabled >Category</option>
+                                            <option selected value="" disabled >Category (Req.)</option>
                                             <option value="Laptop - Mac">Laptop - Mac</option>
                                             <option value="Laptop - PC">Laptop - PC</option>
                                             <option value="iPad">iPad</option>
