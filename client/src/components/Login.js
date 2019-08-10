@@ -1,6 +1,7 @@
 import React from "react";
-
 import axios from "axios";
+
+import { Redirect } from "react-router-dom";
 
 export default class Login extends React.Component {
   state = {
@@ -40,9 +41,12 @@ export default class Login extends React.Component {
         console.log("storage", localStorage.getItem("sessionid"));
         // console.log(res.headers);
         // console.log(res.data);
+        return <Redirect to="/dashboard" />;
       })
       .catch(err => console.log(err));
   };
+
+  //  Redirect
 
   render() {
     return (
