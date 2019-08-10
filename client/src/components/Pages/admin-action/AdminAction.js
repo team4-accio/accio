@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import CollapseBody from "./local-components/CollapseBody";
 
+
+const keyStyle = {
+    fontWeight: "bold",
+    float: "left"
+};
+
+const countStyle = {
+    fontWeight: "bold",
+    float: "right"
+};
+
+
+
 let testArr = [
     {
         items: [{
@@ -99,8 +112,9 @@ class AdminAction extends Component {
         M.AutoInit();
     }
 
+
     sortActions(actions) {
- 
+
         let pending = actions.filter(obj => {
             return obj.status === 'pending'
         })
@@ -112,10 +126,10 @@ class AdminAction extends Component {
         let overdue = [];
         let out = [];
         let today = new Date();
-        for (let i in approved){
-            var returnDate = new Date(approved[i].return );
+        for (let i in approved) {
+            var returnDate = new Date(approved[i].return);
             // if date is not overdue add to out
-            if (returnDate < today ){
+            if (returnDate < today) {
                 overdue.push(approved[i])
             }
             // if date is  overdue add to overdue
@@ -129,9 +143,13 @@ class AdminAction extends Component {
             "Out": out,
             "Overdue": overdue
         }
+
+
         console.log(obj)
         this.setState({ sortedActions: obj })
+
     }
+
 
     render() {
         return (
@@ -141,7 +159,36 @@ class AdminAction extends Component {
 
                     {Object.keys(this.state.sortedActions).map((keyName, keyIndex) => (
                         <li key={keyIndex + '-li'}>
-                            <div className="collapsible-header"><i className="material-icons">create</i>{keyName}</div>
+                            <div className="collapsible-header">
+                                {keyName == "Pending" ?
+                                    <div id="pendingCollapse">
+                                        <div id="pendingButton" style={keyStyle}>
+                                        <i class="large material-icons">thumbs_up_down</i> {keyName} || {this.state.sortedActions[keyName].length}
+                                        </div>
+                                        {/* <div className="titleOfKey" style={keyStyle}>{keyName} | </div>
+                                        <div className="countOfKey" style={countStyle}>| {this.state.sortedActions[keyName].length}</div> */}
+                                    </div>
+                                    : null
+                                }
+                                {keyName == "Out" ?
+                                    <div id="outCollapse" style={keyStyle}>
+                                        <i class="large material-icons">all_out</i> {keyName} || {this.state.sortedActions[keyName].length}
+                                        {/* <div className="titleOfKey" style={keyStyle}>{keyName} | </div>
+                                        <div className="countOfKey" style={countStyle}>| {this.state.sortedActions[keyName].length}</div> */}
+                                    </div>
+                                    : null
+                                }
+                                {keyName == "Overdue" ?
+                                    <div id="overdueCollapse" style={keyStyle}>
+                                        <i class="large material-icons" >warning</i> {keyName} || {this.state.sortedActions[keyName].length}
+                                        {/* <div className="titleOfKey" style={keyStyle}>{keyName} | </div>
+                                        <div className="countOfKey" style={countStyle}>| {this.state.sortedActions[keyName].length}</div> */}
+                                    </div>
+                                    : null
+                                }
+                                {/* <div className="titleOfKey" style={keyStyle}>{keyName} | </div>
+                                        <div className="countOfKey" style={countStyle}>| {this.state.sortedActions[keyName].length}</div> */}
+                            </div>
                             <CollapseBody category={keyName} key={keyIndex} actions={this.state.sortedActions[keyName]} >
                             </CollapseBody>
                         </li>
@@ -155,24 +202,3 @@ class AdminAction extends Component {
 }
 
 export default AdminAction;
-
-
-// {Object.keys(this.state.sortedItems).map(function (keyName, keyIndex) {
-//     // use keyName to get current key's name
-//     // and a[keyName] to get its value
-//     return (<li key={keyIndex + '-li'}>
-//         <div className="collapsible-header"><i className="material-icons">create</i>{keyName}</div>
-//         <CollapseBody category={keyName} key={keyIndex} {...this.state.sortItems[keyName]} >
-//         </CollapseBody>
-//     </li>)
-// })
-// }
-// {
-//     this.state.categories.map((value) => (
-//         <li key={value + '-li'}>
-//             <div className="collapsible-header"><i className="material-icons">create</i>{value}</div>
-//             <CollapseBody category={value} key={value} {...this.state.sortedItems[keyName]} >
-//             </CollapseBody>
-//         </li>
-//     ))
-// }
