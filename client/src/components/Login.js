@@ -4,52 +4,77 @@ import axios from "axios";
 
 export default class Login extends React.Component {
   state = {
-    useremail: "",
-    userpassword: ""
+    email: "",
+    password: ""
   };
 
+  // handleChange = event => {
+  //   this.setState({ email: event.target.value, password: event.target.value });
+  //   console.log(event.target.value);
+  // };
+
   handleChange = event => {
-    this.setState({ useremail: event.target.value });
-    this.setState({ userpassword: event.target.value });
+    // Getting the value and name of the input which triggered the change
+    const { name, value } = event.target;
+    // Updating the input's state
+    this.setState({
+      [name]: value
+    });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
     const user = {
-      useremail: this.state.useremail,
-      userpassword: this.state.userpassword
+      email: this.state.email,
+      password: this.state.password
     };
+    console.log(user);
 
     axios
-      .post(`https://jsonplaceholder.typicode.com/users`, { user })
+      .post(`/login`, user)
       .then(res => {
+        console.log(res.headers["x-session-token"]);
         console.log(res);
-        console.log(res.data);
-      });
+        localStorage.setItem("sessionid", res.headers["x-session-token"]);
+        console.log("storage", localStorage.getItem("sessionid"));
+        // console.log(res.headers);
+        // console.log(res.data);
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
     return (
       <div>
-        <div class="container">
-          <div class="row">
-            <div class="col s10" />
+        <div className="container">
+          <div className="row">
+            <div className="col s10" />
             <form onSubmit={this.handleSubmit}>
               <label>
-                Email <span class="req">*</span>
-                <input type="email" name="useremail" class="width-50" />
+                Email <span className="req">*</span>
+                <input
+                  type="email"
+                  name="email"
+                  className="width-50"
+                  onChange={this.handleChange}
+                />
               </label>
 
               <label>
                 Password
-                <input type="password" name="userpassword" class="width-50" />
+                <input
+                  type="password"
+                  name="password"
+                  className="width-50"
+                  onChange={this.handleChange}
+                />
               </label>
               <p>
-                <button button type="submit" class="btn btn-blue">
+                <button type="submit" className="btn btn-blue">
                   Log in
                 </button>
-                <button class="btn">Cancel</button>
+                <button className="btn">Cancel</button>
               </p>
             </form>
           </div>

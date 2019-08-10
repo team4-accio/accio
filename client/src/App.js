@@ -2,13 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Wrapper from "./components/Wrapper";
 import AdminInventory from "./components/Pages/admin-inventory/AdminInventory";
-import TestPage from "./components/testPage/testPage";
-import AdminAction from "./components/Pages/admin-action/AdminAction"
+import AdminAction from "./components/Pages/admin-action/AdminAction";
 import AdminUsers from "./components/Pages/admin-userlist/AdminUserList";
 import UserCheckout from "./components/Pages/user-checkout/UserCheckout";
 import Home from "./components/Pages/Home";
 
 function App() {
+
     return (
         <Router>
             <div>
@@ -23,6 +23,7 @@ function App() {
             </div>
         </Router>
     );
+
 }
 
 export default App;
