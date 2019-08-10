@@ -1,32 +1,90 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import "./style.css";
+import API from "../../../../../utils/API";
 
-import API from "../../../../../utils/API"
+function validate(state) {
+    // true means invalid, so our conditions got reversed
+    return {
+        category: state.category == null,
+        name: state.name == null,
+        sn: state.sn == null
+    };
+}
 
 class NewItemBtn extends Component {
     state = {
-       tagList: {}
+        tagList: {},
+        formData: {
+            available: true,
+            category: null,
+            condition: "new",
+            description: null,
+            name: null,
+            sn: null,
+            tags: []
+        }
     }
-    componentWillReceiveProps(nextProps){
-        this.setState({tagList: nextProps.tags})
+    componentWillReceiveProps(nextProps) {
+        this.setState({ tagList: nextProps.tags })
         this.initChipAutoComplete({
             autocompleteOptions: {
-              data: nextProps.tags,
-              limit: Infinity,
-              minLength: 1
-            }})
+                data: nextProps.tags,
+                limit: Infinity,
+                minLength: 1
+            },
+            onChipAdd: (event, chip) => {
+                let arr = event[0].M_Chips.chipsData.map(a => a.tag);;
+                this.state.formData.tags = arr;
+                this.forceUpdate()
+            },
+            onChipDelete: (event, chip) => {
+                let arr = event[0].M_Chips.chipsData.map(a => a.tag);;
+                this.state.formData.tags = arr;
+                this.forceUpdate()
+            }
+        })
     }
 
     componentDidMount() {
 
-        
-
         M.AutoInit()
+    
+    }
+    handleInputChange = (event) => {
+        let field = event.target.id
+        let value = event.target.value === "true"
+            ? true
+            : event.target.value === "false"
+                ? false
+                : event.target.value
+
+        this.state.formData[field] = value;
+        this.forceUpdate()
+    }
+    handleFormSubmit = event => {
+        if (!this.canBeSubmitted()) {
+            event.preventDefault();
+            return;
+        }
+        else{
+
+        }
+        //event.preventDefault();
+        //verify required fields
+        //if good close modal (add class to button?)
+        //let autocomplete = document.querySelectorAll('.chips');
+        // console.log(M.Chips.getInstance(document.querySelectorAll('.chips')));
+
+    }
+    canBeSubmitted() {
+        const errors = validate(this.state.formData);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+        return !isDisabled;
     }
 
     getAutocompleteData() {
-    
+
     }
     initChipAutoComplete(options) {
         console.log(options)
@@ -34,6 +92,7 @@ class NewItemBtn extends Component {
 
         M.Chips.init(autocomplete, options);
     }
+
 
 
 
@@ -45,6 +104,9 @@ class NewItemBtn extends Component {
     //  //   sn  type: string    required
     //  //   tags    type: list  optional
     render() {
+        const errors = validate(this.state.formData);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+
         return (
 
             <div>
@@ -55,22 +117,22 @@ class NewItemBtn extends Component {
                         <h4>Create New Item</h4>
                         <div className="divider" />
                         <div className="row">
-                            <form className="col s12">
+                            <form className="col s12" onSubmit={this.handleFormSubmit}>
                                 <div className="row">
                                     <div className="input-field col s6">
-                                        <input id="item_name" type="text" className="validate" />
-                                        <label htmlFor="item_name">Name</label>
+                                        <input id="name" type="text" className="validate invalid" required="" onChange={this.handleInputChange} />
+                                        <label htmlFor="name">Name</label>
                                     </div>
                                     <div className="input-field col s6">
-                                        <input id="serial_number" type="text" className="validate" />
-                                        <label htmlFor="serial_number">Serial Number</label>
+                                        <input id="sn" type="text" className="validate invalid" onChange={this.handleInputChange} />
+                                        <label htmlFor="sn">Serial Number</label>
                                     </div>
                                 </div>
 
                                 <div className="row">
                                     <div className="input-field col s4">
-                                        <select className="category-select">
-                                            <option value="" disabled defaultValue>Category</option>
+                                        <select id="category" className="category-select" onChange={this.handleInputChange}>
+                                            <option selected value="" disabled >Category</option>
                                             <option value="Laptop - Mac">Laptop - Mac</option>
                                             <option value="Laptop - PC">Laptop - PC</option>
                                             <option value="iPad">iPad</option>
@@ -80,7 +142,7 @@ class NewItemBtn extends Component {
                                         <label>Category</label>
                                     </div>
                                     <div className="input-field col s4">
-                                        <select className="condition-select">
+                                        <select id="condition" className="condition-select" onChange={this.handleInputChange}>
                                             <option defaultValue value="new">New</option>
                                             <option value="good">Good</option>
                                             <option value="okay">Okay</option>
@@ -89,7 +151,7 @@ class NewItemBtn extends Component {
                                         <label>Condition</label>
                                     </div>
                                     <div className="input-field col s4">
-                                        <select className="available-select">
+                                        <select id="available" className="available-select" onChange={this.handleInputChange}>
                                             <option defaultValue value={true}>Yes</option>
                                             <option value={false}>No</option>
                                         </select>
@@ -99,22 +161,23 @@ class NewItemBtn extends Component {
 
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <textarea id="textarea1" className="materialize-textarea"></textarea>
-                                        <label htmlFor="textarea1">Description</label>
+                                        <textarea id="description" className="materialize-textarea" onChange={this.handleInputChange}></textarea>
+                                        <label htmlFor="description">Description</label>
                                     </div>
                                 </div>
                                 <label htmlFor="tag_chips">Tags</label>
-                                <div className="chips chips-autocomplete" id="tag_chips">
-                                
+                                <div className="chips chips-autocomplete" id="tags" onChange={this.handleInputChange}>
+
                                 </div>
-                                
+
                             </form>
                         </div>
 
 
                     </div>
                     <div className="modal-footer">
-                        <a href="#!" className="modal-close waves-effect waves-green btn-flat">Create</a>
+                        {/* <a href="#!" className="modal-close waves-effect waves-green btn-flat">Create</a> */}
+                        <a href="#!" disabled={isDisabled} className="waves-effect waves-green btn-flat" onClick={this.handleFormSubmit}>Create</a>
                     </div>
                 </div>
             </div>
