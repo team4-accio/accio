@@ -36,6 +36,8 @@ export default class Login extends React.Component {
       .then(res => {
         console.log(res.headers["x-session-token"]);
         console.log(res);
+        localStorage.setItem("sessionid", res.headers["x-session-token"]);
+        console.log("storage", localStorage.getItem("sessionid"));
         // console.log(res.headers);
         // console.log(res.data);
       })
