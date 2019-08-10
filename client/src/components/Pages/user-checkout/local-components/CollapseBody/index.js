@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import "./style.css";
+import "./style.css";
 import Card from "../Card";
 
 
@@ -52,7 +52,7 @@ class CollapseBody extends Component {
                         return (
                             <li key={index}>
                                 <div className="collapsible-header" onClick={() => this.changeFilter(item)}>
-                                    <h1>{item}</h1>
+                                    <p>{item}</p>
                                 </div>
                                 <div className="collapsible-body">
                                     <span>
