@@ -4,7 +4,7 @@
 const router = require('express').Router(); // Create a Router instance
 
 // Require User model
-const User = require('../users').model;
+const User = require('../users/usersModel');
 
 // Require utilities
 const utils = require('../utils');
