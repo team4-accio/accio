@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CartCard from "../CartCard";
 // import "./style.css";
 
 class Cart extends Component {
@@ -19,22 +20,22 @@ class Cart extends Component {
                         <div className="row">
                             {this.props.carts.map((cart, index) => {
                                 return (
+                                    <div key={index}>
+                                        <CartCard name={cart.name} condition={cart.condion} />
+                                        {/* <div className="col s12 m6">
+                                            <div className="card blue-grey darken-1">
+                                                <div className="card-content white-text">
+                                                    <span className="card-title"><p>{cart.name} </p></span>
 
-                                    <div className="col s12 m6" key={index}>
-                                        <div className="card blue-grey darken-1">
-                                            <div className="card-content white-text">
-                                                <span className="card-title"><p>{cart.name} </p></span>
+                                                </div>
+                                                <div className="card-action" >
 
+                                                    <p>{cart.condition}</p>
+                                                   
+                                                </div>
                                             </div>
-                                            <div className="card-action" >
-
-                                                <p>{cart.condition}</p>
-                                                {/* <a href="#">This is a link</a>
-                        <a href="#">This is a link</a> */}
-                                            </div>
-                                        </div>
+                                        </div> */}
                                     </div>
-
                                 )
                             })}
                         </div>
