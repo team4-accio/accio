@@ -12,27 +12,37 @@ class Cart extends Component {
     render() {
         return (
             // <h2>hi</h2>
-            <div className="row">
-                {this.props.carts.map((cart, index) => {
-                    return (
-                        <li key={index}>
-                            <div className="col s12 m6">
-                                <div className="card blue-grey darken-1">
-                                    <div className="card-content white-text">
-                                        <span className="card-title"><p>{cart.name} </p></span>
+            <div className="modalHolder">
+                <a className="waves-effect waves-light btn modal-trigger" href="#modal1">View Cart</a>
+                <div id="modal1" className="modal">
+                    <div className="modal-content">
+                        <div className="row">
+                            {this.props.carts.map((cart, index) => {
+                                return (
 
-                                    </div>
-                                    <div className="card-action">
+                                    <div className="col s12 m6" key={index}>
+                                        <div className="card blue-grey darken-1">
+                                            <div className="card-content white-text">
+                                                <span className="card-title"><p>{cart.name} </p></span>
 
-                                        <p>{cart.condition}</p>
-                                        {/* <a href="#">This is a link</a>
+                                            </div>
+                                            <div className="card-action" >
+
+                                                <p>{cart.condition}</p>
+                                                {/* <a href="#">This is a link</a>
                         <a href="#">This is a link</a> */}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                    )
-                })}
+
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <a href="#!" className="modal-close waves-effect waves-green btn-flat">Checkout</a>
+                    </div>
+                </div>
             </div>
         )
     }
