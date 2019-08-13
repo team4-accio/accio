@@ -6,7 +6,8 @@ import { Redirect } from "react-router-dom";
 export default class Login extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    redirect: false
   };
 
   // handleChange = event => {
@@ -41,7 +42,7 @@ export default class Login extends React.Component {
         console.log("storage", localStorage.getItem("sessionid"));
         // console.log(res.headers);
         // console.log(res.data);
-        return <Redirect to="/dashboard" />;
+        this.setState({ redirect: true });
       })
       .catch(err => console.log(err));
   };
@@ -49,41 +50,46 @@ export default class Login extends React.Component {
   //  Redirect
 
   render() {
-    return (
-      <div>
-        <div className="container">
-          <div className="row">
-            <div className="col s10" />
-            <form onSubmit={this.handleSubmit}>
-              <label>
-                Email <span className="req">*</span>
-                <input
-                  type="email"
-                  name="email"
-                  className="width-50"
-                  onChange={this.handleChange}
-                />
-              </label>
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/dashboard" />;
+    } else {
+      return (
+        <div>
+          <div className="container">
+            <div className="row">
+              <div className="col s10" />
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  Email <span className="req">*</span>
+                  <input
+                    type="email"
+                    name="email"
+                    className="width-50"
+                    onChange={this.handleChange}
+                  />
+                </label>
 
-              <label>
-                Password
-                <input
-                  type="password"
-                  name="password"
-                  className="width-50"
-                  onChange={this.handleChange}
-                />
-              </label>
-              <p>
-                <button type="submit" className="btn btn-blue">
-                  Log in
-                </button>
-                <button className="btn">Cancel</button>
-              </p>
-            </form>
+                <label>
+                  Password
+                  <input
+                    type="password"
+                    name="password"
+                    className="width-50"
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <p>
+                  <button type="submit" className="btn btn-blue">
+                    Log in
+                  </button>
+                  <button className="btn">Cancel</button>
+                </p>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
