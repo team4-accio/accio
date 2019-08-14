@@ -1,42 +1,43 @@
 import React, { Component } from "react";
 import M from "materialize-css";
-import {Autocomplete} from "react-materialize";
+import { Autocomplete } from "react-materialize";
 import CollapseBody from "./local-components/CollapseBody";
 import NewItemBtn from "./local-components/NewItemBtn";
 import axios from "axios";
 import testArr from "./testArr.json"
 
 class AdminInventory extends Component {
-    state = {
-        sortedItems: {}
+    constructor(props) {
+        super(props)
+
+        // Bind the this context to the handler function
+        this.updateOnNewItem = this.updateOnNewItem.bind(this);
+
+        // Set some state
+        this.state = {
+            sortedItems: {}
+        }
     }
-    
-    // constructor (props){
-    //     super(props);
-      
-    //     this.state = {
-    //         sortedItems: {}
-    //       };
-      
-    //     this.sortItems = this.sortItems.bind(this);
-      
-    //   }
+
 
     componentDidMount() {
         this.getItems()
-        //this.sortItems(testArr)
+
         M.AutoInit();
     }
-
-    getItems(){
+    // this function will be sent to NewItemBtn so it can call and update this component on successful item add
+    updateOnNewItem() {
+        this.getItems();
+    }
+    getItems() {
         axios.get('/api/items')
-        .then( (response) => {
-            console.log(response);
-            this.sortItems(response.data)
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .then((response) => {
+                console.log(response);
+                this.sortItems(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     sortItems(items) {
@@ -51,22 +52,22 @@ class AdminInventory extends Component {
                 obj[items[i].category] = [items[i]]
             }
             //add to tags if item has tags and tag hasn't been added yet 
-            if(items[i].tags.length >0){
-                for(let j in items[i].tags){
+            if (items[i].tags.length > 0) {
+                for (let j in items[i].tags) {
                     if (!tags[items[i].tags[j]]) {
                         tags[items[i].tags[j]] = null
                     }
                 }
             }
         }
-        console.log(tags)
         this.setState({ sortedItems: obj, tagList: tags })
     }
+
 
     render() {
         return (
             <div>
-                <NewItemBtn tags={this.state.tagList} />
+                <NewItemBtn tags={this.state.tagList} {...this.state} updateOnNewItem={this.updateOnNewItem} />
                 <ul className="collapsible">
 
                     {Object.keys(this.state.sortedItems).map((keyName, keyIndex) => (
@@ -85,24 +86,3 @@ class AdminInventory extends Component {
 }
 
 export default AdminInventory;
-
-
-// {Object.keys(this.state.sortedItems).map(function (keyName, keyIndex) {
-//     // use keyName to get current key's name
-//     // and a[keyName] to get its value
-//     return (<li key={keyIndex + '-li'}>
-//         <div className="collapsible-header"><i className="material-icons">create</i>{keyName}</div>
-//         <CollapseBody category={keyName} key={keyIndex} {...this.state.sortItems[keyName]} >
-//         </CollapseBody>
-//     </li>)
-// })
-// }
-// {
-//     this.state.categories.map((value) => (
-//         <li key={value + '-li'}>
-//             <div className="collapsible-header"><i className="material-icons">create</i>{value}</div>
-//             <CollapseBody category={value} key={value} {...this.state.sortedItems[keyName]} >
-//             </CollapseBody>
-//         </li>
-//     ))
-// }

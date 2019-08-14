@@ -3,7 +3,6 @@ import "./style.css";
 
 
 function Card(props) {
-    //console.log(props)
     return (
 
         <div className="col s6 m4 l3">

@@ -14,28 +14,29 @@ class CollapseBody extends Component {
 
 
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log(nextProps)
-    //     this.setState(
-    //         {
-    //             type: nextProps.category
-    //         }
-    //     );
-    // }
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+        this.setState(
+            {
+                type: nextProps.category,
+                items: nextProps.items
+            }
+        )
+    }
 
     render() {
         return (
             <div className="collapsible-body">
                 <div className="row">
-                {
-                    this.state.items.map((item) => (
-                        <Card 
-                            item={item}
-                        />
-                    ))
-                }
+                    {
+                        this.state.items.map((item) => (
+                            <Card
+                                item={item}
+                            />
+                        ))
+                    }
                 </div>
-               
+
             </div>
         );
     }

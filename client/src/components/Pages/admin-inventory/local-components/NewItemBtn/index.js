@@ -13,6 +13,12 @@ function validate(state) {
 }
 
 class NewItemBtn extends Component {
+
+    // constructor(props) {
+    //     super(props);
+
+
+    // }
     state = {
         tagList: {},
         formData: {
@@ -27,6 +33,7 @@ class NewItemBtn extends Component {
     }
     componentWillReceiveProps(nextProps) {
         this.setState({ tagList: nextProps.tags })
+        // passes options to chip autocomplete field 
         this.initChipAutoComplete({
             autocompleteOptions: {
                 data: nextProps.tags,
@@ -47,9 +54,18 @@ class NewItemBtn extends Component {
     }
 
     componentDidMount() {
-
         M.AutoInit()
-    
+
+        // init modal so we can close on success
+        const options = {
+            inDuration: 250,
+            outDuration: 250,
+            opacity: 0.5,
+            dismissible: true,
+            startingTop: "4%",
+            endingTop: "10%"
+        };
+        M.Modal.init(this.Modal, options);
     }
     handleInputChange = (event) => {
         let field = event.target.id
@@ -65,16 +81,33 @@ class NewItemBtn extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.canBeSubmitted()) {
-            console.log("submitted")
+            // Sends new Item to DB, success / fail toasts
             API.addNewItem(this.state.formData)
-            // close modal
-            // toast item added
-            //refresh parent
+                .then(res => {
+                    // close modal
+                    var elem = document.getElementById('modal1');
+                    var instance = M.Modal.getInstance(elem);
+                    instance.close();
+
+                    // toast item added
+                    M.toast({ html: (res.data.name + ' Added!'), 
+                    classes: 'greenToast'})
+
+                    // Clear text inputs
+                    this.refs.form.reset();
+                    //refresh parent
+                    this.props.updateOnNewItem()
+
+                }).catch(res => {
+                    M.toast({ html: 'Unable To Add Item', classes: 'redToast' })
+                })
+
 
         }
-        else{
-            console.log("give validation error here")
+        else {
+            M.toast({ html: 'Missing Required Info', classes: 'redToast' })
         }
+
     }
     canBeSubmitted() {
         const errors = validate(this.state.formData);
@@ -82,26 +115,13 @@ class NewItemBtn extends Component {
         return !isDisabled;
     }
 
-    getAutocompleteData() {
-
-    }
     initChipAutoComplete(options) {
-        console.log(options)
         let autocomplete = document.querySelectorAll('.chips');
 
         M.Chips.init(autocomplete, options);
     }
 
 
-
-
-    //  //   available   type: boolean   required
-    //  //   category    type: string (enum) enums: Laptop - Mac, Laptop - PC, iPad, keyboard, mouse  required
-    //  //   condition   type: string (enum) enums: new, good, okay, bad required
-    //  //   description type: string    optional
-    //  //   name    type: string    required
-    //  //   sn  type: string    required
-    //  //   tags    type: list  optional
     render() {
         const errors = validate(this.state.formData);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
@@ -116,7 +136,7 @@ class NewItemBtn extends Component {
                         <h4>Create New Item</h4>
                         <div className="divider" />
                         <div className="row">
-                            <form className="col s12" onSubmit={this.handleFormSubmit}>
+                            <form className="col s12" onSubmit={this.handleFormSubmit} ref='form'>
                                 <div className="row">
                                     <div className="input-field col s6">
                                         <input id="name" type="text" className="validate invalid" required="" onChange={this.handleInputChange} />
