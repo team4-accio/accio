@@ -39,6 +39,16 @@ export default {
                 status: "pending"
             }
         })
+    },
+    searchItems: (filter, query) => {
+        return axios.get("/api/items", {
+            headers: {
+                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+            },
+            params: {
+                [filter]: query
+            }
+        })
     }
     
 };

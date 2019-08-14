@@ -4,7 +4,7 @@ import "./style.css";
 import API from "../../../../../utils/API";
 
 
-class NewItemBtn extends Component {
+class DashActions extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -41,8 +41,6 @@ class NewItemBtn extends Component {
         return (
 
             <div className="conatainer">
-                <div className='row'>
-                    <div className="col s4">
                         <div className="card">
                             <a href='/admin/action'>
                                 <div className="card-content ">
@@ -65,8 +63,7 @@ class NewItemBtn extends Component {
                                     }
                                 </div>
                             </a>
-                        </div>
-                    </div>
+                      
                 </div>
 
 
@@ -116,5 +113,5 @@ class NewItemBtn extends Component {
     }
 }
 
-export default NewItemBtn;
+export default DashActions;
 

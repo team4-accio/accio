@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import DashActions from "./local-components/DashActions";
+import DashInventory from "./local-components/DashInventory";
 //import Autocomplete from "./local-components/Autocomplete";
 // import axios from "axios";
 // import API from "../../../utils/API"
@@ -29,6 +30,7 @@ class AdminDashboard extends Component {
         return (
             <div className="container">
                 <DashActions />
+                <DashInventory />
             </div>
         )
     }
