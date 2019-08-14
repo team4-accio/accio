@@ -13,10 +13,16 @@ class Cart extends Component {
         this.state = {
             startDate: new Date(),
         }
+        this.handleDateChange = this.handleDateChange.bind(this);
     }
 
-    onDateChange() {
-        console.log("date change called")
+    // onDateChange() {
+    //     console.log("date change called")
+    // }
+    handleDateChange(date) {
+        this.setState({
+            startDate: date
+        });
     }
 
     render() {
