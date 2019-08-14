@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import CollapseBody from "./local-components/CollapseBody";
+import axios from "axios";
 
 
 const keyStyle = {
@@ -108,8 +109,22 @@ class AdminAction extends Component {
     }
 
     componentDidMount() {
-        this.sortActions(testArr)
+        this.getStatuses()
+        // this.sortActions(testArr)
         M.AutoInit();
+        console.log("Component Did Mount")
+    }
+
+    //getStatuses stuck in continous loop work in progress to fix pulling from server
+    getStatuses() {
+        axios.get('/api/checkouts')
+            .then((response) => {
+                console.log(response);
+                this.getStatuses(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
 
@@ -147,6 +162,8 @@ class AdminAction extends Component {
 
         console.log(obj)
         this.setState({ sortedActions: obj })
+        console.log("sort actions did invoke")
+
 
     }
 
@@ -163,7 +180,7 @@ class AdminAction extends Component {
                                 {keyName == "Pending" ?
                                     <div id="pendingCollapse">
                                         <div id="pendingButton" style={keyStyle}>
-                                        <i class="large material-icons">thumbs_up_down</i> {keyName} || {this.state.sortedActions[keyName].length}
+                                            <i class="large material-icons">thumbs_up_down</i> {keyName} || {this.state.sortedActions[keyName].length}
                                         </div>
                                         {/* <div className="titleOfKey" style={keyStyle}>{keyName} | </div>
                                         <div className="countOfKey" style={countStyle}>| {this.state.sortedActions[keyName].length}</div> */}
