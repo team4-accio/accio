@@ -9,99 +9,99 @@ const keyStyle = {
     float: "left"
 };
 
-const countStyle = {
-    fontWeight: "bold",
-    float: "right"
-};
+// const countStyle = {
+//     fontWeight: "bold",
+//     float: "right"
+// };
 
 
 
-let testArr = [
-    {
-        items: [{
-            category: 'Laptop - PC',
-            serialNumber: '11111',
-            condition: 'Good',
-            available: true,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            tags: []
-        }],
-        out: "07-20-2019",
-        return: "08-10-2019", //NOT PAST DUE
-        status: 'approved',
-        user: "user.1@email.com"
-    },
-    {
-        items: [{
-            category: 'Laptop - Mac',
-            serialNumber: '123456',
-            condition: 'Good',
-            available: true,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            tags: []
-        }],
-        out: "07-20-2019",
-        return: "08-10-2019", //NOT PAST DUE
-        status: 'approved',
-        user: "user.11@email.com"
-    },
-    {
-        items: [{
-            category: 'Laptop - PC',
-            serialNumber: '11111',
-            condition: 'Good',
-            available: true,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            tags: []
-        }],
-        out: "07-20-2019",
-        return: "07-29-2019", //Past Due
-        status: 'approved',
-        user: "user.2@email.com"
-    },
-    {
-        items: [{
-            category: 'Laptop - PC',
-            serialNumber: '22222',
-            condition: 'Okay',
-            available: false,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            tags: []
-        }],
-        out: "07-20-2019",
-        return: "08-10-2019",
-        status: 'closed',
-        user: "user.3@email.com"
-    },
-    {
-        items: [{
-            category: 'Laptop - Mac',
-            serialNumber: '66666',
-            condition: 'Bad',
-            available: false,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            tags: []
-        }],
-        out: "07-20-2019",
-        return: "08-10-2019",
-        status: 'pending',
-        user: "user.4@email.com"
-    },
-    {
-        items: [{
-            category: 'iPad',
-            serialNumber: '88888',
-            condition: 'Okay',
-            available: true,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            tags: []
-        }],
-        out: "07-20-2019",
-        return: "08-10-2019",
-        status: 'rejected',
-        user: "user.5@email.com"
-    }
-]
+// let testArr = [
+//     {
+//         items: [{
+//             category: 'Laptop - PC',
+//             serialNumber: '11111',
+//             condition: 'Good',
+//             available: true,
+//             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+//             tags: []
+//         }],
+//         out: "07-20-2019",
+//         return: "08-10-2019", //NOT PAST DUE
+//         status: 'approved',
+//         user: "user.1@email.com"
+//     },
+//     {
+//         items: [{
+//             category: 'Laptop - Mac',
+//             serialNumber: '123456',
+//             condition: 'Good',
+//             available: true,
+//             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+//             tags: []
+//         }],
+//         out: "07-20-2019",
+//         return: "08-10-2019", //NOT PAST DUE
+//         status: 'approved',
+//         user: "user.11@email.com"
+//     },
+//     {
+//         items: [{
+//             category: 'Laptop - PC',
+//             serialNumber: '11111',
+//             condition: 'Good',
+//             available: true,
+//             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+//             tags: []
+//         }],
+//         out: "07-20-2019",
+//         return: "07-29-2019", //Past Due
+//         status: 'approved',
+//         user: "user.2@email.com"
+//     },
+//     {
+//         items: [{
+//             category: 'Laptop - PC',
+//             serialNumber: '22222',
+//             condition: 'Okay',
+//             available: false,
+//             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+//             tags: []
+//         }],
+//         out: "07-20-2019",
+//         return: "08-10-2019",
+//         status: 'closed',
+//         user: "user.3@email.com"
+//     },
+//     {
+//         items: [{
+//             category: 'Laptop - Mac',
+//             serialNumber: '66666',
+//             condition: 'Bad',
+//             available: false,
+//             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+//             tags: []
+//         }],
+//         out: "07-20-2019",
+//         return: "08-10-2019",
+//         status: 'pending',
+//         user: "user.4@email.com"
+//     },
+//     {
+//         items: [{
+//             category: 'iPad',
+//             serialNumber: '88888',
+//             condition: 'Okay',
+//             available: true,
+//             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+//             tags: []
+//         }],
+//         out: "07-20-2019",
+//         return: "08-10-2019",
+//         status: 'rejected',
+//         user: "user.5@email.com"
+//     }
+// ]
 
 class AdminAction extends Component {
     state = {
@@ -177,7 +177,7 @@ class AdminAction extends Component {
                     {Object.keys(this.state.sortedActions).map((keyName, keyIndex) => (
                         <li key={keyIndex + '-li'}>
                             <div className="collapsible-header">
-                                {keyName == "Pending" ?
+                                {keyName === "Pending" ?
                                     <div id="pendingCollapse">
                                         <div id="pendingButton" style={keyStyle}>
                                             <i class="large material-icons">thumbs_up_down</i> {keyName} || {this.state.sortedActions[keyName].length}
@@ -187,7 +187,7 @@ class AdminAction extends Component {
                                     </div>
                                     : null
                                 }
-                                {keyName == "Out" ?
+                                {keyName === "Out" ?
                                     <div id="outCollapse" style={keyStyle}>
                                         <i class="large material-icons">all_out</i> {keyName} || {this.state.sortedActions[keyName].length}
                                         {/* <div className="titleOfKey" style={keyStyle}>{keyName} | </div>
@@ -195,7 +195,7 @@ class AdminAction extends Component {
                                     </div>
                                     : null
                                 }
-                                {keyName == "Overdue" ?
+                                {keyName === "Overdue" ?
                                     <div id="overdueCollapse" style={keyStyle}>
                                         <i class="large material-icons" >warning</i> {keyName} || {this.state.sortedActions[keyName].length}
                                         {/* <div className="titleOfKey" style={keyStyle}>{keyName} | </div>
