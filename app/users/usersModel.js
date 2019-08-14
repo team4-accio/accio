@@ -48,6 +48,10 @@ const userSchema = new Schema({
         enum: ['active', 'inactive'],
         required: true,
         type: String
+    },
+    token: {
+        default: null,
+        type: String
     }
 }, { timestamps: true });
 
