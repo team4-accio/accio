@@ -3,7 +3,11 @@ import React from "react";
 import M from "materialize-css";
 // import Card from "./local-components/Card";
 import CollapseBody from "./local-components/CollapseBody";
+import Cart from "./local-components/Modal";
 import axios from "axios";
+import "./style.css";
+// import DatePicker from 'react-datepicker';
+// import "react-datepicker/dist/react-datepicker.css";
 // import testArr from "./testArr.json"
 
 class User extends React.Component {
@@ -12,7 +16,8 @@ class User extends React.Component {
 
         filteredInventory: [],
         inventory: [],
-        cart: []
+        cart: [],
+        startDate: new Date(),
     }
 
     componentDidMount() {
@@ -21,6 +26,8 @@ class User extends React.Component {
         // this.changeFilter(inventory)
         M.AutoInit();
     };
+
+
 
     getItems() {
         console.log("get items")
@@ -55,22 +62,36 @@ class User extends React.Component {
 
     }
 
+    // displayCart() {
+    // console.log
+    // }
+
     render() {
         console.log("rendered")
         // console.log(this.props.inventory)
         return (
             <div className="App">
+                <div className="CollapseHolder">
 
-                <CollapseBody
-                    inventory={this.state.inventory}
-                    handleRequest={this.handleRequest}
-                />
+                    <CollapseBody
+                        inventory={this.state.inventory}
+                        handleRequest={this.handleRequest}
+                    />
 
 
-                {/* <button onClick={() => this.changeFilter('checkedIn')}>Checked in</button>
+                    {/* <button onClick={() => this.changeFilter('checkedIn')}>Checked in</button>
                     <button onClick={() => this.changeFilter('checkedOut')}>Checked out</button>
                     <button onClick={() => this.changeFilter('electronics')}>Electronics</button> */}
-
+                </div>
+                <div className="DateHolder">
+                    {/* <DatePicker
+                        selected={this.state.startDate}
+                        onChange={this.handleDateChange}
+                    /> */}
+                </div>
+                <div className="CartHolder">
+                    <Cart carts={this.state.cart} />
+                </div>
 
             </div>
         );
