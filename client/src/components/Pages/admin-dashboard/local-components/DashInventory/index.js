@@ -3,27 +3,11 @@ import M from "materialize-css";
 import "./style.css";
 import API from "../../../../../utils/API";
 import "../../../../../../node_modules/react-vis/dist/style.css"
-import {
-    RadialChart,
-    Sunburst,
-    Hint,
-    XYPlot,
-    HorizontalRectSeries
-} from 'react-vis';
+import SunburstChart from "../SunburstChart";
 
 // 12 colors for sunburst categories 
 // if inventory has more than 12 categories will have an error
 const COLORS = ["#D4F1F4", "#75E6DA", "#00ccff", "#189AB4", "#05445E", "#4682B4", "#008081", "#0080FF", "#0E4D92", "#1034A6", "#003152", "#1D2951"]
-
-const tipStyle = {
-    display: 'flex',
-    color: '#fff',
-    background: '#000',
-    opacity: "0.6",
-    alignItems: 'center',
-    padding: '5px'
-};
-const boxStyle = { height: '10px', width: '10px' };
 
 class DashInventory extends Component {
     constructor(props) {
@@ -34,8 +18,7 @@ class DashInventory extends Component {
             inCount: 0,
             outCount: 0,
             waitingForAvailability: true,
-            availablityData: {},
-            hoveredCell: false
+            availablityData: {}
         }
     }
 
@@ -49,71 +32,27 @@ class DashInventory extends Component {
             this.getItemConditions(results.data)
             this.getItemAvailability(results.data)
         })
-        
-
     }
 
     getItemConditions(items) {
-        // API.searchItems('condition', 'new')
-        //     .then((res) => {
-        //         //this.setState({ newCount: res.data.length })
-        //         setTimeout(this.setState(prevState => ({
-        //             conditionData: [...prevState.conditionData, {
-        //                 angle: res.data.length,
-        //                 color: "00ccff"
-        //             }]
-        //         })), 1000);
-        //     })
-        // API.searchItems('condition', 'good')
-        //     .then((res) => {
-        //         //this.setState({ goodCount: res.data.length })
-        //         this.setState(prevState => ({
-        //             conditionData: [...prevState.conditionData, {
-        //                 angle: res.data.length,
-        //                 color: "green"
-        //             }]
-        //         }))
-        //     })
-        // API.searchItems('condition', 'okay')
-        //     .then((res) => {
-        //         //this.setState({ okayCount: res.data.length })
-        //         this.setState(prevState => ({
-        //             conditionData: [...prevState.conditionData, {
-        //                 angle: res.data.length,
-        //                 color: "yellow"
-        //             }]
-        //         }))
-        //     })
-        // API.searchItems('condition', 'bad')
-        //     .then((res) => {
-        //         this.setState(prevState => ({
-        //             conditionData: [...prevState.conditionData, {
-        //                 angle: res.data.length,
-        //                 color: "red"
-        //             }]
-        //         }))
-        //         this.setState({ waitingForCondition: false })
-        //     })
-        // // I don't like putting wFC above in case of API error, but running into async issues below 
-        // // this.setState({ waitingForCondition: false })
         let obj = {}
-                for (let i in items) {
-                    if (obj[items[i].category]) {
-                        obj[items[i].category][items[i].condition+'Count']++
-                    }
-                    else {
-                        obj[items[i].category] = {
-                            newCount: 0,
-                            goodCount: 0,
-                            okayCount:0,
-                            badCount:0,
-                        }
-                        obj[items[i].category][items[i].condition+'Count']++
-                    }
+        for (let i in items) {
+            if (obj[items[i].category]) {
+                obj[items[i].category][items[i].condition + 'Count']++
+            }
+            else {
+                obj[items[i].category] = {
+                    newCount: 0,
+                    goodCount: 0,
+                    okayCount: 0,
+                    badCount: 0,
                 }
-                this.createConditionData(obj)
+                obj[items[i].category][items[i].condition + 'Count']++
+            }
+        }
+        this.createConditionData(obj)
     }
-    createConditionData(itemObj){
+    createConditionData(itemObj) {
         let data = {
             "title": "Categories",
             "clr": "#12939A",
@@ -140,31 +79,26 @@ class DashInventory extends Component {
         this.setState({ conditionData: data, waitingForCondition: false })
     }
 
-
     getItemAvailability(items) {
-        //API.getItems()
-          //  .then((results) => {
-           //     let items = results.data
-                let obj = {}
+        let obj = {}
 
-                for (let i in items) {
-                    if (obj[items[i].category]) {
-                        items[i].available
-                            ? obj[items[i].category].inCount++
-                            : obj[items[i].category].outCount++
-                    }
-                    else {
-                        obj[items[i].category] = {
-                            inCount: 0,
-                            outCount: 0
-                        }
-                        items[i].available
-                            ? obj[items[i].category].inCount++
-                            : obj[items[i].category].outCount++
-                    }
+        for (let i in items) {
+            if (obj[items[i].category]) {
+                items[i].available
+                    ? obj[items[i].category].inCount++
+                    : obj[items[i].category].outCount++
+            }
+            else {
+                obj[items[i].category] = {
+                    inCount: 0,
+                    outCount: 0
                 }
-                this.createAvailablityData(obj)
-            //})
+                items[i].available
+                    ? obj[items[i].category].inCount++
+                    : obj[items[i].category].outCount++
+            }
+        }
+        this.createAvailablityData(obj)
     }
     // Turns the counted in/out items for each category into a usable object for the sunburst graph
     createAvailablityData(itemObj) {
@@ -193,17 +127,8 @@ class DashInventory extends Component {
     }
 
 
-    buildValue(hoveredCell) {
-        const { radius, angle, angle0 } = hoveredCell;
-        const truedAngle = (angle + angle0) / 2;
-        return {
-            x: radius * Math.cos(truedAngle),
-            y: radius * Math.sin(truedAngle)
-        };
-    }
-
     render() {
-        const { hoveredCell } = this.state;
+
         return (
 
             <div className="conatainer">
@@ -233,33 +158,7 @@ class DashInventory extends Component {
                                         // setTimeout seems to be a quick fix
                                         animation
                                         colorType="literal" /> */}
-                                         <Sunburst
-                                        hideRootNode
-                                        data={this.state.conditionData}
-
-                                        style={{ stroke: '#fff' }}
-                                        onValueMouseOver={v =>
-                                            this.setState({ hoveredCell: v.x && v.y ? v : false })
-                                        }
-                                        onValueMouseOut={v => this.setState({ hoveredCell: false })}
-                                        height={300}
-                                        margin={{ top: 50, bottom: 50, left: 50, right: 50 }}
-                                        getLabel={d => d.name}
-                                        //getSize={d => d.bigness}
-                                        getColor={d => d.clr}
-                                        width={350}
-                                        padAngle={() => 0.0}
-                                        colorType="literal"
-                                    >
-                                        {hoveredCell ? (
-                                            <Hint value={this.buildValue(hoveredCell)}>
-                                                <div style={tipStyle}>
-                                                    <div style={{ ...boxStyle, background: hoveredCell.clr }} />
-                                                    {hoveredCell.title}
-                                                </div>
-                                            </Hint>
-                                        ) : null}
-                                    </Sunburst>
+                                    <SunburstChart data={this.state.conditionData} />
                                     <div style={{
                                         position: 'absolute',
                                         padding: '5px',
@@ -277,33 +176,7 @@ class DashInventory extends Component {
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}>
-                                    <Sunburst
-                                        hideRootNode
-                                        data={this.state.availablityData}
-
-                                        style={{ stroke: '#fff' }}
-                                        onValueMouseOver={v =>
-                                            this.setState({ hoveredCell: v.x && v.y ? v : false })
-                                        }
-                                        onValueMouseOut={v => this.setState({ hoveredCell: false })}
-                                        height={300}
-                                        margin={{ top: 50, bottom: 50, left: 50, right: 50 }}
-                                        getLabel={d => d.name}
-                                        //getSize={d => d.bigness}
-                                        getColor={d => d.clr}
-                                        width={350}
-                                        padAngle={() => 0.0}
-                                        colorType="literal"
-                                    >
-                                        {hoveredCell ? (
-                                            <Hint value={this.buildValue(hoveredCell)}>
-                                                <div style={tipStyle}>
-                                                    <div style={{ ...boxStyle, background: hoveredCell.clr }} />
-                                                    {hoveredCell.title}
-                                                </div>
-                                            </Hint>
-                                        ) : null}
-                                    </Sunburst>
+                                    <SunburstChart data={this.state.availablityData} />
 
                                     <div style={{
                                         position: 'absolute',
