@@ -29,29 +29,43 @@ class DashInventory extends Component {
     componentDidMount() {
         // M.AutoInit();
         API.getItems().then(results => {
-            this.getItemConditions(results.data)
-            this.getItemAvailability(results.data)
+            this.sortData(results.data)
         })
     }
+    // sorts data from DB to be parsed by the createData functions for the chart to use
+    sortData(items){
+        let condObj = {}
+        let availObj = {}
 
-    getItemConditions(items) {
-        let obj = {}
         for (let i in items) {
-            if (obj[items[i].category]) {
-                obj[items[i].category][items[i].condition + 'Count']++
+            if (condObj[items[i].category]) {
+                condObj[items[i].category][items[i].condition + 'Count']++;
+                items[i].available
+                    ? availObj[items[i].category].inCount++
+                    : availObj[items[i].category].outCount++
             }
             else {
-                obj[items[i].category] = {
+                condObj[items[i].category] = {
                     newCount: 0,
                     goodCount: 0,
                     okayCount: 0,
                     badCount: 0,
                 }
-                obj[items[i].category][items[i].condition + 'Count']++
+                condObj[items[i].category][items[i].condition + 'Count']++
+
+                availObj[items[i].category] = {
+                    inCount: 0,
+                    outCount: 0
+                }
+                items[i].available
+                    ? availObj[items[i].category].inCount++
+                    : availObj[items[i].category].outCount++
             }
         }
-        this.createConditionData(obj)
+        this.createConditionData(condObj)
+        this.createAvailablityData(availObj)
     }
+
     createConditionData(itemObj) {
         let data = {
             "title": "Categories",
@@ -79,27 +93,7 @@ class DashInventory extends Component {
         this.setState({ conditionData: data, waitingForCondition: false })
     }
 
-    getItemAvailability(items) {
-        let obj = {}
-
-        for (let i in items) {
-            if (obj[items[i].category]) {
-                items[i].available
-                    ? obj[items[i].category].inCount++
-                    : obj[items[i].category].outCount++
-            }
-            else {
-                obj[items[i].category] = {
-                    inCount: 0,
-                    outCount: 0
-                }
-                items[i].available
-                    ? obj[items[i].category].inCount++
-                    : obj[items[i].category].outCount++
-            }
-        }
-        this.createAvailablityData(obj)
-    }
+ 
     // Turns the counted in/out items for each category into a usable object for the sunburst graph
     createAvailablityData(itemObj) {
         let data = {
@@ -148,16 +142,6 @@ class DashInventory extends Component {
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}>
-                                    {/* <RadialChart
-                                        data={this.state.conditionData}
-                                        innerRadius={100}
-                                        radius={140}
-                                        width={300}
-                                        height={300}
-                                        // animation only works when new data is passed into it, state change refreshes whole component
-                                        // setTimeout seems to be a quick fix
-                                        animation
-                                        colorType="literal" /> */}
                                     <SunburstChart data={this.state.conditionData} />
                                     <div style={{
                                         position: 'absolute',
@@ -177,7 +161,6 @@ class DashInventory extends Component {
                                         justifyContent: 'center'
                                     }}>
                                     <SunburstChart data={this.state.availablityData} />
-
                                     <div style={{
                                         position: 'absolute',
                                         padding: '5px',
