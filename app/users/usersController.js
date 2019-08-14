@@ -42,43 +42,34 @@ router.route('/')
     // POST route for creating a user
     .post(function (req, res) {
         auth.authorize(req, res, function () {
-            if (req.body.password !== req.body.passwordConfirm) {
-                res.status(400).json({
-                    error: {
-                        code: 400,
-                        message: 'Passwords do not match'
-                    }
-                });
-            } else {
-                const password = hashPass(req.body.password);
-                const request = {
-                    email: req.body.email,
-                    name: req.body.name,
-                    password: password.hash,
-                    role: req.body.role,
-                    salt: password.salt,
-                    status: req.body.status
-                };
+            const password = hashPass(req.body.password);
+            const request = {
+                email: req.body.email,
+                name: req.body.name,
+                password: password.hash,
+                role: req.body.role,
+                salt: password.salt,
+                status: req.body.status
+            };
 
-                if (request.role === 'admin') {
-                    const uuid = uuidv4();
-                    request.token = uuid;
-                }
-
-                User.create(request)
-                    .then(function (user) {
-                        const response = utils.format.usersResponse(user);
-
-                        if (user.token) {
-                            response.token = user.token;
-                        }
-
-                        res.status(200).json(response);
-                    })
-                    .catch(function (err) {
-                        res.status(500).json(err);
-                    });
+            if (request.role === 'admin') {
+                const uuid = uuidv4();
+                request.token = uuid;
             }
+
+            User.create(request)
+                .then(function (user) {
+                    const response = utils.format.usersResponse(user);
+
+                    if (user.token) {
+                        response.token = user.token;
+                    }
+
+                    res.status(200).json(response);
+                })
+                .catch(function (err) {
+                    res.status(500).json(err);
+                });
         });
     });
 
@@ -104,6 +95,12 @@ router.route('/:_id')
     // PATCH route for updating a user by id
     .patch(function (req, res) {
         auth.authorize(req, res, function () {
+            if (req.body.password) {
+                const password = hashPass(req.body.password);
+                req.body.password = password.hash;
+                req.body.salt = password.salt;
+            }
+
             User.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
                 .populate({
                     path: 'checkouts',
