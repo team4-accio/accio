@@ -81,6 +81,14 @@ router.route('/:_id')
     })
     // PATCH route for updating a user by id
     .patch(function (req, res) {
+        if (req.body.password) {
+            console.log(req.body)
+            const password = hashPass(req.body.password);
+            req.body.password = password.hash;
+            req.body.salt = password.salt;
+            console.log(req.body)
+        }
+
         User.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
             .populate({
                 path: 'checkouts',
