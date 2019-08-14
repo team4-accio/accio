@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import "./style.css";
+import "./style.css";
 import Card from "../Card";
 
 
@@ -17,23 +17,23 @@ class CollapseBody extends Component {
     }
 
     changeFilter = (action) => {
-        console.log("change filter" + action)
-        console.log("this.props.inventory" + this.props.inventory)
+        // console.log("change filter" + action)
+        // console.log("this.props.inventory" + this.props.inventory)
         var currentInventory = this.props.inventory;
         if (action === 'Laptop - Mac') {
-            console.log("conditional laptop")
+            console.log("conditional laptop Mac")
             console.log(currentInventory.filter(each => each.category === 'Laptop - Mac'))
             this.setState({
                 filteredInventory: currentInventory.filter(each => each.category === 'Laptop - Mac')
             })
         } else if (action === 'Laptop - PC') {
-            console.log("conditional laptop")
+            console.log("conditional laptop PC")
             console.log(currentInventory.filter(each => each.category === 'Laptop - PC'))
             this.setState({
                 filteredInventory: currentInventory.filter(each => each.category === 'Laptop - PC')
             })
         } else if (action === 'iPad') {
-            console.log("conditional laptop")
+            console.log("conditional ipad")
             console.log(currentInventory.filter(each => each.category === 'iPad'))
             this.setState({
                 filteredInventory: currentInventory.filter(each => each.category === 'iPad')
@@ -42,7 +42,7 @@ class CollapseBody extends Component {
     }
 
     render() {
-        console.log(this.props.filteredInventory)
+        // console.log(this.props.filteredInventory)
         return (
 
             <div className="row">
@@ -52,7 +52,7 @@ class CollapseBody extends Component {
                         return (
                             <li key={index}>
                                 <div className="collapsible-header" onClick={() => this.changeFilter(item)}>
-                                    <h1>{item}</h1>
+                                    <p>{item}</p>
                                 </div>
                                 <div className="collapsible-body">
                                     <span>
@@ -61,7 +61,7 @@ class CollapseBody extends Component {
                                             return (
                                                 <div key={index}>
 
-                                                    <Card category={item2.category} condition={item2.condition} />
+                                                    <Card category={item2.category} condition={item2.condition} id={item2._id} handleRequest={this.props.handleRequest} />
                                                 </div>
                                             )
                                         })}

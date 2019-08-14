@@ -3,7 +3,11 @@ import React from "react";
 import M from "materialize-css";
 // import Card from "./local-components/Card";
 import CollapseBody from "./local-components/CollapseBody";
+import Cart from "./local-components/Modal";
 import axios from "axios";
+import "./style.css";
+// import DatePicker from 'react-datepicker';
+// import "react-datepicker/dist/react-datepicker.css";
 // import testArr from "./testArr.json"
 
 class User extends React.Component {
@@ -11,7 +15,9 @@ class User extends React.Component {
     state = {
 
         filteredInventory: [],
-        inventory: []
+        inventory: [],
+        cart: [],
+        startDate: new Date(),
     }
 
     componentDidMount() {
@@ -20,6 +26,8 @@ class User extends React.Component {
         // this.changeFilter(inventory)
         M.AutoInit();
     };
+
+
 
     getItems() {
         console.log("get items")
@@ -41,38 +49,49 @@ class User extends React.Component {
             })
     };
 
-    // changeFilter = (action) => {
-    //     console.log("change filter")
-    //     var currentInventory = this.state.inventory;
-    //     if (action === 'Laptop - Mac') {
-    //         console.log("conditional laptop")
-    //         console.log(currentInventory.filter(each => each.category === 'Laptop - Mac'))
-    //         this.setState({
-    //             filteredinventory: currentInventory.filter(each => each.category === 'Laptop - Mac')
-    //         })
-    //         // } else if (action === 'checkedOut') {
-    //         //     this.setState({
-    //         //         filteredinventory: this.state.inventory.filter(each => each.checkedOut === true)
-    //         //     })
-    //     }
-    //     else if (action === 'electronics') {
-    //         this.setState({
-    //             filteredinventory: this.state.inventory.filter(each => each.type === 'electronics')
-    //         })
-    //     }
+    handleRequest = (id) => {
+        console.log(id);
+        // console.log(this.state.inventory);
+        const chosenItemForRequest = this.state.inventory.filter(each => each._id === id)
+        console.log(chosenItemForRequest)
+        var cart = this.state.cart
+        cart.push(chosenItemForRequest[0])
+        this.setState({
+            cart: cart
+        })
+
+    }
+
+    // displayCart() {
+    // console.log
+    // }
 
     render() {
         console.log("rendered")
-        console.log(this.state.inventory)
+        // console.log(this.props.inventory)
         return (
             <div className="App">
-                <CollapseBody inventory={this.state.inventory} />
+                <div className="CollapseHolder">
+
+                    <CollapseBody
+                        inventory={this.state.inventory}
+                        handleRequest={this.handleRequest}
+                    />
 
 
-                {/* <button onClick={() => this.changeFilter('checkedIn')}>Checked in</button>
+                    {/* <button onClick={() => this.changeFilter('checkedIn')}>Checked in</button>
                     <button onClick={() => this.changeFilter('checkedOut')}>Checked out</button>
                     <button onClick={() => this.changeFilter('electronics')}>Electronics</button> */}
-
+                </div>
+                <div className="DateHolder">
+                    {/* <DatePicker
+                        selected={this.state.startDate}
+                        onChange={this.handleDateChange}
+                    /> */}
+                </div>
+                <div className="CartHolder">
+                    <Cart carts={this.state.cart} />
+                </div>
 
             </div>
         );

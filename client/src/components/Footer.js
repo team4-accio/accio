@@ -2,23 +2,26 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Footer Content</h5>
-            <p class="grey-text text-lighten-4"> Company Info & Description</p>
+    <footer className="page-footer">
+      <div className="container">
+        <div className="row">
+          <div className="col l6 s12">
+            <h5 className="white-text">Footer Content</h5>
+            <p className="grey-text text-lighten-4">
+              {" "}
+              Company Info & Description
+            </p>
           </div>
-          <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
+          <div className="col l4 offset-l2 s12">
+            <h5 className="white-text">Links</h5>
             <ul>
               <li>
-                <a class="grey-text text-lighten-3" href="#!">
+                <a className="grey-text text-lighten-3" href="#!">
                   Link 1
                 </a>
               </li>
               <li>
-                <a class="grey-text text-lighten-3" href="#!">
+                <a className="grey-text text-lighten-3" href="#!">
                   Link 2
                 </a>
               </li>
@@ -26,10 +29,10 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div class="footer-copyright">
-        <div class="container">
+      <div className="footer-copyright">
+        <div className="container">
           © 2019 Copyright Text
-          <a class="grey-text text-lighten-4 right" href="#!">
+          <a className="grey-text text-lighten-4 right" href="#!">
             More Links
           </a>
         </div>

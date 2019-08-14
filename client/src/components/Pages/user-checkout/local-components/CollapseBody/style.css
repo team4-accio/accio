@@ -1,0 +1,23 @@
+.collapsible-header {
+ 
+    display: -webkit-box;
+   
+    display: -webkit-flex;
+   
+    display: -ms-flexbox;
+   
+    display: flex;
+   
+    cursor: pointer;
+   
+    -webkit-tap-highlight-color: transparent;
+   
+    line-height: 1.5;
+   
+    padding: 1rem;
+   
+    background-color: #e3f2fd ;
+   
+    border-bottom: 1px solid #4a148c;
+   
+  }
