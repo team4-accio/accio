@@ -5,32 +5,27 @@ import API from "../../../../../utils/API";
 import "../../../../../../node_modules/react-vis/dist/style.css"
 import {
     RadialChart,
+    Sunburst,
+    Hint,
     XYPlot,
-    LineSeries,
-    HorizontalRectSeries,
-    XAxis,
-    YAxis,
-    VerticalGridLines,
-    HorizontalGridLines,
-    VerticalRectSeries
+    HorizontalRectSeries
 } from 'react-vis';
 
-const timestamp = new Date('May 23 2017').getTime();
-const ONE_DAY = 86400000;
+// 12 colors for sunburst categories 
+// if inventory has more than 12 categories will have an error
+const COLORS = ["#D4F1F4", "#75E6DA", "#00ccff", "#189AB4", "#05445E", "#4682B4", "#008081", "#0080FF", "#0E4D92", "#1034A6", "#003152", "#1D2951"]
 
-const DATA = [
-    { x0: ONE_DAY * 2, x: ONE_DAY * 3, y: 1 },
-    { x0: ONE_DAY * 7, x: ONE_DAY * 8, y: 1 },
-    { x0: ONE_DAY * 8, x: ONE_DAY * 9, y: 1 },
-    { x0: ONE_DAY * 9, x: ONE_DAY * 10, y: 2 },
-    { x0: ONE_DAY * 10, x: ONE_DAY * 11, y: 2.2 },
-    { x0: ONE_DAY * 19, x: ONE_DAY * 20, y: 1 },
-    { x0: ONE_DAY * 20, x: ONE_DAY * 21, y: 2.5 },
-    { x0: ONE_DAY * 21, x: ONE_DAY * 24, y: 1 }
-].map(el => ({ x0: el.x0 + timestamp, x: el.x + timestamp, y: el.y }));
+const tipStyle = {
+    display: 'flex',
+    color: '#fff',
+    background: '#000',
+    opacity: "0.6",
+    alignItems: 'center',
+    padding: '5px'
+};
+const boxStyle = { height: '10px', width: '10px' };
 
-
-class NewItemBtn extends Component {
+class DashInventory extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -38,7 +33,9 @@ class NewItemBtn extends Component {
             conditionData: [],
             inCount: 0,
             outCount: 0,
-            waitingForAvailability: true
+            waitingForAvailability: true,
+            availablityData: {},
+            hoveredCell: false
         }
     }
 
@@ -98,22 +95,70 @@ class NewItemBtn extends Component {
         // this.setState({ waitingForCondition: false })
     }
 
+
     getItemAvailability() {
-        API.searchItems('available', true)
-            .then((res) => {
-                //this.setState({ newCount: res.data.length })
-                this.setState({ inCount: res.data.length })
+        API.getItems()
+            .then((results) => {
+                let items = results.data
+                let obj = {}
+
+                for (let i in items) {
+                    if (obj[items[i].category]) {
+                        items[i].available
+                            ? obj[items[i].category].inCount++
+                            : obj[items[i].category].outCount++
+                    }
+                    else {
+                        obj[items[i].category] = {
+                            inCount: 0,
+                            outCount: 0
+                        }
+                        items[i].available
+                            ? obj[items[i].category].inCount++
+                            : obj[items[i].category].outCount++
+                    }
+                }
+                this.createAvailablityData(obj)
             })
-        API.searchItems('available', false)
-            .then((res) => {
-                //this.setState({ newCount: res.data.length })
-                this.setState({ outCount: res.data.length, waitingForAvailability: false })
-            })
+    }
+    // Turns the counted in/out items for each category into a usable object for the sunburst graph
+    createAvailablityData(itemObj) {
+        let data = {
+            "title": "Categories",
+            "clr": "#12939A",
+            "children": []
+        }
+        Object.keys(itemObj).map((keyName, keyIndex) => {
+            let tempObj = {
+                bigness: 1,
+                "title": keyName,
+                "clr": COLORS[keyIndex],
+                "children": [
+                    { bigness: 1, "title": "out", "clr": "red", "size": itemObj[keyName].outCount },
+                    { bigness: 1, "title": "in", "clr": "green", "size": itemObj[keyName].inCount }
+                ],
+                labelStyle: {
+                    fontSize: 15,
+                    fontWeight: 'bold'
+                }
+            }
+            data.children.push(tempObj)
+        })
+        this.setState({ availablityData: data, waitingForAvailability: false })
     }
 
 
-    render() {
+    buildValue(hoveredCell) {
+        const { radius, angle, angle0 } = hoveredCell;
+        const truedAngle = (angle + angle0) / 2;
+        return {
+            x: radius * Math.cos(truedAngle),
+            y: radius * Math.sin(truedAngle)
+        };
+    }
 
+    render() {
+        const { hoveredCell } = this.state;
         return (
 
             <div className="conatainer">
@@ -160,16 +205,33 @@ class NewItemBtn extends Component {
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}>
-                                    <XYPlot
-                                        width={300}
-                                        height={300} >
-                                        <HorizontalRectSeries
-                                            data={[{ x: this.state.outCount, x0: 0, y: 5, y0: 0, color: "red" },
-                                            { x: this.state.inCount, x0: this.state.outCount, y: 5, y0: 0, color: "blue" }]}
-                                            animation
-                                            colorType="literal"
-                                        />
-                                    </XYPlot>
+                                    <Sunburst
+                                        hideRootNode
+                                        data={this.state.availablityData}
+
+                                        style={{ stroke: '#fff' }}
+                                        onValueMouseOver={v =>
+                                            this.setState({ hoveredCell: v.x && v.y ? v : false })
+                                        }
+                                        onValueMouseOut={v => this.setState({ hoveredCell: false })}
+                                        height={300}
+                                        margin={{ top: 50, bottom: 50, left: 50, right: 50 }}
+                                        getLabel={d => d.name}
+                                        //getSize={d => d.bigness}
+                                        getColor={d => d.clr}
+                                        width={350}
+                                        padAngle={() => 0.0}
+                                        colorType="literal"
+                                    >
+                                        {hoveredCell ? (
+                                            <Hint value={this.buildValue(hoveredCell)}>
+                                                <div style={tipStyle}>
+                                                    <div style={{ ...boxStyle, background: hoveredCell.clr }} />
+                                                    {hoveredCell.title}
+                                                </div>
+                                            </Hint>
+                                        ) : null}
+                                    </Sunburst>
 
                                     <div style={{
                                         position: 'absolute',
@@ -183,52 +245,11 @@ class NewItemBtn extends Component {
 
                 </div>
 
-
-                {/* CARD REVEAL
-                <div className="card ">
-                    <div className="card-content activator">
-                        <i className="material-icons " style={{ fontSize: '20vw' }}>playlist_add_check </i>
-                        <span className="card-title activator grey-text text-darken-4">Actions<i className="material-icons right">more_vert</i></span>
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div className="card-reveal">
-                        <span className="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div> */}
-
-                {/* //     <div className="col s4">
-            //         <div className="card teal">
-            //             {this.state.overdueCount > 0
-            //                 ? <span className="badge circle red">{this.state.overdueCount}</span>
-            //                 : null
-            //             }
-            //             <div className="card-content white-text center-align">
-            //                 <i className="material-icons" style={{ fontSize: '20vw' }}>event_busy </i>
-            //                 <span className="card-title">Overdue</span>
-            //             </div>
-            //         </div>
-            //     </div>
-
-            //     <div className="col s4">
-            //         <div className="card teal">
-            //             {this.state.pendingCount > 0
-            //                 ? <span className="badge circle red">{this.state.pendingCount}</span>
-            //                 : null
-            //             }
-            //             <div className="card-content white-text center-align">
-            //                 <i className="material-icons" style={{ fontSize: '20vw' }}>access_time </i>
-            //                 <span className="card-title">Pending</span>
-            //             </div>
-            //         </div>
-            //     </div> */}
-
-
             </div>
 
         )
     }
 }
 
-export default NewItemBtn;
+export default DashInventory;
 
