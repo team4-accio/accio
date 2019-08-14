@@ -1,8 +1,10 @@
+
 import React from "react";
 
 // function Header() {
 const Header = props => {
   const { branding } = props;
+
   return (
     <nav className="navbar">
       <div className="nav-wrapper">
@@ -23,6 +25,7 @@ const Header = props => {
       </div>
     </nav>
   );
+
 };
 
 export default Header;
