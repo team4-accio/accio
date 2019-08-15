@@ -6,6 +6,7 @@ import CollapseBody from "./local-components/CollapseBody";
 import Cart from "./local-components/Modal";
 import axios from "axios";
 import "./style.css";
+
 // import DatePicker from 'react-datepicker';
 // import "react-datepicker/dist/react-datepicker.css";
 // import testArr from "./testArr.json"
@@ -60,7 +61,14 @@ class User extends React.Component {
             cart: cart
         })
 
+
     }
+
+    handlePostSuccess(response) {
+        console.log("handlepost")
+        console.log(response)
+    }
+
 
     // displayCart() {
     // console.log
@@ -90,7 +98,7 @@ class User extends React.Component {
                     /> */}
                 </div>
                 <div className="CartHolder">
-                    <Cart carts={this.state.cart} />
+                    <Cart carts={this.state.cart} handlePostSuccess={this.handlePostSuccess} />
                 </div>
 
             </div>
