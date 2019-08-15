@@ -5,7 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 // import ptBR from 'date-fns/locale/pt-BR';
 // registerLocale('pt-BR', ptBR);
-// import "./style.css";
+import "./styles.css";
+
+// 89873270-be2f-11e9-ace9-0b90993bf7cc key
 
 class Cart extends Component {
     constructor(props) {
@@ -41,15 +43,15 @@ class Cart extends Component {
             user: "5d422915501c450bd4230aac"
         }
         console.log(payload)
-        axios.post("/api/checkouts", payload,
-            {
-                headers: {
-                    authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
-                }
-            }
-        ).then(function (data) {
-            console.log(data)
-        });
+        // axios.post("/api/checkouts", payload,
+        //     {
+        //         headers: {
+        //             authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+        //         }
+        //     }
+        // ).then(function (data) {
+        //     console.log(data)
+        // });
 
     }
 
