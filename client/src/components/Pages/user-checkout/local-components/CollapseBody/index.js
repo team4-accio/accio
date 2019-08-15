@@ -21,22 +21,22 @@ class CollapseBody extends Component {
         // console.log("this.props.inventory" + this.props.inventory)
         var currentInventory = this.props.inventory;
         if (action === 'Laptop - Mac') {
-            console.log("conditional laptop Mac")
+            // console.log("conditional laptop Mac")
             console.log(currentInventory.filter(each => each.category === 'Laptop - Mac'))
             this.setState({
-                filteredInventory: currentInventory.filter(each => each.category === 'Laptop - Mac')
+                filteredInventory: currentInventory.filter(each => each.category === 'Laptop - Mac' && each.available === true)
             })
         } else if (action === 'Laptop - PC') {
-            console.log("conditional laptop PC")
+            // console.log("conditional laptop PC")
             console.log(currentInventory.filter(each => each.category === 'Laptop - PC'))
             this.setState({
-                filteredInventory: currentInventory.filter(each => each.category === 'Laptop - PC')
+                filteredInventory: currentInventory.filter(each => each.category === 'Laptop - PC' && each.available === true)
             })
         } else if (action === 'iPad') {
-            console.log("conditional ipad")
+            // console.log("conditional ipad")
             console.log(currentInventory.filter(each => each.category === 'iPad'))
             this.setState({
-                filteredInventory: currentInventory.filter(each => each.category === 'iPad')
+                filteredInventory: currentInventory.filter(each => each.category === 'iPad' && each.available === true)
             })
         }
     }
