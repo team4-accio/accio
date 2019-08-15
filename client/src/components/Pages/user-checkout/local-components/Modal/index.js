@@ -7,7 +7,7 @@ import axios from "axios";
 // registerLocale('pt-BR', ptBR);
 import "./styles.css";
 
-// 89873270-be2f-11e9-ace9-0b90993bf7cc key
+
 
 class Cart extends Component {
     constructor(props) {
@@ -52,6 +52,8 @@ class Cart extends Component {
         // ).then(function (data) {
         //     console.log(data)
         // });
+        this.props.handlePostSuccess(payload);
+        // ultimately update this to db response
 
     }
 
