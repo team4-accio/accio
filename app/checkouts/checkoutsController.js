@@ -6,6 +6,9 @@ const router = require('express').Router(); // Create a Router instance
 // Require Checkout model
 const Checkout = require('./checkoutsModel');
 
+// Require items helper module
+const items = require('../items/itemsAvailability');
+
 // Require users helper modules
 const users = { // Avoid cyclic dependency by requiring direct path to users attach module
     attach: require('../users/usersAttach').attach,
@@ -53,11 +56,14 @@ router.route('/')
                                 .then(function (dbCheckout) {
                                     res.status(200).json(dbCheckout);
 
-                                    // Attach the checkout to a user
-                                    return users.attach(
-                                        { _id: dbCheckout.user },
-                                        { checkouts: dbCheckout._id }
-                                    );
+                                    // Update items to unavailable
+                                    items.makeUnavailable({ _id: dbCheckout.items }, function () {
+                                        // Attach the checkout to a user
+                                        return users.attach(
+                                            { _id: dbCheckout.user },
+                                            { checkouts: dbCheckout._id }
+                                        );
+                                    });
                                 })
                                 .catch(function (err) {
                                     res.status(500).json(err);
@@ -65,11 +71,14 @@ router.route('/')
                         } else {
                             res.status(200).json(checkout);
 
-                            // Attach the checkout to a user
-                            return users.attach(
-                                { _id: checkout.user },
-                                { checkouts: checkout._id }
-                            );
+                            // Update items to unavailable
+                            items.makeUnavailable({ _id: checkout.items }, function () {
+                                // Attach the checkout to a user
+                                return users.attach(
+                                    { _id: checkout.user },
+                                    { checkouts: checkout._id }
+                                );
+                            });
                         }
                     })
                     .catch(function (err) {
@@ -101,6 +110,13 @@ router.route('/:_id')
                 .populate({ path: 'items', options: { sort: { _id: -1 } } })
                 .then(function (checkout) {
                     res.status(200).json(checkout);
+
+                    if (req.body.status === 'closed') {
+                        // Update items to available
+                        items.makeAvailable({ _id: checkout.items }, function () {
+                            return true;
+                        });
+                    }
                 })
                 .catch(function (err) {
                     res.status(500).json(err);
@@ -114,11 +130,14 @@ router.route('/:_id')
                 .then(function (checkout) {
                     res.status(200).json(checkout);
 
-                    // Detach the checkout from a user
-                    return users.detach(
-                        { _id: checkout.user },
-                        { checkouts: checkout._id }
-                    );
+                    // Update items to available
+                    items.makeAvailable({ _id: checkout.items }, function () {
+                        // Detach the checkout from a user
+                        return users.detach(
+                            { _id: checkout.user },
+                            { checkouts: checkout._id }
+                        );
+                    });
                 })
                 .catch(function (err) {
                     res.status(500).json(err);
