@@ -117,10 +117,10 @@ class AdminAction extends Component {
 
     //getStatuses stuck in continous loop work in progress to fix pulling from server
     getStatuses() {
-        axios.get('/api/checkouts')
+        axios.get('/api/users')
             .then((response) => {
                 console.log(response);
-                this.getStatuses(response.data)
+                this.sortActions(response.data)
             })
             .catch(function (error) {
                 console.log(error);
@@ -129,14 +129,29 @@ class AdminAction extends Component {
 
 
     sortActions(actions) {
-
+        console.log("****************************")
         let pending = actions.filter(obj => {
-            return obj.status === 'pending'
+            let hasPending = false
+            if (obj.checkouts.length > 0) {
+                for (let i in obj.checkouts) {
+                    if (obj.checkouts[i].status === "pending") {
+                        hasPending = true;
+                    }
+                }
+            } if (hasPending) {
+                console.log(obj)
+                return obj;
+            }
+
         })
 
         let approved = actions.filter(obj => {
-            return obj.status === 'approved'
+            return obj.checkouts.status === 'approved'
         })
+
+        console.log(actions)
+
+
 
         let overdue = [];
         let out = [];
@@ -163,7 +178,6 @@ class AdminAction extends Component {
         console.log(obj)
         this.setState({ sortedActions: obj })
         console.log("sort actions did invoke")
-
 
     }
 
