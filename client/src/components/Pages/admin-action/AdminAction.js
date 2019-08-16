@@ -129,24 +129,33 @@ class AdminAction extends Component {
 
 
     sortActions(actions) {
-        console.log("****************************")
+
         let pending = actions.filter(obj => {
-            let hasPending = false
+            let hasPending = false;
             if (obj.checkouts.length > 0) {
-                for (let i in obj.checkouts) {
-                    if (obj.checkouts[i].status === "pending") {
+                for(let i in obj.checkouts){
+                    if(obj.checkouts[i].status === 'pending'){
                         hasPending = true;
                     }
                 }
-            } if (hasPending) {
+            } if(hasPending){
                 console.log(obj)
                 return obj;
             }
-
         })
 
         let approved = actions.filter(obj => {
-            return obj.checkouts.status === 'approved'
+            let hasApproved = false;
+            if (obj.checkouts.length > 0) {
+                for(let i in obj.checkouts){
+                    if(obj.checkouts[i].status === 'approved'){
+                        hasApproved = true;
+                    }
+                }
+            } if(hasApproved){
+                console.log(obj)
+                return obj;
+            }
         })
 
         console.log(actions)
