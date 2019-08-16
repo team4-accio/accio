@@ -5,11 +5,17 @@ import AdminInventory from './components/Pages/admin-inventory/AdminInventory';
 import AdminAction from './components/Pages/admin-action/AdminAction';
 import AdminUsers from './components/Pages/admin-userlist/AdminUserList';
 import UserCheckout from './components/Pages/user-checkout/UserCheckout';
+import { Header, HeaderLink, Footer } from './components/common';
 import Login from './components/Login';
 import API from './utils/API';
 
 class App extends Component {
     state = {
+        links: {
+            admin: ['action', 'inventory', 'users'],
+            user: ['checkout'],
+            placeholder: ['/admin/action', '/admin/inventory', '/admin/users', '/users/checkout'] // @TODO remove this and update HeaderLink component
+        },
         init: true,
         loggedIn: false,
         path: '',
@@ -57,6 +63,15 @@ class App extends Component {
         if (Object.keys(this.state.sessionUser).length > 0) {
             return (
                 <Router>
+                    <Header>
+                        {
+                            this.state.links.placeholder.map(link =>
+                                <HeaderLink link={link}>
+                                    {link}
+                                </HeaderLink>
+                            )
+                        }
+                    </Header>
                     <Wrapper>
                         <Switch>
                             <Route
@@ -82,16 +97,19 @@ class App extends Component {
                             <Route render={() => <Login login={this.handleLogin} />} />
                         </Switch>
                     </Wrapper>
+                    <Footer />
                 </Router>
             );
         } else if (!this.state.init) {
             return (
                 <Router>
+                    <Header />
                     <Wrapper>
                         <Switch>
                             <Route render={() => <Login login={this.handleLogin} />} />
                         </Switch>
                     </Wrapper>
+                    <Footer />
                 </Router>
             );
         }
