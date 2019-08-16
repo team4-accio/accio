@@ -40,13 +40,13 @@ class Cart extends Component {
             out: new Date(),
             return: this.state.returnDate,
             status: "pending",
-            user: "5d535d43a598fb423838ea4a"
+            user: ""
         }
         console.log(payload)
         axios.post("/api/checkouts", payload,
             {
                 headers: {
-                    authorization: "89873270-be2f-11e9-ace9-0b90993bf7cc"
+                    authorization: ""
                 }
             }
         ).then(function (data) {
