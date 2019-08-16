@@ -22,9 +22,9 @@ function ListAction(props) {
     <li className="collection-item avatar">
       <div id="userInfo" style={userInfoStyle}>
         <p>
-          Username: {props.action.user}<br />
-          Category: {props.action.items[0].category} <br />
-          Checkout Date: {props.action.out} to {props.action.return}<br /> 
+          Username: {props.action.name}<br />
+          Description: {props.action.checkouts[0].items[0].description} <br />
+          Checkout Date: {props.action.checkouts[0].out} to {props.action.checkouts[0].return}<br /> 
        </p>
       </div>
       {props.type == "Pending" ?
