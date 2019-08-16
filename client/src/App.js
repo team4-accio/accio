@@ -5,12 +5,13 @@ import AdminInventory from './components/Pages/admin-inventory/AdminInventory';
 import AdminAction from './components/Pages/admin-action/AdminAction';
 import AdminUsers from './components/Pages/admin-userlist/AdminUserList';
 import UserCheckout from './components/Pages/user-checkout/UserCheckout';
-import Home from './components/Pages/Home';
+import Login from './components/Login';
 import API from './utils/API';
 
 class App extends Component {
     state = {
         init: true,
+        loggedIn: false,
         path: '',
         sessionToken: '',
         sessionUser: {}
@@ -33,8 +34,18 @@ class App extends Component {
     // Retrieve user if session token exists
     getSessionUser = (sessionToken) => {
         API.getSession(sessionToken)
-            .then(res => this.setState({ sessionUser: res.data }))
+            .then(res => this.setState({
+                loggedIn: true,
+                sessionUser: res.data
+            }))
             .catch(err => console.log(err));
+    };
+
+    handleLogin = (user) => {
+        this.setState({
+            loggedIn: true,
+            sessionUser: user
+        });
     };
 
     // Render routes based on:
@@ -68,7 +79,7 @@ class App extends Component {
                                 path='/users/checkout'
                                 render={() => <UserCheckout sessionUser={this.state.sessionUser} />}
                             />
-                            <Route component={Home} />
+                            <Route render={() => <Login login={this.handleLogin} />} />
                         </Switch>
                     </Wrapper>
                 </Router>
@@ -78,7 +89,7 @@ class App extends Component {
                 <Router>
                     <Wrapper>
                         <Switch>
-                            <Route component={Home} />
+                            <Route render={() => <Login login={this.handleLogin} />} />
                         </Switch>
                     </Wrapper>
                 </Router>
