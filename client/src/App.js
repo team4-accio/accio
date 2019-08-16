@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Wrapper from './components/Wrapper';
-import AdminInventory from './components/Pages/admin-inventory/AdminInventory';
-import AdminAction from './components/Pages/admin-action/AdminAction';
-import AdminUsers from './components/Pages/admin-userlist/AdminUserList';
-import UserCheckout from './components/Pages/user-checkout/UserCheckout';
-import { Header, HeaderLink, Footer } from './components/common';
+import { Header, HeaderLink, Footer, Wrapper } from './components/common';
+import { AdminInventory, AdminAction, AdminUserList, UserCheckout } from './components/Pages';
 import Login from './components/Login';
 import API from './utils/API';
 
@@ -87,7 +83,7 @@ class App extends Component {
                             <Route
                                 exact
                                 path='/admin/users'
-                                render={() => <AdminUsers sessionUser={this.state.sessionUser} />}
+                                render={() => <AdminUserList sessionUser={this.state.sessionUser} />}
                             />
                             <Route
                                 exact
