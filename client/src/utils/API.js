@@ -1,5 +1,4 @@
-import axios from "axios"
-// import moment from "moment"
+import axios from 'axios';
 
 export default {
     getAllUsers: () => {
@@ -12,10 +11,14 @@ export default {
             params: {
                 [filter]: query
             }
-        })
+        });
     },
     addNewItem: (itemData) => {
         console.log(itemData)
-        return axios.post(`/api/items`, itemData)
+        return axios.post(`/api/items`, itemData);
+    },
+    // Retrieve session user from session token
+    getSession: (session) => {
+        return axios.get('/session', { headers: { 'x-session-token': session } });
     }
 };

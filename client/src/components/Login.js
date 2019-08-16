@@ -40,6 +40,8 @@ export default class Login extends React.Component {
         console.log("storage", localStorage.getItem("sessionid"));
         // console.log(res.headers);
         // console.log(res.data);
+
+        this.props.login(res.data);
       })
       .catch(err => console.log(err));
   };
