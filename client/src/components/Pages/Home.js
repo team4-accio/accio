@@ -5,9 +5,8 @@ import Footer from "../Footer";
 
 function Home() {
   return (
-
     <div className="App">
-      <Header />
+      <Header branding="ACCIO" />
       <Login />
       <Footer />
     </div>

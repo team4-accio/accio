@@ -33,7 +33,9 @@ router.route('/')
     .post(function (req, res) {
         auth.authorize(req, res, function () {
             const item = new Item(req.body);
-            item.filterTags();
+            if (req.body.tags) {
+                item.filterTags();
+            }
 
             Item.create(item)
                 .then(function (dbItem) {
@@ -62,9 +64,10 @@ router.route('/:_id')
     // PATCH route for updating an item by id
     .patch(function (req, res) {
         auth.authorize(req, res, function () {
-            const item = new Item(req.body);
-
-            req.body.tags = item.filterTags(); // Only pass updated tags to avoid creating new _id
+            if (req.body.tags) {
+                const item = new Item(req.body);
+                req.body.tags = item.filterTags(); // Only pass updated tags to avoid creating new _id
+            }
 
             Item.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
                 .then(function (dbItem) {

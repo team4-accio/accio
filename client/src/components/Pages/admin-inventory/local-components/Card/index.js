@@ -3,7 +3,6 @@ import "./style.css";
 
 
 function Card(props) {
-    //console.log(props)
     return (
 
         <div className="col s6 m4 l3">
@@ -14,7 +13,7 @@ function Card(props) {
                 </div>
                 <div className="card-action">
                     <h3 className='center-align'
-                    style={props.item.condition == "good" ? {color: "green"} : props.item.condition == "okay" ? {color: "yellow"}:{color: "red"}} 
+                        style={props.item.condition === "good" ? { color: "green" } : props.item.condition === "okay" ? { color: "yellow" } : { color: "red" }}
                     >{props.item.condition}</h3>
                 </div>
             </div>

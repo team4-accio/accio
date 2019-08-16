@@ -1,5 +1,5 @@
 import axios from "axios"
-import moment from "moment"
+// import moment from "moment"
 
 export default {
     getAllUsers: () => {
@@ -13,5 +13,9 @@ export default {
                 [filter]: query
             }
         })
+    },
+    addNewItem: (itemData) => {
+        console.log(itemData)
+        return axios.post(`/api/items`, itemData)
     }
 };

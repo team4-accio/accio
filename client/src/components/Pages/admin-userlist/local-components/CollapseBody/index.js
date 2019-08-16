@@ -66,9 +66,9 @@ class CollapseBody extends Component {
                         <div className="modal-content">
                             <h4>{this.state.modalContent.userName}'s History:</h4>
                             <ul className="collection">
-                                {this.state.modalContent.history.map((item) => (
+                                {this.state.modalContent.history.map((checkout) => (
                                     <HistoryElem
-                                        {...item}
+                                        {...checkout}
                                     />
                                 ))}
                             </ul>

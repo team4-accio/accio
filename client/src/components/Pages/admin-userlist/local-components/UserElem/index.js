@@ -30,9 +30,9 @@ class UserElem extends Component {
     //TESTING FUNCTION
     updateUserState(field) {
         let val = ""
-        if (field == "status") {
+        if (field === "status") {
             let obj = this.state.user
-            obj.status == "active" ? val = "inactive" : val = "active"
+            obj.status === "active" ? val = "inactive" : val = "active"
             //changes state to update page
             //  not best practice in case patch req fails
             obj.status = val
@@ -40,7 +40,7 @@ class UserElem extends Component {
         }
         else {
             let obj = this.state.user
-            obj.role == "user" ? val = "admin" : val = "user"
+            obj.role === "user" ? val = "admin" : val = "user"
             //changes state to update page
             //  not best practice in case patch req fails
             obj.role = val
