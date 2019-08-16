@@ -64,9 +64,14 @@ class User extends React.Component {
 
     }
 
-    handlePostSuccess(response) {
+    handlePostSuccess(data) {
         console.log("handlepost")
-        console.log(response)
+        console.log(data)
+        // set data to variable 
+        // look for id for changed item from response
+        // map
+        // set to data variable
+        // update state
     }
 
 
