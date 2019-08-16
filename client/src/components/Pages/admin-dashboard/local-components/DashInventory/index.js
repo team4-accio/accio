@@ -18,7 +18,8 @@ class DashInventory extends Component {
             inCount: 0,
             outCount: 0,
             waitingForAvailability: true,
-            availablityData: {}
+            availablityData: {},
+            conditionHoverTitle: ""
         }
     }
 
@@ -119,6 +120,10 @@ class DashInventory extends Component {
         })
         this.setState({ availablityData: data, waitingForAvailability: false })
     }
+    getHoverTitle(title, source){
+        //console.log(title)
+        this.setState({conditionHoverTitle: title})
+    }
 
 
     render() {
@@ -127,7 +132,7 @@ class DashInventory extends Component {
 
             <div className="conatainer">
                 <div className="card">
-                    <a href='/admin/inventory'>
+                    {/* <a href='/admin/inventory'> */}
                         <div className="card-content ">
                             <span className="card-title grey-text text-darken-4 center-align">Inventory</span>
                             <div className="divider" />
@@ -142,11 +147,12 @@ class DashInventory extends Component {
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}>
-                                    <SunburstChart data={this.state.conditionData} />
+                                    <SunburstChart data={this.state.conditionData} {...this.state} getHoverTitle={(title, source) => this.getHoverTitle(title, source)}/>
                                     <div style={{
                                         position: 'absolute',
                                         padding: '5px',
-                                    }}>Condition</div>
+                                    }}>Condition <br />
+                                    {this.state.conditionHoverTitle} </div>
                                 </div>)
                             }
 
@@ -169,7 +175,7 @@ class DashInventory extends Component {
                             }
 
                         </div>
-                    </a>
+                    {/* </a> */}
 
                 </div>
 

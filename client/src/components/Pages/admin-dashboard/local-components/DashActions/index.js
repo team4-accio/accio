@@ -42,7 +42,7 @@ class DashActions extends Component {
 
             <div className="conatainer">
                         <div className="card">
-                            <a href='/admin/action'>
+                            {/* <a href='/admin/action'> */}
                                 <div className="card-content ">
                                     <i className="material-icons " style={{ fontSize: '20vw' }}>playlist_add_check </i>
     
@@ -62,7 +62,7 @@ class DashActions extends Component {
                                         : null
                                     }
                                 </div>
-                            </a>
+                            {/* </a> */}
                       
                 </div>
 
