@@ -130,7 +130,7 @@ class DashInventory extends Component {
 
             <div className="conatainer">
                 <div className="card">
-                    {/* <a href='/admin/inventory'> */}
+                    <a href='/admin/inventory'>
                     <div className="card-content ">
                         <span className="card-title grey-text text-darken-4 center-align">Inventory</span>
                         <div className="divider" />
@@ -189,7 +189,7 @@ class DashInventory extends Component {
                         }
 
                     </div>
-                    {/* </a> */}
+                    </a>
 
                 </div>
 
