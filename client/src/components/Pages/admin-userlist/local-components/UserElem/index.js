@@ -81,7 +81,7 @@ class UserElem extends Component {
                         userName={this.state.user.name}
                         parent={this}
                     />
-                    {this.state.userType == "users" ?
+                    {this.state.userType === "users" ?
                         <span ><br /> <a onClick={() => this.props.parent.updateModalContent(this.state.user.name)} className="modal-trigger" href="#modal1">History</a></span>
                         : null
                     }

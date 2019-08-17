@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import M from "materialize-css";
+//import M from "materialize-css";
 import "./style.css";
 import API from "../../../../../utils/API";
 
@@ -21,20 +21,13 @@ class DashActions extends Component {
         // M.AutoInit();
         API.getAllOverdue()
             .then((res) => {
-                console.log(res)
-                this.setState({ overdueCount: res.data.length })
+                this.setState({ overdueCount: res.data.length });
             })
         API.getAllPending()
             .then((res) => {
-                console.log(res)
-                this.setState({ pendingCount: res.data.length })
+                this.setState({ pendingCount: res.data.length });
             })
     }
-
-    getActions() {
-
-    }
-
 
     render() {
 

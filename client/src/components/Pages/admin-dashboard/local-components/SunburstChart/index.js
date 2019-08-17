@@ -1,8 +1,5 @@
 import React from "react";
-import {
-    Sunburst,
-    Hint,
-} from 'react-vis';
+import { Sunburst } from 'react-vis';
 import dummyData from "./initialData.json";
 
 export default class SunburstChart extends React.Component {
@@ -20,7 +17,7 @@ export default class SunburstChart extends React.Component {
     }
 
     render() {
-        const { hoveredCell, data } = this.state;
+        const { data } = this.state;
         return (
 
             <Sunburst

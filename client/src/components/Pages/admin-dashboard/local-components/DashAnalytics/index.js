@@ -6,21 +6,20 @@ import "./style.css";
 class DashAnalytics extends Component {
 
     componentDidMount() {
-        M.AutoInit()
+        M.AutoInit();
     }
     openTapTarget() {
         var elems = document.querySelectorAll('.tap-target');
-        console.log(elems)
         var instance = M.TapTarget.getInstance(elems[0]);
-        instance.open()
+        instance.open();
     }
 
     render() {
         return (
             <div className="conatainer">
-                <a id="menu" className="waves-effect waves-light btn btn-floating "  style={{ opacity:"0", position: "fixed", bottom: 0, right: 0 }}></a>
+                <a href="#" id="menu" className="waves-effect waves-light btn btn-floating " style={{ opacity: "0", position: "fixed", bottom: 0, right: 0 }}><i className="material-icons">whatshot</i></a>
                 <div className="card">
-                    <a onClick={this.openTapTarget}>
+                    <a href="#" onClick={this.openTapTarget}>
                         <div className="card-content ">
                             <i className="material-icons " style={{ fontSize: '20vw' }}>multiline_chart</i>
 
@@ -33,7 +32,7 @@ class DashAnalytics extends Component {
                 <div className="tap-target" data-target="menu">
                     <div className="tap-target-content">
                         <h5>Coming Soon!</h5>
-                        <p>This functionality is not completed yet</p>
+                        <p>This functionality is not completed yet.</p>
                     </div>
                 </div>
             </div>

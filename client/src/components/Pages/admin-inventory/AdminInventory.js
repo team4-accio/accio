@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import M from "materialize-css";
-import { Autocomplete } from "react-materialize";
+//import { Autocomplete } from "react-materialize";
 import CollapseBody from "./local-components/CollapseBody";
 import NewItemBtn from "./local-components/NewItemBtn";
 import axios from "axios";
-import testArr from "./testArr.json"
+//import testArr from "./testArr.json"
 
 class AdminInventory extends Component {
     constructor(props) {

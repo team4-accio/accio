@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import M from "materialize-css";
+//import M from "materialize-css";
 import "./style.css";
 import API from "../../../../../utils/API";
 import "../../../../../../node_modules/react-vis/dist/style.css";
