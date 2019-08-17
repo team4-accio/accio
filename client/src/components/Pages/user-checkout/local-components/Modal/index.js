@@ -29,7 +29,8 @@ class Cart extends Component {
         // console.log(date);
     }
 
-    handleCheckout() {
+    handleCheckout = event => {
+        // event.preventDefault();
         // var idsOnly = []
         // for (let i = 0; i < this.props.carts.length; i++) {
         //     idsOnly.push(this.props.carts[i]._id)
@@ -40,18 +41,20 @@ class Cart extends Component {
             out: new Date(),
             return: this.state.returnDate,
             status: "pending",
-            user: ""
+            user: "5d535d43a598fb423838ea4a"
         }
         console.log(payload)
+
         axios.post("/api/checkouts", payload,
             {
                 headers: {
-                    authorization: ""
+                    authorization: "89873270-be2f-11e9-ace9-0b90993bf7cc"
                 }
             }
         ).then(function (data) {
             console.log(data)
             this.props.handlePostSuccess(data);
+
         }.bind(this));
 
         // ultimately update this to db response
@@ -68,7 +71,7 @@ class Cart extends Component {
                         <div className="row">
                             {this.props.carts.map((cart, index) => {
                                 return (
-                                    <CartCard name={cart.name} condition={cart.condion} key={index} />
+                                    <CartCard name={cart.name} condition={cart.condion} key={index} {...this.state} />
                                 )
                             })}
 

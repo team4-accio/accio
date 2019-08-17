@@ -10,7 +10,7 @@ class CollapseBody extends Component {
         // console.log(props)
         this.state = {
             filteredInventory: [],
-            categories: ["Laptop - Mac", "Laptop - PC", "iPad",]
+            categories: ["Laptop - Mac", "Laptop - PC", "iPad", "keyboard"]
 
         }
 
@@ -38,6 +38,12 @@ class CollapseBody extends Component {
             this.setState({
                 filteredInventory: currentInventory.filter(each => each.category === 'iPad' && each.available === true)
             })
+        } else if (action === 'keyboard') {
+            // console.log("conditional ipad")
+            console.log(currentInventory.filter(each => each.category === 'keyboard'))
+            this.setState({
+                filteredInventory: currentInventory.filter(each => each.category === 'keyboard' && each.available === true)
+            })
         }
     }
 
@@ -51,6 +57,7 @@ class CollapseBody extends Component {
                     {this.state.categories.map((item, index) => {
                         return (
                             <li key={index}>
+                                {/*  */}
                                 <div className="collapsible-header" onClick={() => this.changeFilter(item)}>
                                     <p>{item}</p>
                                 </div>
