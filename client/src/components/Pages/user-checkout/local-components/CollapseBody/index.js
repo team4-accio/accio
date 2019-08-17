@@ -57,6 +57,7 @@ class CollapseBody extends Component {
                     {this.state.categories.map((item, index) => {
                         return (
                             <li key={index}>
+                                {/*  */}
                                 <div className="collapsible-header" onClick={() => this.changeFilter(item)}>
                                     <p>{item}</p>
                                 </div>

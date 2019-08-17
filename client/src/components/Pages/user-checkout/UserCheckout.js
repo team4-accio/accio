@@ -73,7 +73,7 @@ class User extends React.Component {
             html: ('Checked out'),
             classes: 'greenToast'
         })
-        this.updateOnNewItem()
+        this.updateOnNewItem(data.item)
         // set data to variable 
         // look for id for changed item from response
         // map
@@ -83,9 +83,32 @@ class User extends React.Component {
 
     updateOnNewItem() {
         this.getItems();
-        // var elems = document.querySelectorAll('.collapsible');
-        // var instances = M.Collapsible.init(elems);
-        // instances.close()
+
+        var elems = document.querySelectorAll('.collapsible');
+        var instance = M.Collapsible.init(elems[0]);
+        console.log(elems)
+        for (var i = 0; i < elems[0].children.length; i++) {
+            // console.log(elems[i]);
+
+            // var instance = M.Collapsible.getInstance(elems[i]);
+
+            console.log(instance)
+            instance.close(i)
+        }
+        // var instances = M.Collapsible.init(elems[0]);
+        // console.log(instances)
+        // let headerIndex = Array.find(elems[0].children.find((element, index) => {
+        //     if (element.className === "active") {
+        //         return index
+        //     }
+        // });
+        //not working but array prototype is the direction we need to go
+        // let headerIndex = Array.find(elems[0].children, (element, index) => {
+        //     if (element.className === "active") {
+        //         return index
+        //     }
+        // });
+
     }
     // displayCart() {
     // console.log
