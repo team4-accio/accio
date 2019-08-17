@@ -15,8 +15,9 @@ const userInfoStyle = {
   float: "left"
 };
 
+
+
 function ListAction(props) {
-  //console.log(props)
   return (
 
     <li className="collection-item avatar">
@@ -31,20 +32,20 @@ function ListAction(props) {
       </div>
       {props.type === "Pending" ?
         <div id="approveDeny">
-          <a className="waves-effect waves-light btn-large" id="denyButton" style={denyStyle}>Deny</a>
-          <a className="waves-effect waves-light btn-large" id="approveButton" style={approveStyle}>Approve</a>
+          <a className="waves-effect waves-light btn-large" id="denyButton" style={denyStyle} onClick={() => props.rejectButton(props.action.checkouts[0]._id)}>Deny</a>
+          <a className="waves-effect waves-light btn-large" id="approveButton" style={approveStyle} onClick={() => props.approveButton(props.action.checkouts[0]._id)}>Approve</a>
         </div>
         : null
       }
       {props.type === "Out" ?
         <div id="outCheckIn">
-          <a className="waves-effect waves-light btn-large" id="checkInButton" style={approveStyle}>Check-In</a>
+          <a className="waves-effect waves-light btn-large" id="checkInButton" style={approveStyle} onClick={() => props.checkinButton(props.action.checkouts[0]._id)}>Check-In</a>
         </div>
         : null
       }
       {props.type === "Overdue" ?
         <div id="overdueCheckIn">
-          <a className="waves-effect waves-light btn-large" id="checkInButton" style={approveStyle}>Check-In</a>
+          <a className="waves-effect waves-light btn-large" id="checkInButton" style={approveStyle} onClick={() => props.checkinButton(props.action.checkouts[0]._id)}>Check-In</a>
         </div>
         : null
       }

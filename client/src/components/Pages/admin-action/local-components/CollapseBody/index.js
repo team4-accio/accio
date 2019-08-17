@@ -12,10 +12,6 @@ class CollapseBody extends Component {
         }
     }
 
-
-
-
-    // Need to tie in information from adminaction below
     render() {
         return (
             <div className="collapsible-body">
@@ -26,6 +22,9 @@ class CollapseBody extends Component {
                         <ListAction 
                             action={action}
                             type={this.state.type}
+                            approveButton={(checkoutID) => this.props.approveButton(checkoutID)}
+                            rejectButton={(checkoutID) => this.props.rejectButton(checkoutID)}
+                            checkinButton={(checkoutID) => this.props.checkinButton(checkoutID)}
                         />
                     ))
                 }
