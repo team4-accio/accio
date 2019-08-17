@@ -58,7 +58,6 @@ export default {
                 [filter]: query
             }
         })
-        return axios.post(`/api/items`, itemData);
     },
     // Retrieve session user from session token
     getSession: (session) => {
