@@ -45,38 +45,23 @@ router.route('/')
         users.exists(req, res, function () {
             Checkout.create(req.body)
                 .then(function (checkout) {
-                    let populateItems = true; // Enables items to populate in response
+                    Checkout.findById(checkout._id)
+                        .populate({ path: 'items', options: { sort: { _id: -1 } } })
+                        .then(function (dbCheckout) {
+                            res.status(200).json(dbCheckout);
 
-                    if (populateItems) {
-                        Checkout.findById(checkout._id)
-                            .populate({ path: 'items', options: { sort: { _id: -1 } } })
-                            .then(function (dbCheckout) {
-                                res.status(200).json(dbCheckout);
-
-                                // Update items to unavailable
-                                items.makeUnavailable({ _id: dbCheckout.items }, function () {
-                                    // Attach the checkout to a user
-                                    return users.attach(
-                                        { _id: dbCheckout.user },
-                                        { checkouts: dbCheckout._id }
-                                    );
-                                });
-                            })
-                            .catch(function (err) {
-                                res.status(500).json(err);
+                            // Update items to unavailable
+                            items.makeUnavailable({ _id: dbCheckout.items }, function () {
+                                // Attach the checkout to a user
+                                return users.attach(
+                                    { _id: dbCheckout.user },
+                                    { checkouts: dbCheckout._id }
+                                );
                             });
-                    } else {
-                        res.status(200).json(checkout);
-
-                        // Update items to unavailable
-                        items.makeUnavailable({ _id: checkout.items }, function () {
-                            // Attach the checkout to a user
-                            return users.attach(
-                                { _id: checkout.user },
-                                { checkouts: checkout._id }
-                            );
+                        })
+                        .catch(function (err) {
+                            res.status(500).json(err);
                         });
-                    }
                 })
                 .catch(function (err) {
                     res.status(500).json(err);
