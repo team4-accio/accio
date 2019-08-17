@@ -89,7 +89,8 @@ router.route('/:_id')
             .then(function (checkout) {
                 res.status(200).json(checkout);
 
-                if (req.body.status === 'closed') {
+                if ((req.body.status === 'closed') ||
+                    (req.body.status === 'rejected')) {
                     // Update items to available
                     items.makeAvailable({ _id: checkout.items }, function () {
                         return true;
