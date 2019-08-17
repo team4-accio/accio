@@ -2,7 +2,7 @@
 
 // Dependencies
 const router = require('express').Router(); // Create a Router instance
-const hashPass = require('hashPass');
+const hashPass = require('hashpass');
 const uuidv1 = require('uuid/v1');
 
 // Require users auth controller
