@@ -12,13 +12,15 @@ import "./style.css";
 // import testArr from "./testArr.json"
 
 class User extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
 
-    state = {
-
-        filteredInventory: [],
-        inventory: [],
-        cart: [],
-        startDate: new Date(),
+            filteredInventory: [],
+            inventory: [],
+            cart: [],
+            startDate: new Date(),
+        }
     }
 
     componentDidMount() {
@@ -67,6 +69,11 @@ class User extends React.Component {
     handlePostSuccess(data) {
         console.log("handlepost")
         console.log(data)
+        M.toast({
+            html: ('Checked out'),
+            classes: 'greenToast'
+        })
+        this.updateOnNewItem()
         // set data to variable 
         // look for id for changed item from response
         // map
@@ -74,7 +81,12 @@ class User extends React.Component {
         // update state
     }
 
-
+    updateOnNewItem() {
+        this.getItems();
+        // var elems = document.querySelectorAll('.collapsible');
+        // var instances = M.Collapsible.init(elems);
+        // instances.close()
+    }
     // displayCart() {
     // console.log
     // }
@@ -103,7 +115,7 @@ class User extends React.Component {
                     /> */}
                 </div>
                 <div className="CartHolder">
-                    <Cart carts={this.state.cart} handlePostSuccess={this.handlePostSuccess} />
+                    <Cart carts={this.state.cart} handlePostSuccess={(data) => this.handlePostSuccess(data)}  {...this.state} />
                 </div>
 
             </div>
