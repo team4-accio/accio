@@ -5,13 +5,13 @@ const User = require('../users/usersModel');
 
 module.exports = {
     // Authenticate request
-    authorize: function (req, res, cb) {
+    authenticate: function (req, res, next) {
         User.findOne({ token: req.headers['authorization'] })
             .then(function (user) {
                 const useAuth = false;
 
                 if (user || !useAuth) {
-                    cb();
+                    next();
                 } else {
                     res.status(401).json({
                         error: {
