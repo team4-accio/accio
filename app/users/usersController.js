@@ -2,7 +2,7 @@
 
 // Dependencies
 const router = require('express').Router(); // Create a Router instance
-const hashPass = require('hashPass');
+const hashPass = require('hashpass');
 const uuidv4 = require('uuid/v4');
 
 // Require User model
