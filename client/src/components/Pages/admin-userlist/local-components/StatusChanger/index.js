@@ -45,7 +45,7 @@ class StatusChanger extends Component {
                         Yes
     </label>
                 </div>
-                : <a onClick={() => this.changeEditStatus()}><i className="material-icons tiny" >edit</i></a>
+                : <a href="#" onClick={() => this.changeEditStatus()}><i className="material-icons tiny" >edit</i></a>
 
         );
     }

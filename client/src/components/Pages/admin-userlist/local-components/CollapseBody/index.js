@@ -61,7 +61,7 @@ class CollapseBody extends Component {
                         ))
                     }
                 </ul>
-                {this.state.listType == "users" ?
+                {this.state.listType === "users" ?
                     <div id="modal1" className="modal bottom-sheet">
                         <div className="modal-content">
                             <h4>{this.state.modalContent.userName}'s History:</h4>

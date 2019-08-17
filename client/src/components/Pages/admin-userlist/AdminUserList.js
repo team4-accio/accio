@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import CollapseBody from "./local-components/CollapseBody";
 //import Autocomplete from "./local-components/Autocomplete";
-import axios from "axios";
+//import axios from "axios";
 import API from "../../../utils/API"
-import testArr from "./testArr.json"
+//import testArr from "./testArr.json"
 import moment from "moment"
 
 
@@ -53,7 +53,7 @@ class AdminUserList extends Component {
         let admins = [];
 
         for (let i in arr) {
-            if (arr[i].role == "user") {
+            if (arr[i].role === "user") {
                 users.push(arr[i])
             }
             else {
@@ -153,7 +153,7 @@ class AdminUserList extends Component {
                         {
                             !this.state.showingAll
                                 ? <div className="col s2 left">
-                                    <a className="waves-effect waves-light btn-flat" onClick={() => this.changeSearchFilter("all")} >All</a>
+                                    <a href="#" className="waves-effect waves-light btn-flat" onClick={() => this.changeSearchFilter("all")} >All</a>
                                 </div>
                                 : null
                         }
