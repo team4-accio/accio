@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header, HeaderLink, Footer, Wrapper } from './components/common';
 import { AdminInventory, AdminAction, AdminUserList, UserCheckout } from './components/Pages';
-  import AdminDashboard from "./components/Pages/admin-dashboard/AdminDashboard";
+import AdminDashboard from "./components/Pages/admin-dashboard/AdminDashboard";
+import UserDashboard from "./components/Pages/user-dashboard/UserDashboard";
 import Login from './components/Login';
 import API from './utils/API';
 
@@ -72,7 +73,7 @@ class App extends Component {
                     </Header>
                     <Wrapper>
                         <Switch>
-                      <Route
+                            <Route
                                 exact
                                 path='/admin/dashboard'
                                 render={() => <AdminDashboard sessionUser={this.state.sessionUser} />}
@@ -91,6 +92,11 @@ class App extends Component {
                                 exact
                                 path='/admin/users'
                                 render={() => <AdminUserList sessionUser={this.state.sessionUser} />}
+                            />
+                            <Route
+                                exact
+                                path='/users/dashboard'
+                                render={() => <UserDashboard sessionUser={this.state.sessionUser} />}
                             />
                             <Route
                                 exact
