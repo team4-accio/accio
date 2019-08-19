@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    usersResponse: function (res) {
+    usersResponse: function(res) {
         return {
             _id: res._id,
             checkouts: res.checkouts,
@@ -13,13 +13,15 @@ module.exports = {
             updatedAt: res.updatedAt
         };
     },
-    query: function (query) {
+    query: function(query) {
         const keys = Object.keys(query);
         keys.forEach(key => {
-            if ((key === 'createdAt') ||
-                (key === 'updatedAt') ||
-                (key === 'out') ||
-                (key === 'return')) {
+            if (
+                key === 'createdAt' ||
+                key === 'updatedAt' ||
+                key === 'out' ||
+                key === 'return'
+            ) {
                 query[key] = JSON.parse(query[key]);
             }
         });

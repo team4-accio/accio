@@ -7,53 +7,57 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Define User schema
-const userSchema = new Schema({
-    checkouts: [
-        {
-            ref: 'Checkout',
-            type: Schema.Types.ObjectId
+const userSchema = new Schema(
+    {
+        checkouts: [
+            {
+                ref: 'Checkout',
+                type: Schema.Types.ObjectId
+            }
+        ],
+        email: {
+            index: true,
+            lowercase: true,
+            match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/],
+            required: true,
+            trim: true,
+            type: String,
+            unique: true
+        },
+        name: {
+            required: true,
+            trim: true,
+            type: String
+        },
+        password: {
+            required: true,
+            type: String
+        },
+        role: {
+            enum: ['admin', 'user'],
+            lowercase: true,
+            required: true,
+            trim: true,
+            type: String
+        },
+        salt: {
+            required: true,
+            type: String
+        },
+        session: {
+            default: null,
+            type: String
+        },
+        status: {
+            enum: ['active', 'inactive'],
+            lowercase: true,
+            required: true,
+            trim: true,
+            type: String
         }
-    ],
-    email: {
-        lowercase: true,
-        match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/],
-        required: true,
-        trim: true,
-        type: String,
-        unique: true
     },
-    name: {
-        required: true,
-        trim: true,
-        type: String
-    },
-    password: {
-        required: true,
-        type: String
-    },
-    role: {
-        enum: ['admin', 'user'],
-        required: true,
-        type: String
-    },
-    salt: {
-        required: true,
-        type: String
-    },
-    session: {
-        default: null,
-        type: String
-    },
-    status: {
-        enum: ['active', 'inactive'],
-        required: true,
-        type: String
-    },
-    token: {
-        default: null,
-        type: String
-    }
-}, { timestamps: true });
+    { timestamps: true }
+);
 
 // Create User model
 const User = mongoose.model('User', userSchema);

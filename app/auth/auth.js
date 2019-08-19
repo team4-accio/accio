@@ -5,12 +5,10 @@ const User = require('../users/usersModel');
 
 module.exports = {
     // Authenticate request
-    authenticate: function (req, res, next) {
-        User.findOne({ token: req.headers['authorization'] })
-            .then(function (user) {
-                const useAuth = false;
-
-                if (user || !useAuth) {
+    authenticate: function(req, res, next) {
+        User.findOne({ session: req.headers['x-session-token'] })
+            .then(function(user) {
+                if (user) {
                     next();
                 } else {
                     res.status(401).json({
@@ -21,7 +19,7 @@ module.exports = {
                     });
                 }
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 res.status(500).json(err);
             });
     }

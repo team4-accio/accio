@@ -4,9 +4,9 @@ const User = require('./usersModel');
 
 module.exports = {
     // Check if user exists
-    exists: function (req, res, cb) {
+    exists: function(req, res, next) {
         User.findById(req.body.user)
-            .then(function (user) {
+            .then(function(user) {
                 if (user === null) {
                     res.status(404).json({
                         error: {
@@ -15,10 +15,10 @@ module.exports = {
                         }
                     });
                 } else {
-                    cb();
+                    next();
                 }
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 res.status(500).json(err);
             });
     }

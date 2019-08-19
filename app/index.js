@@ -22,7 +22,7 @@ router.use('/login', auth.login);
 router.use('/session', auth.session);
 
 // If no API routes are hit, send React app
-router.use(function (req, res) {
+router.use(function(req, res) {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
