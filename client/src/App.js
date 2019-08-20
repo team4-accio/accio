@@ -7,13 +7,13 @@ import {
 } from 'react-router-dom';
 import { Header, HeaderLink, Footer, Wrapper } from './components/common';
 import {
-    AdminInventory,
     AdminAction,
+    AdminDashboard,
+    AdminInventory,
     AdminUserList,
-    UserCheckout
+    UserCheckout,
+    UserDashboard
 } from './components/Pages';
-import AdminDashboard from './components/Pages/admin-dashboard/AdminDashboard';
-import UserDashboard from './components/Pages/user-dashboard/UserDashboard';
 import Login from './components/Login';
 import API from './utils/API';
 
