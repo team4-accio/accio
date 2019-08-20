@@ -58,6 +58,7 @@ class App extends Component {
             .catch(err => console.log(err));
     };
 
+    // Event handler to update state on login
     handleLogin = user => {
         this.setState({
             sessionUser: user,
@@ -65,6 +66,7 @@ class App extends Component {
         });
     };
 
+    // Render admin nav and routes
     renderAdminRoutes = () => (
         <Router>
             <Header>
@@ -114,13 +116,19 @@ class App extends Component {
                             />
                         )}
                     />
-                    <Route render={() => <Redirect to="/dashboard" />} />
+                    <Route
+                        exact
+                        path="/login"
+                        render={() => <Redirect to={this.state.path} />}
+                    />
+                    <Route render={() => <Redirect to={'/dashboard'} />} />
                 </Switch>
             </Wrapper>
             <Footer />
         </Router>
     );
 
+    // Render user nav and routes
     renderUserRoutes = () => (
         <Router>
             <Header>
@@ -150,6 +158,11 @@ class App extends Component {
                             />
                         )}
                     />
+                    <Route
+                        exact
+                        path="/login"
+                        render={() => <Redirect to={this.state.path} />}
+                    />
                     <Route render={() => <Redirect to="/dashboard" />} />
                 </Switch>
             </Wrapper>
@@ -157,6 +170,7 @@ class App extends Component {
         </Router>
     );
 
+    // Render login route
     renderLoginRoutes = () => (
         <Router>
             <Header />
@@ -165,9 +179,7 @@ class App extends Component {
                     <Route
                         exact
                         path="/login"
-                        render={() => (
-                            <Login login={this.handleLogin} path={this.path} />
-                        )}
+                        render={() => <Login login={this.handleLogin} />}
                     />
                     <Route render={() => <Redirect to="/login" />} />
                 </Switch>
