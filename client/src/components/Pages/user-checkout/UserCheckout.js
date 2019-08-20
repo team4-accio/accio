@@ -62,8 +62,7 @@ class User extends React.Component {
         this.setState({
             cart: cart
         })
-
-
+        this.closeCollapse();
     }
 
     handlePostSuccess(data) {
@@ -83,7 +82,22 @@ class User extends React.Component {
 
     updateOnNewItem() {
         this.getItems();
+        this.closeCollapse()
+        // var elems = document.querySelectorAll('.collapsible');
+        // var instance = M.Collapsible.init(elems[0]);
+        // console.log(elems)
+        // for (var i = 0; i < elems[0].children.length; i++) {
+        //     // console.log(elems[i]);
 
+        //     // var instance = M.Collapsible.getInstance(elems[i]);
+
+        //     console.log(instance)
+        //     instance.close(i)
+        // }
+
+    }
+
+    closeCollapse() {
         var elems = document.querySelectorAll('.collapsible');
         var instance = M.Collapsible.init(elems[0]);
         console.log(elems)
@@ -95,21 +109,8 @@ class User extends React.Component {
             console.log(instance)
             instance.close(i)
         }
-        // var instances = M.Collapsible.init(elems[0]);
-        // console.log(instances)
-        // let headerIndex = Array.find(elems[0].children.find((element, index) => {
-        //     if (element.className === "active") {
-        //         return index
-        //     }
-        // });
-        //not working but array prototype is the direction we need to go
-        // let headerIndex = Array.find(elems[0].children, (element, index) => {
-        //     if (element.className === "active") {
-        //         return index
-        //     }
-        // });
-
     }
+
     // displayCart() {
     // console.log
     // }
