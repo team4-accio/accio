@@ -21,8 +21,7 @@ class App extends Component {
     state = {
         links: {
             admin: ['dashboard', 'action', 'inventory', 'users'],
-            user: ['dashboard', 'checkout'],
-            placeholder: ['/action', '/inventory', '/users', '/checkout'] // @TODO remove this and update HeaderLink component
+            user: ['dashboard', 'checkout']
         },
         init: true,
         path: '',
@@ -69,8 +68,8 @@ class App extends Component {
     renderAdminRoutes = () => (
         <Router>
             <Header>
-                {this.state.links.placeholder.map(link => (
-                    <HeaderLink link={link}>{link}</HeaderLink>
+                {this.state.links.admin.map(link => (
+                    <HeaderLink link={'/' + link}>{link}</HeaderLink>
                 ))}
             </Header>
             <Wrapper>
@@ -125,8 +124,8 @@ class App extends Component {
     renderUserRoutes = () => (
         <Router>
             <Header>
-                {this.state.links.placeholder.map(link => (
-                    <HeaderLink link={link}>{link}</HeaderLink>
+                {this.state.links.user.map(link => (
+                    <HeaderLink link={'/' + link}>{link}</HeaderLink>
                 ))}
             </Header>
             <Wrapper>
