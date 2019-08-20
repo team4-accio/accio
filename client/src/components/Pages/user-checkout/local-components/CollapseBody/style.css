@@ -21,3 +21,9 @@
     border-bottom: 1px solid #4a148c;
    
   }
+
+  .collapsible-header {
+    /* margin-block-start: .1em;
+    margin-block-end: .1em; */
+    padding: .1em;
+  }
