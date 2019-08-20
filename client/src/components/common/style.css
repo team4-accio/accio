@@ -1,4 +1,8 @@
 .wrapper {
-  min-height: 100%;
-  padding-bottom: 100px;
+    min-height: 100%;
+    padding-bottom: 100px;
+}
+
+.nav-link {
+    text-transform: capitalize;
 }
