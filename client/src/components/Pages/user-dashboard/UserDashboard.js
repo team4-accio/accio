@@ -4,6 +4,7 @@ import DashHistory from "./local-components/DashHistory";
 import DashCheckout from "./local-components/DashCheckout";
 import DashAccount from "./local-components/DashAccount";
 import moment from "moment";
+import User from "../user-checkout/UserCheckout";
 
 class UserDashboard extends Component {
     constructor(props) {
@@ -55,11 +56,12 @@ class UserDashboard extends Component {
                 </ul>
                 <div></div>
                 <div className="row" >
-                    <div className='col s4'>
-                        <DashCheckout />
+                    <div className='col s6'>
+                        <User />
+                        {/* <DashCheckout /> */}
                         <DashAccount />
                     </div>
-                    <div className='col s8'>
+                    <div className='col s6'>
                         <DashHistory checkouts={this.state.sortedCheckouts} />
                     </div>
                 </div>
