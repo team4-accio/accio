@@ -119,7 +119,7 @@ class User extends React.Component {
         console.log("rendered")
         // console.log(this.props.inventory)
         return (
-            <div className="App">
+            <div className="checkoutHolder">
                 <div className="CollapseHolder">
 
                     <CollapseBody
@@ -139,7 +139,11 @@ class User extends React.Component {
                     /> */}
                 </div>
                 <div className="CartHolder">
-                    <Cart carts={this.state.cart} handlePostSuccess={(data) => this.handlePostSuccess(data)}  {...this.state} />
+                    <Cart
+                        carts={this.state.cart}
+                        sessionToken={this.props.sessionToken}
+                        sessionUser={this.props.sessionUser}
+                        handlePostSuccess={(data) => this.handlePostSuccess(data)}  {...this.state} />
                 </div>
 
             </div>
