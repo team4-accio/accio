@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import API from '../utils/API';
 
 class Login extends Component {
-
     state = {
         email: '',
         password: ''
@@ -24,12 +23,13 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         })
-            .then(res =>
+            .then(res => {
+                this.props.login(res.data);
                 localStorage.setItem(
                     'sessionid',
                     res.headers['x-session-token']
-                )
-            )
+                );
+            })
             .catch(err => console.log(err));
     };
 
