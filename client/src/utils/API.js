@@ -40,6 +40,13 @@ export default {
         console.log(itemData)
         return axios.post(`/api/items`, itemData)
     },
+    editItem: (itemID, field, value) => {
+        return axios.patch("/api/items/" + itemID, { [field]: value }, {
+            headers: {
+                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+            }
+        })
+    },
     deleteItem: (itemID) => {
         return axios.delete("/api/items/" + itemID, {
             headers: {
@@ -72,6 +79,18 @@ export default {
         })
     },
 
+    // AUTH
+    confirmPassword: (email, password) => {
+        return axios.post("/api/auth/password", {
+            headers: {
+                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+            },
+            body: {
+                email: email,
+                password: password
+            }
+        })
+    },
     // Retrieve session user from session token
     getSession: (session) => {
         return axios.get('/session', { headers: { 'x-session-token': session } });
