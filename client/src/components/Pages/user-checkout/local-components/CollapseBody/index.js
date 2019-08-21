@@ -68,7 +68,12 @@ class CollapseBody extends Component {
                                             return (
                                                 <div key={index}>
 
-                                                    <Card category={item2.category} condition={item2.condition} id={item2._id} handleRequest={this.props.handleRequest} />
+                                                    <Card category={item2.category}
+                                                        condition={item2.condition}
+                                                        description={item2.description}
+                                                        id={item2._id}
+                                                        name={item2.name}
+                                                        handleRequest={this.props.handleRequest} />
                                                 </div>
                                             )
                                         })}
