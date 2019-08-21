@@ -58,7 +58,10 @@ class UserDashboard extends Component {
                 <div className="row" >
                     <div className='col s6'>
                         <div className="row">
-                            <User />
+                            <User
+                                sessionUser={this.props.sessionUser}
+                                sessionToken={this.props.sessionToken}
+                            />
                         </div>
                         {/* <DashCheckout /> */}
                         <div className="row">
