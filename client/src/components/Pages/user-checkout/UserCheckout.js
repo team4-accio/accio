@@ -132,12 +132,12 @@ class User extends React.Component {
                     <button onClick={() => this.changeFilter('checkedOut')}>Checked out</button>
                     <button onClick={() => this.changeFilter('electronics')}>Electronics</button> */}
                 </div>
-                <div className="DateHolder">
-                    {/* <DatePicker
+                {/* <div className="DateHolder">
+                    <DatePicker
                         selected={this.state.startDate}
                         onChange={this.handleDateChange}
-                    /> */}
-                </div>
+                    />
+                </div> */}
                 <div className="CartHolder">
                     <Cart
                         carts={this.state.cart}
