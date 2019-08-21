@@ -1,3 +1,7 @@
+.collapsible {
+  margin-bottom: 0px;
+}
+
 .collapsible-header {
  
     display: -webkit-box;
@@ -14,16 +18,15 @@
    
     line-height: 1.5;
    
-    padding: 1rem;
+    /* padding: 1rem; */
    
     background-color: #e3f2fd ;
    
     border-bottom: 1px solid #4a148c;
    
+    padding: .1em;
   }
 
-  .collapsible-header {
-    /* margin-block-start: .1em;
-    margin-block-end: .1em; */
-    padding: .1em;
+  .row {
+    margin-bottom: .25em;
   }
