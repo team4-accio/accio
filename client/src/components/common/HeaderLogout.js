@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-export default class Login extends React.Component {
+class HeaderLogout extends React.Component {
   state = {
     id: ""
   };
@@ -25,7 +25,9 @@ export default class Login extends React.Component {
     console.log(user);
 
     axios
-      .delete(`/login`, user)
+      .delete("/login", {
+        headers: { "x-session-token": localStorage.getItem("sessionid") }
+      })
       .then(res => {
         console.log(res.headers["x-session-token"]);
         console.log(res);
@@ -50,3 +52,5 @@ export default class Login extends React.Component {
     );
   }
 }
+
+export default HeaderLogout;

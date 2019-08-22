@@ -32,7 +32,7 @@ export default class Login extends React.Component {
     console.log(user);
 
     axios
-      .post(`/login`, user)
+      .post("/login", user)
       .then(res => {
         console.log(res.headers["x-session-token"]);
         console.log(res);
