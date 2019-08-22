@@ -43,10 +43,10 @@ class HeaderLogout extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>
+          {/* <label>
             <input type="text" name="id" onChange={this.handleChange} />
-          </label>
-          <button type="submit">Delete</button>
+          </label> */}
+          <button type="submit">Logout</button>
         </form>
       </div>
     );
