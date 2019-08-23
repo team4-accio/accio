@@ -1,8 +1,17 @@
 .card{
     height: 100%;
     width: 100%;
+    
     /* background-color: transparent; */
 }
+.card .card-content {
+    padding: .5em;
+}
+
+.card .card-action {
+    padding: .5em;
+}
+
 .card-image{
     height: 100%;
     width: 100%;
@@ -19,4 +28,9 @@ img{
 }
 .card-container{
     align-items: center;
+}
+
+@media only screen and (min-width: 601px)
+.row .col.m6 {
+
 }

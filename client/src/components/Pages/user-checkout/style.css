@@ -1,3 +1,12 @@
 .CollapseHolder {
     width: 100%;
 }
+
+.col .row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.checkoutHolder {
+    padding-bottom: .5em;
+}
