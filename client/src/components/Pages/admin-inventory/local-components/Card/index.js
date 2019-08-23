@@ -61,7 +61,9 @@ class Card extends Component {
                 API.confirmPassword(result.data.email, this.refs.passwordConfirm.value, this.props.sessionToken)
                     .then((result) => {
                         console.log(result);
+                        // Needs to change category to Deleted
                         // API.deleteItem(this.props.item._id);
+
                         // this.props.updateOnItemChange(this.props.item.category);
                     })
             })
@@ -86,7 +88,7 @@ class Card extends Component {
     editItemCondition() {
         //API CALL TO EDIT CONDITION
         setTimeout(() => {
-            API.editItem(this.props.item._id, 'condition', this.state.itemCondition,this.props.sessionToken)
+            API.editItem(this.props.item._id, 'condition', this.state.itemCondition, this.props.sessionToken)
                 .then(() => {
                     this.setState({ clickedEditCondition: false });
                     this.props.updateOnItemChange(this.props.item.category);
