@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.png';
+import logo from '../../utils/images/logo.png';
 import { Link } from 'react-router-dom';
 import HeaderLogout from './HeaderLogout'
 import "./style.css";
@@ -10,7 +10,7 @@ const spanFix = {
 };
 
 const imageFix = {
-    width: "10%"
+    width: "106px"
 };
 
 
@@ -21,11 +21,9 @@ function Header(props) {
                 <ul id="nav-mobile" className="left">
                     <HeaderLogout logout={props.logout} />
                 </ul>
-                <span className="brand-logo center" style={spanFix}>
-                    <Link to="/">
-                        <img src={logo} alt="Logo" style={imageFix} />
-                    </Link>
-                </span>
+                <Link to="/">
+                    <img src={logo} alt="Logo" className="brand-logo center" style={imageFix} />
+                </Link>
                 <ul id="nav-mobile" className="right">
                     {props.children}
                 </ul>
