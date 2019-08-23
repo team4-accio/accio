@@ -180,68 +180,68 @@ class DashInventory extends Component {
                                     <div className="indeterminate" />
                                 </div>
                             ) : (
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}
-                                >
-                                    <SunburstChart
-                                        chartName="condition"
-                                        data={this.state.conditionData}
-                                        {...this.state}
-                                        getHoverTitle={(title, source) =>
-                                            this.getHoverTitle(title, source)
-                                        }
-                                    />
                                     <div
                                         style={{
-                                            position: 'absolute',
-                                            padding: '5px'
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
                                         }}
                                     >
-                                        <p className="center">Condition</p>
-                                        <p className="center">
-                                            {this.state.conditionHoverTitle}
-                                        </p>
+                                        <SunburstChart
+                                            chartName="condition"
+                                            data={this.state.conditionData}
+                                            {...this.state}
+                                            getHoverTitle={(title, source) =>
+                                                this.getHoverTitle(title, source)
+                                            }
+                                        />
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                padding: '5px'
+                                            }}
+                                        >
+                                            <p className="center">Condition</p>
+                                            <p className="center">
+                                                {this.state.conditionHoverTitle}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
 
                             {this.state.waitingForAvailability ? (
                                 <div className="progress">
                                     <div className="indeterminate" />
                                 </div>
                             ) : (
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}
-                                >
-                                    <SunburstChart
-                                        chartName="availability"
-                                        data={this.state.availablityData}
-                                        {...this.state}
-                                        getHoverTitle={(title, source) =>
-                                            this.getHoverTitle(title, source)
-                                        }
-                                    />
                                     <div
                                         style={{
-                                            position: 'absolute',
-                                            padding: '5px'
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
                                         }}
                                     >
-                                        <p className="center">Availabity</p>
-                                        <p className="center">
-                                            {this.state.availablityHoverTitle}
-                                        </p>
+                                        <SunburstChart
+                                            chartName="availability"
+                                            data={this.state.availablityData}
+                                            {...this.state}
+                                            getHoverTitle={(title, source) =>
+                                                this.getHoverTitle(title, source)
+                                            }
+                                        />
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                padding: '5px'
+                                            }}
+                                        >
+                                            <p className="center">Availability</p>
+                                            <p className="center">
+                                                {this.state.availablityHoverTitle}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
                         </div>
                     </a>
                 </div>
