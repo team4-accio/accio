@@ -15,11 +15,23 @@ const imageFix = {
 
 
 function Header(props) {
+    console.log(props)
     return (
         <nav className="navbar">
             <div className="nav-wrapper">
                 <ul id="nav-mobile" className="left">
-                    <HeaderLogout logout={props.logout} />
+                    {
+                        localStorage.getItem("sessionid") === null
+                            ? <li>
+                                <Link to="/">
+                                    <i className="material-icons left">open_in_browser</i>
+                                    <span className='hide-on-med-and-down'>Login</span>
+                                </Link>
+                            </li>
+                            : <HeaderLogout logout={props.logout} />
+
+                    }
+
                 </ul>
                 <Link to="/">
                     <img src={logo} alt="Logo" className="brand-logo center" style={imageFix} />
