@@ -54,7 +54,7 @@ class AdminInventory extends Component {
                 console.log(response);
                 this.sortItems(response.data);
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
     }
@@ -80,6 +80,21 @@ class AdminInventory extends Component {
         }
         this.setState({ sortedItems: obj, tagList: tags });
     }
+    getHeaderIcon(cat) {
+        return cat === 'Laptop - Mac'
+            ? 'laptop_mac'
+            : cat === 'Laptop - PC'
+                ? 'laptop_windows'
+                : cat === 'iPad'
+                    ? 'tablet_mac'
+                    : cat === 'keyboard'
+                        ? 'keyboard'
+                        : cat === 'mouse'
+                            ? 'mouse'
+                            : cat === 'Deleted'
+                                ? 'delete_forever'
+                                : 'help'
+    }
 
     render() {
         return (
@@ -102,7 +117,7 @@ class AdminInventory extends Component {
                                 }
                             >
                                 <div className="collapsible-header">
-                                    <i className="material-icons">create</i>
+                                    <i className="material-icons">{this.getHeaderIcon(keyName)}</i>
                                     {keyName}
                                 </div>
                                 <CollapseBody
