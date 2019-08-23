@@ -5,9 +5,6 @@ const router = require('express').Router(); // Create a Router instance
 const hashPass = require('hashpass');
 const uuidv1 = require('uuid/v1');
 
-// Require users auth controller
-const auth = require('./auth');
-
 // Require User model
 const User = require('../users/usersModel');
 
@@ -16,11 +13,12 @@ const utils = require('../utils');
 
 // Routes
 // Matches with /login
-router.route('/')
+router
+    .route('/')
     // POST route to log in a user
-    .post(auth.authenticate, function (req, res) {
+    .post(function(req, res) {
         User.findOne({ email: req.body.email })
-            .then(function (user) {
+            .then(function(user) {
                 if (user === null) {
                     res.status(404).json({
                         error: {
@@ -33,14 +31,21 @@ router.route('/')
                     if (attempt.hash === user.password) {
                         const uuid = uuidv1();
 
-                        User.findOneAndUpdate({ email: user.email }, { session: uuid }, { new: true })
-                            .populate({ path: 'checkouts', options: { sort: { _id: -1 } } })
-                            .then(function (dbUser) {
+                        User.findOneAndUpdate(
+                            { email: user.email },
+                            { session: uuid },
+                            { new: true }
+                        )
+                            .populate({
+                                path: 'checkouts',
+                                options: { sort: { _id: -1 } }
+                            })
+                            .then(function(dbUser) {
                                 res.status(200)
                                     .header('x-session-token', dbUser.session)
                                     .json(utils.format.usersResponse(dbUser));
                             })
-                            .catch(function (err) {
+                            .catch(function(err) {
                                 res.status(500).json(err);
                             });
                     } else {
@@ -53,17 +58,23 @@ router.route('/')
                     }
                 }
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 res.status(500).json(err);
             });
     })
     // DELETE route to log out a user
-    .delete(auth.authenticate, function (req, res) {
-        User.findOneAndUpdate({ session: req.headers['x-session-token'] }, { session: null }, { new: true })
-            .then(function (user) {
-                res.status(200).json({ message: `User: ${user.email} logged out successfully` });
+    .delete(function(req, res) {
+        User.findOneAndUpdate(
+            { session: req.headers['x-session-token'] },
+            { session: null },
+            { new: true }
+        )
+            .then(function(user) {
+                res.status(200).json({
+                    message: `User: ${user.email} logged out successfully`
+                });
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 res.status(500).json(err);
             });
     });

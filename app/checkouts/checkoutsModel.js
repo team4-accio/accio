@@ -7,32 +7,39 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Define Checkout schema
-const checkoutSchema = new Schema({
-    items: [
-        {
-            ref: 'Item',
-            type: Schema.Types.ObjectId
+const checkoutSchema = new Schema(
+    {
+        items: [
+            {
+                ref: 'Item',
+                type: Schema.Types.ObjectId
+            }
+        ],
+        out: {
+            required: true,
+            type: Date
+        },
+        return: {
+            required: true,
+            type: Date
+        },
+        status: {
+            enum: ['approved', 'closed', 'pending', 'rejected'],
+            lowercase: true,
+            required: true,
+            trim: true,
+            type: String
+        },
+        user: {
+            immutable: true,
+            index: true,
+            required: true,
+            trim: true,
+            type: String
         }
-    ],
-    out: {
-        required: true,
-        type: Date
     },
-    return: {
-        required: true,
-        type: Date
-    },
-    status: {
-        enum: ['approved', 'closed', 'pending', 'rejected'],
-        required: true,
-        type: String
-    },
-    user: {
-        immutable: true,
-        required: true,
-        type: String
-    }
-}, { timestamps: true });
+    { timestamps: true }
+);
 
 // Create Checkout model
 const Checkout = mongoose.model('Checkout', checkoutSchema);

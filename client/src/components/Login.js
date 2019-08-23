@@ -1,17 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
+import API from '../utils/API';
 
-import axios from 'axios';
-
-export default class Login extends React.Component {
+class Login extends Component {
     state = {
         email: '',
         password: ''
     };
-
-    // handleChange = event => {
-    //   this.setState({ email: event.target.value, password: event.target.value });
-    //   console.log(event.target.value);
-    // };
 
     handleChange = event => {
         // Getting the value and name of the input which triggered the change
@@ -25,25 +19,15 @@ export default class Login extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        const user = {
+        API.login({
             email: this.state.email,
             password: this.state.password
-        };
-        console.log(user);
-
-        axios
-            .post(`/login`, user)
+        })
             .then(res => {
-                console.log(res.headers['x-session-token']);
-                console.log(res);
                 localStorage.setItem(
                     'sessionid',
                     res.headers['x-session-token']
                 );
-                console.log('storage', localStorage.getItem('sessionid'));
-                // console.log(res.headers);
-                // console.log(res.data);
-
                 this.props.login(res.data);
             })
             .catch(err => console.log(err));
@@ -79,7 +63,6 @@ export default class Login extends React.Component {
                                 <button type="submit" className="btn btn-blue">
                                     Log in
                                 </button>
-                                <button className="btn">Cancel</button>
                             </p>
                         </form>
                     </div>
@@ -88,3 +71,5 @@ export default class Login extends React.Component {
         );
     }
 }
+
+export default Login;

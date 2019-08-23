@@ -55,21 +55,39 @@ class App extends Component {
                     switchState: res.data.role
                 })
             )
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+
+                this.setState({
+                    switchState: 'login'
+                });
+            });
     };
 
     // Event handler to update state on login
     handleLogin = user => {
         this.setState({
+            sessionToken: localStorage.getItem('sessionid'),
             sessionUser: user,
             switchState: user.role
         });
+    };
+    handleLogout = () => {
+        API.logout()
+            .then(res => {
+                localStorage.removeItem("sessionid");
+                this.setState({
+                    sessionUser: {},
+                    switchState: 'login'
+                });
+            })
+            .catch(err => console.log(err));
     };
 
     // Render admin nav and routes
     renderAdminRoutes = () => (
         <Router>
-            <Header>
+            <Header logout={this.handleLogout}>
                 {this.state.links.admin.map(link => (
                     <HeaderLink link={'/' + link}>{link}</HeaderLink>
                 ))}
@@ -119,7 +137,15 @@ class App extends Component {
                     <Route
                         exact
                         path="/login"
-                        render={() => <Redirect to={this.state.path} />}
+                        render={() => (
+                            <Redirect
+                                to={
+                                    this.state.path === '/login'
+                                        ? '/dashboard'
+                                        : this.state.path
+                                }
+                            />
+                        )}
                     />
                     <Route render={() => <Redirect to={'/dashboard'} />} />
                 </Switch>
@@ -131,7 +157,7 @@ class App extends Component {
     // Render user nav and routes
     renderUserRoutes = () => (
         <Router>
-            <Header>
+            <Header logout={this.handleLogout}>
                 {this.state.links.user.map(link => (
                     <HeaderLink link={'/' + link}>{link}</HeaderLink>
                 ))}
@@ -161,9 +187,17 @@ class App extends Component {
                     <Route
                         exact
                         path="/login"
-                        render={() => <Redirect to={this.state.path} />}
+                        render={() => (
+                            <Redirect
+                                to={
+                                    this.state.path === '/login'
+                                        ? '/dashboard'
+                                        : this.state.path
+                                }
+                            />
+                        )}
                     />
-                    <Route render={() => <Redirect to="/dashboard" />} />
+                    <Route render={() => <Redirect to={'/dashboard'} />} />
                 </Switch>
             </Wrapper>
             <Footer />
@@ -189,6 +223,8 @@ class App extends Component {
     );
 
     render() {
+        console.log('my state');
+        console.log(this.state);
         switch (this.state.switchState) {
             case 'admin':
                 return this.renderAdminRoutes();

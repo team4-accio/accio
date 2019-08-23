@@ -3,9 +3,6 @@
 // Dependencies
 const router = require('express').Router(); // Create a Router instance
 
-// Require users auth controller
-const auth = require('./auth');
-
 // Require User model
 const User = require('../users/usersModel');
 
@@ -14,9 +11,10 @@ const utils = require('../utils');
 
 // Routes
 // Matches with /session
-router.route('/')
+router
+    .route('/')
     // GET route to retrieve session user with token header
-    .get(auth.authenticate, function (req, res) {
+    .get(function(req, res) {
         if (req.headers['x-session-token']) {
             User.findOne({ session: req.headers['x-session-token'] })
                 .populate({
@@ -24,7 +22,7 @@ router.route('/')
                     populate: { path: 'items' },
                     options: { sort: { _id: -1 } }
                 })
-                .then(function (user) {
+                .then(function(user) {
                     if (user) {
                         res.status(200).json(utils.format.usersResponse(user));
                     } else {
@@ -36,7 +34,7 @@ router.route('/')
                         });
                     }
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     res.status(500).json(err);
                 });
         } else {

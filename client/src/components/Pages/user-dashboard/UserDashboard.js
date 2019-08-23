@@ -57,9 +57,16 @@ class UserDashboard extends Component {
                 <div></div>
                 <div className="row" >
                     <div className='col s6'>
-                        <User />
+                        <div className="row">
+                            <User
+                                sessionUser={this.props.sessionUser}
+                                sessionToken={this.props.sessionToken}
+                            />
+                        </div>
                         {/* <DashCheckout /> */}
-                        <DashAccount />
+                        <div className="row">
+                            <DashAccount />
+                        </div>
                     </div>
                     <div className='col s6'>
                         <DashHistory checkouts={this.state.sortedCheckouts} />
