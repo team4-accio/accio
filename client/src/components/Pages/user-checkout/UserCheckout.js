@@ -131,20 +131,16 @@ class User extends React.Component {
                     {/* <button onClick={() => this.changeFilter('checkedIn')}>Checked in</button>
                     <button onClick={() => this.changeFilter('checkedOut')}>Checked out</button>
                     <button onClick={() => this.changeFilter('electronics')}>Electronics</button> */}
-                </div>
-                {/* <div className="DateHolder">
-                    <DatePicker
-                        selected={this.state.startDate}
-                        onChange={this.handleDateChange}
-                    />
-                </div> */}
-                <div className="CartHolder">
+                    {/* <div className="CartHolder"> */}
                     <Cart
                         carts={this.state.cart}
                         sessionToken={this.props.sessionToken}
                         sessionUser={this.props.sessionUser}
                         handlePostSuccess={(data) => this.handlePostSuccess(data)}  {...this.state} />
+                    {/* </div> */}
                 </div>
+
+
 
             </div>
         );
