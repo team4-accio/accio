@@ -12,16 +12,16 @@ export default function DashAccount(props) {
     }
 
     return (
-        <div className="conatainer">
-            <div className="card">
-                <a onClick={openTapTarget}>
-                    <div className="card-content ">
-                        <i className="material-icons " style={{ fontSize: '20vw' }}>face</i>
-                        <span className="card-title grey-text text-darken-4 center-align">Account</span>
-                    </div>
-                </a>
-            </div>
-        </div>
+        // <div className="conatainer">
+        //     <div className="card">
+        <a onClick={openTapTarget} className="right">
+            {/* <div className="card-content "> */}
+            <i className="material-icons">face</i>
+            <span className="" style={{ fontSize: '15px' }}>Account</span>
+            {/* </div> */}
+        </a>
+        //     </div>
+        // </div>
     );
 
 }
