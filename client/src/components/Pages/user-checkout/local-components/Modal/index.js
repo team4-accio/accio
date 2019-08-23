@@ -51,7 +51,7 @@ class Cart extends Component {
                 }
             })
             .then(
-                function(data) {
+                function (data) {
                     console.log(data);
                     this.props.handlePostSuccess(data);
                 }.bind(this)
@@ -61,23 +61,51 @@ class Cart extends Component {
     };
 
     render() {
+        console.log(this.props)
+        let viewHeight = window.innerHeight;
+        console.log(viewHeight)
         return (
             // <h2>hi</h2>
             <div className="modalHolder">
-                <a
-                    className="waves-effect waves-light btn modal-trigger"
-                    href="#modal1"
-                >
-                    View Cart
-                </a>
-                <div id="modal1" className="modal">
-                    <div className="modal-content">
+                {
+                    this.props.carts.length > 0
+                        ? <div className="fixed-action-btn click-to-toggle">
+                            <a className="btn-floating btn-large blue modal-trigger pulse" href="#modal1">
+                                <i className="large material-icons">shopping_cart</i>
+                            </a>
+                        </div>
+                        : null
+                }
+
+
+                <div id="modal1" className="modal bottom-sheet">
+                    <div className=" row modal-header">
+                        <div className='left'>
+                            <i className="material-icons blue-text">today</i>
+                            <DatePicker
+                                selected={this.state.returnDate}
+                                onChange={this.handleDateChange}
+                            />
+                        </div>
+
+                        <a
+                            href="#!"
+                            onClick={() => this.handleCheckout()}
+                            className="modal-close waves-effect waves-green btn-flat right"
+                        >
+                            Checkout
+                        </a>
+                    </div>
+                    <div className="modal-content" style={{ "min-height": '300px' }}>
+
                         <div className="row">
                             {this.props.carts.map((cart, index) => {
+                                console.log(cart)
                                 return (
                                     <CartCard
                                         name={cart.name}
-                                        condition={cart.condion}
+                                        category={cart.category}
+                                        condition={cart.condition}
                                         key={index}
                                         {...this.state}
                                     />
@@ -85,18 +113,7 @@ class Cart extends Component {
                             })}
                         </div>
                     </div>
-                    <DatePicker
-                        selected={this.state.returnDate}
-                        onChange={this.handleDateChange}
-                    />
-                    <div className="modal-footer">
-                        <button
-                            onClick={() => this.handleCheckout()}
-                            className="modal-close waves-effect waves-green btn-flat"
-                        >
-                            Checkout
-                        </button>
-                    </div>
+
                 </div>
             </div>
         );

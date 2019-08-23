@@ -1,7 +1,7 @@
 .react-datepicker__input-container {
-    padding-left:40px;
+    padding-left: 40px;
 }
 
 .react-datepicker-popper[data-placement^="bottom"] {
-    padding-left:40px;
+    padding-left: 40px;
 }
