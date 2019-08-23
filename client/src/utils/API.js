@@ -2,6 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 export default {
+    // USERS
     getAllUsers: () => {
         return axios.get('/api/users');
     },
@@ -14,10 +15,45 @@ export default {
             }
         });
     },
-    addNewItem: itemData => {
-        console.log(itemData);
-        return axios.post(`/api/items`, itemData);
+
+    // ITEMS
+    getItems: () => {
+        return axios.get("/api/items", {
+            headers: {
+                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+            }
+        })
     },
+    searchItems: (filter, query) => {
+        return axios.get("/api/items", {
+            headers: {
+                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+            },
+            params: {
+                [filter]: query
+            }
+        })
+    },
+    addNewItem: (itemData) => {
+        console.log(itemData);
+        return axios.post(`/api/items`, itemData)
+    },
+    editItem: (itemID, field, value) => {
+        return axios.patch("/api/items/" + itemID, { [field]: value }, {
+            headers: {
+                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+            }
+        })
+    },
+    deleteItem: (itemID) => {
+        return axios.delete("/api/items/" + itemID, {
+            headers: {
+                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+            }
+        })
+    },
+
+    // CHECKOUTS
     getAllOverdue: () => {
         return axios.get('/api/checkouts', {
             headers: {
@@ -40,20 +76,16 @@ export default {
             }
         });
     },
-    getItems: () => {
-        return axios.get('/api/items', {
-            headers: {
-                authorization: '86b89440-bb1d-11e9-8a28-0f10265f69af'
-            }
-        });
-    },
-    searchItems: (filter, query) => {
-        return axios.get('/api/items', {
+  
+    // AUTH
+    confirmPassword: (email, password) => {
+        return axios.post("/api/auth/password", {
             headers: {
                 authorization: '86b89440-bb1d-11e9-8a28-0f10265f69af'
             },
-            params: {
-                [filter]: query
+            body: {
+                email: email,
+                password: password
             }
         });
     },
