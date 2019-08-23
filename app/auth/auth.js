@@ -32,6 +32,11 @@ const roles = [
                 actions: ['create', 'delete', 'list', 'retrieve', 'update'],
                 resource: 'checkouts',
                 scope: 'limited'
+            },
+            {
+                actions: ['list', 'retrieve'],
+                resource: 'items',
+                scope: 'unlimited'
             }
         ]
     }

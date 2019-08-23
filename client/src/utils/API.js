@@ -3,61 +3,80 @@ import moment from 'moment';
 
 export default {
     // USERS
-    getAllUsers: () => {
-        return axios.get('/api/users');
+    getAllUsers: session => {
+        return axios.get('/api/users', {
+            headers: {
+                'x-session-token': session
+            }
+        });
     },
-    getFilteredUsers: (filter, query) => {
-        return axios.request({
-            method: 'GET',
-            url: `/api/users`,
+    getFilteredUsers: (filter, query, session) => {
+        return axios.request(
+            {
+                method: 'GET',
+                url: `/api/users`,
+                params: {
+                    [filter]: query
+                }
+            },
+            {
+                headers: {
+                    'x-session-token': session
+                }
+            }
+        );
+    },
+
+    // ITEMS
+    getItems: session => {
+        return axios.get('/api/items', {
+            headers: {
+                'x-session-token': session
+            }
+        });
+    },
+    searchItems: (filter, query, session) => {
+        return axios.get('/api/items', {
+            headers: {
+                'x-session-token': session
+            },
             params: {
                 [filter]: query
             }
         });
     },
-
-    // ITEMS
-    getItems: () => {
-        return axios.get("/api/items", {
-            headers: {
-                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
-            }
-        })
-    },
-    searchItems: (filter, query) => {
-        return axios.get("/api/items", {
-            headers: {
-                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
-            },
-            params: {
-                [filter]: query
-            }
-        })
-    },
-    addNewItem: (itemData) => {
+    addNewItem: (itemData, session) => {
         console.log(itemData);
-        return axios.post(`/api/items`, itemData)
-    },
-    editItem: (itemID, field, value) => {
-        return axios.patch("/api/items/" + itemID, { [field]: value }, {
+        return axios.post(`/api/items`, itemData, {
             headers: {
-                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+                'x-session-token': session
             }
-        })
+        });
     },
-    deleteItem: (itemID) => {
-        return axios.delete("/api/items/" + itemID, {
-            headers: {
-                authorization: "86b89440-bb1d-11e9-8a28-0f10265f69af"
+    editItem: (itemID, field, value, session) => {
+        return axios.patch(
+            '/api/items/' + itemID,
+            { [field]: value },
+            {
+                headers: {
+                    'x-session-token': session
+                }
             }
-        })
+        );
+    },
+    deleteItem: (itemID, session) => {
+        return axios.delete('/api/items/' + itemID, {
+            headers: {
+                'x-session-token': session
+            }
+        });
     },
 
     // CHECKOUTS
-    getAllOverdue: () => {
+    getAllOverdue: session => {
         return axios.get('/api/checkouts', {
             headers: {
-                authorization: '86b89440-bb1d-11e9-8a28-0f10265f69af'
+                'x-session-token': session
             },
             params: {
                 return: {
@@ -66,20 +85,20 @@ export default {
             }
         });
     },
-    getAllPending: () => {
+    getAllPending: session => {
         return axios.get('/api/checkouts', {
             headers: {
-                authorization: '86b89440-bb1d-11e9-8a28-0f10265f69af'
+                'x-session-token': session
             },
             params: {
                 status: 'pending'
             }
         });
     },
-  
+
     // AUTH
     confirmPassword: (email, password) => {
-        return axios.post("/api/auth/password", {
+        return axios.post('/api/auth/password', {
             headers: {
                 authorization: '86b89440-bb1d-11e9-8a28-0f10265f69af'
             },

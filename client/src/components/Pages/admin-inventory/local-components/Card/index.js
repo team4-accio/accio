@@ -55,10 +55,10 @@ class Card extends Component {
     // UNTESTED!!!!!!!
     deleteItem() {
         // API Call for Vallidating Password
-        API.getSession(localStorage.sessionid)
+        API.getSession(localStorage.sessionid, this.props.sessionToken)
             .then((result) => {
                 console.log(result);
-                API.confirmPassword(result.data.email, this.refs.passwordConfirm.value)
+                API.confirmPassword(result.data.email, this.refs.passwordConfirm.value, this.props.sessionToken)
                     .then((result) => {
                         console.log(result);
                         // API.deleteItem(this.props.item._id);
@@ -68,7 +68,7 @@ class Card extends Component {
     }
     editItemName() {
         //API CALL TO EDIT NAME
-        API.editItem(this.props.item._id, 'name', this.state.itemName)
+        API.editItem(this.props.item._id, 'name', this.state.itemName, this.props.sessionToken)
             .then(() => {
                 this.setState({ clickedEditName: false });
                 this.props.updateOnItemChange(this.props.item.category);
@@ -77,7 +77,7 @@ class Card extends Component {
     }
     editItemAvailability() {
         //API CALL TO EDIT AVAILABILITY
-        API.editItem(this.props.item._id, 'available', !this.state.isAvailable)
+        API.editItem(this.props.item._id, 'available', !this.state.isAvailable, this.props.sessionToken)
             .then(() => {
                 this.setState({ clickedEditAvailability: false, isAvailable: !this.state.isAvailable });
                 this.props.updateOnItemChange(this.props.item.category);
@@ -86,7 +86,7 @@ class Card extends Component {
     editItemCondition() {
         //API CALL TO EDIT CONDITION
         setTimeout(() => {
-            API.editItem(this.props.item._id, 'condition', this.state.itemCondition)
+            API.editItem(this.props.item._id, 'condition', this.state.itemCondition,this.props.sessionToken)
                 .then(() => {
                     this.setState({ clickedEditCondition: false });
                     this.props.updateOnItemChange(this.props.item.category);
