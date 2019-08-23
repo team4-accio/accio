@@ -14,7 +14,7 @@ const itemSchema = new Schema(
             type: Boolean
         },
         category: {
-            enum: ['Laptop - Mac', 'Laptop - PC', 'iPad', 'keyboard', 'mouse'],
+            enum: ['Laptop - Mac', 'Laptop - PC', 'iPad', 'keyboard', 'mouse', 'Deleted'],
             required: true,
             trim: true,
             type: String
@@ -54,7 +54,7 @@ const itemSchema = new Schema(
 );
 
 // Filters duplicate tags
-itemSchema.methods.filterTags = function() {
+itemSchema.methods.filterTags = function () {
     this.tags = this.tags.filter(
         (tag, index, tags) => tags.indexOf(tag) === index
     );

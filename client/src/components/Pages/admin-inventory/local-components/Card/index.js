@@ -55,16 +55,25 @@ class Card extends Component {
     // UNTESTED!!!!!!!
     deleteItem() {
         // API Call for Vallidating Password
+        console.log(this.props.sessionToken)
         API.getSession(localStorage.sessionid, this.props.sessionToken)
             .then((result) => {
                 console.log(result);
                 API.confirmPassword(result.data.email, this.refs.passwordConfirm.value, this.props.sessionToken)
                     .then((result) => {
                         console.log(result);
-                        // Needs to change category to Deleted
-                        // API.deleteItem(this.props.item._id);
-
-                        // this.props.updateOnItemChange(this.props.item.category);
+                        // changes category to deleted
+                        API.editItem(this.props.item._id, 'category', 'Deleted', this.props.sessionToken)
+                            .then(() => {
+                                this.props.updateOnItemChange(this.props.item.category);
+                            });
+                    })
+                    .catch(result => {
+                        console.log(result)
+                        M.toast({
+                            html: 'Incorrect Password',
+                            classes: 'redToast'
+                        });
                     })
             })
     }
