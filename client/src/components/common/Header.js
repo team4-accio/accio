@@ -14,6 +14,7 @@ const imageFix = {
 };
 
 
+
 function Header(props) {
     console.log(props)
     return (
@@ -33,9 +34,11 @@ function Header(props) {
                     }
 
                 </ul>
+      
                 <Link to="/">
                     <img src={logo} alt="Logo" className="brand-logo center" style={imageFix} />
                 </Link>
+
                 <ul id="nav-mobile" className="right">
                     {props.children}
                 </ul>
