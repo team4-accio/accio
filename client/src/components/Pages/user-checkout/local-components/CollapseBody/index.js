@@ -10,7 +10,7 @@ class CollapseBody extends Component {
         // console.log(props)
         this.state = {
             filteredInventory: [],
-            categories: ["Laptop - Mac", "Laptop - PC", "iPad", "keyboard"]
+            categories: ["Laptop - Mac", "Laptop - PC", "iPad", "keyboard", "mouse"]
 
         }
 
@@ -43,6 +43,12 @@ class CollapseBody extends Component {
             console.log(currentInventory.filter(each => each.category === 'keyboard'))
             this.setState({
                 filteredInventory: currentInventory.filter(each => each.category === 'keyboard' && each.available === true)
+            })
+        } else if (action === 'mouse') {
+            // console.log("conditional ipad")
+            console.log(currentInventory.filter(each => each.category === 'mouse'))
+            this.setState({
+                filteredInventory: currentInventory.filter(each => each.category === 'mouse' && each.available === true)
             })
         }
     }
