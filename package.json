@@ -30,10 +30,12 @@
   },
   "dependencies": {
     "dotenv": "^8.0.0",
+    "emailjs-com": "^2.3.2",
     "express": "^4.17.1",
     "hashpass": "0.0.0",
     "if-env": "^1.0.4",
     "mongoose": "^5.6.7",
+    "react-vis": "^1.11.7",
     "uuid": "^3.3.2"
   }
 }
