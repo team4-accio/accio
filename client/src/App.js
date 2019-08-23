@@ -55,7 +55,13 @@ class App extends Component {
                     switchState: res.data.role
                 })
             )
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+
+                this.setState({
+                    switchState: 'login'
+                });
+            });
     };
 
     // Event handler to update state on login
@@ -119,7 +125,15 @@ class App extends Component {
                     <Route
                         exact
                         path="/login"
-                        render={() => <Redirect to={this.state.path} />}
+                        render={() => (
+                            <Redirect
+                                to={
+                                    this.state.path === '/login'
+                                        ? '/dashboard'
+                                        : this.state.path
+                                }
+                            />
+                        )}
                     />
                     <Route render={() => <Redirect to={'/dashboard'} />} />
                 </Switch>
@@ -161,9 +175,17 @@ class App extends Component {
                     <Route
                         exact
                         path="/login"
-                        render={() => <Redirect to={this.state.path} />}
+                        render={() => (
+                            <Redirect
+                                to={
+                                    this.state.path === '/login'
+                                        ? '/dashboard'
+                                        : this.state.path
+                                }
+                            />
+                        )}
                     />
-                    <Route render={() => <Redirect to="/dashboard" />} />
+                    <Route render={() => <Redirect to={'/dashboard'} />} />
                 </Switch>
             </Wrapper>
             <Footer />

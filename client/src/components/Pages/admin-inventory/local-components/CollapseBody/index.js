@@ -15,7 +15,6 @@ class CollapseBody extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
         this.setState(
             {
                 type: nextProps.category,
@@ -32,11 +31,11 @@ class CollapseBody extends Component {
                         this.state.items.map((item) => (
                             <Card
                                 item={item}
+                                updateOnItemChange={(category) => this.props.updateOnItemChange(category)}
                             />
                         ))
                     }
                 </div>
-
             </div>
         );
     }

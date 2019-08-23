@@ -14,7 +14,8 @@ class AdminInventory extends Component {
 
         // Set some state
         this.state = {
-            sortedItems: {}
+            sortedItems: {},
+            activeCategory: ""
         }
     }
 
@@ -24,9 +25,25 @@ class AdminInventory extends Component {
 
         M.AutoInit();
     }
+    componentDidUpdate() {
+        M.AutoInit();
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems, {
+            closeOnClick: false,
+            constrainWidth: false
+        });
+
+    }
     // this function will be sent to NewItemBtn so it can call and update this component on successful item add
     updateOnNewItem() {
         this.getItems();
+    }
+    // this function will be sent to CollapseBody and then to Card so it can call and update this component on successful item edit
+    updateOnItemChange(category) {
+        console.log(category)
+        this.setState({ activeCategory: category })
+        this.getItems();
+        M.AutoInit();
     }
     getItems() {
         axios.get('/api/items')
@@ -70,10 +87,17 @@ class AdminInventory extends Component {
                 <ul className="collapsible">
 
                     {Object.keys(this.state.sortedItems).map((keyName, keyIndex) => (
-                        <li key={keyIndex + '-li'}>
+                        <li
+                            key={keyIndex + '-li'}
+                            className={keyName === this.state.activeCategory ? "active" : ""}
+                        >
                             <div className="collapsible-header"><i className="material-icons">create</i>{keyName}</div>
-                            <CollapseBody category={keyName} key={keyIndex} items={this.state.sortedItems[keyName]} >
-                            </CollapseBody>
+                            <CollapseBody
+                                category={keyName}
+                                key={keyIndex}
+                                items={this.state.sortedItems[keyName]}
+                                updateOnItemChange={(category) => this.updateOnItemChange(category)}
+                            />
                         </li>
                     ))}
 
