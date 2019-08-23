@@ -5,7 +5,7 @@ import {
     Redirect,
     Switch
 } from 'react-router-dom';
-import { Header, HeaderLink, Footer, Wrapper } from './components/common';
+import { Header, HeaderLink, Wrapper } from './components/common';
 import {
     AdminAction,
     AdminDashboard,
@@ -124,7 +124,7 @@ class App extends Component {
                     <Route render={() => <Redirect to={'/dashboard'} />} />
                 </Switch>
             </Wrapper>
-            <Footer />
+            {/* <Footer /> */}
         </Router>
     );
 
@@ -166,7 +166,7 @@ class App extends Component {
                     <Route render={() => <Redirect to="/dashboard" />} />
                 </Switch>
             </Wrapper>
-            <Footer />
+            {/* <Footer /> */}
         </Router>
     );
 
@@ -184,7 +184,7 @@ class App extends Component {
                     <Route render={() => <Redirect to="/login" />} />
                 </Switch>
             </Wrapper>
-            <Footer />
+            {/* <Footer /> */}
         </Router>
     );
 
