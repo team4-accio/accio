@@ -14,6 +14,7 @@ const imageFix = {
 };
 
 
+
 function Header(props) {
     return (
         <nav className="navbar">
@@ -21,9 +22,11 @@ function Header(props) {
                 <ul id="nav-mobile" className="left">
                     <HeaderLogout logout={props.logout} />
                 </ul>
+      
                 <Link to="/">
                     <img src={logo} alt="Logo" className="brand-logo center" style={imageFix} />
                 </Link>
+
                 <ul id="nav-mobile" className="right">
                     {props.children}
                 </ul>
