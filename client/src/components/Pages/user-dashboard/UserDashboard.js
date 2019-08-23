@@ -5,6 +5,8 @@ import DashCheckout from "./local-components/DashCheckout";
 import DashAccount from "./local-components/DashAccount";
 import moment from "moment";
 import User from "../user-checkout/UserCheckout";
+import "./style.css";
+
 
 class UserDashboard extends Component {
     constructor(props) {
