@@ -24,11 +24,11 @@ class Login extends Component {
             password: this.state.password
         })
             .then(res => {
+                this.props.login(res.data);
                 localStorage.setItem(
                     'sessionid',
                     res.headers['x-session-token']
                 );
-                this.props.login(res.data);
             })
             .catch(err => console.log(err));
     };
