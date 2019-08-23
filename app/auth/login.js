@@ -16,9 +16,9 @@ const utils = require('../utils');
 router
     .route('/')
     // POST route to log in a user
-    .post(function(req, res) {
+    .post(function (req, res) {
         User.findOne({ email: req.body.email })
-            .then(function(user) {
+            .then(function (user) {
                 if (user === null) {
                     res.status(404).json({
                         error: {
@@ -38,14 +38,15 @@ router
                         )
                             .populate({
                                 path: 'checkouts',
+                                populate: { path: 'items' },
                                 options: { sort: { _id: -1 } }
                             })
-                            .then(function(dbUser) {
+                            .then(function (dbUser) {
                                 res.status(200)
                                     .header('x-session-token', dbUser.session)
                                     .json(utils.format.usersResponse(dbUser));
                             })
-                            .catch(function(err) {
+                            .catch(function (err) {
                                 res.status(500).json(err);
                             });
                     } else {
@@ -58,23 +59,23 @@ router
                     }
                 }
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 res.status(500).json(err);
             });
     })
     // DELETE route to log out a user
-    .delete(function(req, res) {
+    .delete(function (req, res) {
         User.findOneAndUpdate(
             { session: req.headers['x-session-token'] },
             { session: null },
             { new: true }
         )
-            .then(function(user) {
+            .then(function (user) {
                 res.status(200).json({
                     message: `User: ${user.email} logged out successfully`
                 });
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 res.status(500).json(err);
             });
     });

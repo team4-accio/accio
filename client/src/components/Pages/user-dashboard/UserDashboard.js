@@ -23,9 +23,10 @@ class UserDashboard extends Component {
         this.sortCheckouts(this.props.sessionUser.checkouts);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     // this.setState({ dashType: nextProps.type })
-    // }
+    componentWillReceiveProps(nextProps) {
+        // this.setState({ dashType: nextProps.type })
+        this.sortCheckouts(this.nextProps.sessionUser.checkouts);
+    }
 
     sortCheckouts(checkouts) {
         let obj = {
@@ -52,7 +53,7 @@ class UserDashboard extends Component {
         return (
             <div className="container" >
                 <ul className="collection with-header">
-                    <li className="collection-header"><h4>Hello {this.props.sessionUser.name}! </h4></li>
+                    <li className="collection-header"><h4>Hello {this.props.sessionUser.name}! <DashAccount /></h4></li>
                 </ul>
                 <div></div>
                 <div className="row" >
@@ -64,9 +65,7 @@ class UserDashboard extends Component {
                             />
                         </div>
                         {/* <DashCheckout /> */}
-                        <div className="row">
-                            <DashAccount />
-                        </div>
+
                     </div>
                     <div className='col s6'>
                         <DashHistory checkouts={this.state.sortedCheckouts} />

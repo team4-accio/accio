@@ -5,7 +5,6 @@ import M from "materialize-css";
 
 
 export default function Collection(props) {
-    //console.log(props.checkouts)
 
     // Creates Overdue or Out lists
     function renderCurrentList() {
