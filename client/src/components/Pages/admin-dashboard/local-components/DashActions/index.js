@@ -34,29 +34,29 @@ class DashActions extends Component {
         return (
 
             <div className="conatainer">
-                        <div className="card">
-                            <a href='/admin/action'>
-                                <div className="card-content ">
-                                    <i className="material-icons " style={{ fontSize: '20vw' }}>playlist_add_check </i>
-    
-                                    <span className="card-title grey-text text-darken-4 center-align">Actions</span>
-                                    <div className="divider" />
-    
-                                    {this.state.pendingCount > 0
-                                        ? <p>{this.state.pendingCount} Requests Pending</p>
-                                        : null
-                                    }
-                                    {this.state.overdueCount > 0
-                                        ? <p>{this.state.overdueCount} Checkouts Overdue</p>
-                                        : null
-                                    }
-                                    {this.state.overdueCount === 0 && this.state.pendingCount === 0
-                                        ? <p>No Current Actions</p>
-                                        : null
-                                    }
-                                </div>
-                            </a>
-                      
+                <div className="card">
+                    <a href='/action'>
+                        <div className="card-content ">
+                            <i className="material-icons " style={{ fontSize: '20vw' }}>playlist_add_check </i>
+
+                            <span className="card-title grey-text text-darken-4 center-align">Actions</span>
+                            <div className="divider" />
+
+                            {this.state.pendingCount > 0
+                                ? <p>{this.state.pendingCount} Requests Pending</p>
+                                : null
+                            }
+                            {this.state.overdueCount > 0
+                                ? <p>{this.state.overdueCount} Checkouts Overdue</p>
+                                : null
+                            }
+                            {this.state.overdueCount === 0 && this.state.pendingCount === 0
+                                ? <p>No Current Actions</p>
+                                : null
+                            }
+                        </div>
+                    </a>
+
                 </div>
 
             </div>
