@@ -76,7 +76,7 @@ export default {
             }
         });
     },
-  
+
     // AUTH
     confirmPassword: (email, password) => {
         return axios.post("/api/auth/password", {
@@ -97,5 +97,11 @@ export default {
     },
     login: user => {
         return axios.post(`/login`, user);
+    },
+    logout: () => {
+        return axios.delete("/login", {
+            headers: { "x-session-token": localStorage.getItem("sessionid") }
+        })
     }
+
 };

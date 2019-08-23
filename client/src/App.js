@@ -71,11 +71,22 @@ class App extends Component {
             switchState: user.role
         });
     };
+    handleLogout = () => {
+        API.logout()
+            .then(res => {
+                localStorage.removeItem("sessionid");
+                this.setState({
+                    sessionUser: {},
+                    switchState: 'login'
+                });
+            })
+            .catch(err => console.log(err));
+    };
 
     // Render admin nav and routes
     renderAdminRoutes = () => (
         <Router>
-            <Header>
+            <Header logout={this.handleLogout}>
                 {this.state.links.admin.map(link => (
                     <HeaderLink link={'/' + link}>{link}</HeaderLink>
                 ))}
@@ -145,7 +156,7 @@ class App extends Component {
     // Render user nav and routes
     renderUserRoutes = () => (
         <Router>
-            <Header>
+            <Header logout={this.handleLogout}>
                 {this.state.links.user.map(link => (
                     <HeaderLink link={'/' + link}>{link}</HeaderLink>
                 ))}
