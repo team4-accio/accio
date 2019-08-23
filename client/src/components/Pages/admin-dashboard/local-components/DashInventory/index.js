@@ -168,7 +168,7 @@ class DashInventory extends Component {
         return (
             <div className="conatainer">
                 <div className="card">
-                    <a href="/admin/inventory">
+                    <a href="/inventory">
                         <div className="card-content ">
                             <span className="card-title grey-text text-darken-4 center-align">
                                 Inventory

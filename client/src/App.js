@@ -55,7 +55,13 @@ class App extends Component {
                     switchState: res.data.role
                 })
             )
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+
+                this.setState({
+                    switchState: 'login'
+                });
+            });
     };
 
     // Event handler to update state on login
