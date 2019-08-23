@@ -67,6 +67,7 @@ class App extends Component {
     // Event handler to update state on login
     handleLogin = user => {
         this.setState({
+            sessionToken: localStorage.getItem('sessionid'),
             sessionUser: user,
             switchState: user.role
         });
@@ -211,6 +212,8 @@ class App extends Component {
     );
 
     render() {
+        console.log('my state');
+        console.log(this.state);
         switch (this.state.switchState) {
             case 'admin':
                 return this.renderAdminRoutes();
