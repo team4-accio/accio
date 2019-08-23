@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
+import './style.css';
 
 class Login extends Component {
     state = {
@@ -35,30 +36,36 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col s10" />
-                        <form onSubmit={this.handleSubmit}>
-                            <label>
-                                Email <span className="req">*</span>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    className="width-50"
-                                    onChange={this.handleChange}
-                                />
-                            </label>
 
-                            <label>
-                                Password
-                                <input
-                                    type="password"
-                                    name="password"
-                                    className="width-50"
-                                    onChange={this.handleChange}
-                                />
-                            </label>
+            <div className="container">
+                <div className="login">
+                    <div className="row">
+                        <form className="col s12" onSubmit={this.handleSubmit}>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        className="validate"
+                                        onChange={this.handleChange}
+                                    />
+                                    <label htmlFor="email">Email</label>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <input
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        className="validate"
+                                        onChange={this.handleChange}
+                                    />
+                                    <label htmlFor="password">Password</label>
+                                </div>
+                            </div>
                             <p>
                                 <button type="submit" className="btn btn-blue">
                                     Log in
