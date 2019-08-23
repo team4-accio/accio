@@ -30,14 +30,12 @@ class User extends React.Component {
     }
 
     getItems() {
-        const config = {
-            headers: {
-                'x-session-token': this.props.sessionToken
-            }
-        };
-
         axios
-            .get('/api/items', config)
+            .get('/api/items', {
+                headers: {
+                    'x-session-token': this.props.sessionToken
+                }
+            })
             .then(response => {
                 this.setState({
                     inventory: response.data
