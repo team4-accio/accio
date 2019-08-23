@@ -59,11 +59,11 @@ const authenticate = function(req, res, next) {
                 if (
                     Object.keys(userPrivileges).length >= 0 && // User has access to the resource
                     userPrivileges.actions.includes(
-                        requiredPrivileges.action && // User can perform action on resource
-                            (userPrivileges.scope === 'unlimited' || // User can access all documents
-                                (user._id == req.query.user || // Request is made on user owned object
-                                    user._id == req.body.user))
-                    )
+                        requiredPrivileges.action
+                    ) && // User can perform action on resource
+                    (userPrivileges.scope === 'unlimited' || // User can access all documents
+                        (user._id == req.query.user || // Request is made on user owned object
+                            user._id == req.body.user))
                 ) {
                     next();
                 } else {
