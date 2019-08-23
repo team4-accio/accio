@@ -116,5 +116,11 @@ export default {
     },
     login: user => {
         return axios.post(`/login`, user);
+    },
+    logout: () => {
+        return axios.delete("/login", {
+            headers: { "x-session-token": localStorage.getItem("sessionid") }
+        })
     }
+
 };
