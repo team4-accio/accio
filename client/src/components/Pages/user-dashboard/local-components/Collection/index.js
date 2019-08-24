@@ -33,7 +33,7 @@ export default function Collection(props) {
             return (
                 <li className="collection-item avatar">
                     <span className="title">
-                        {moment(checkout.createdAt).from(today)}
+                        {moment(checkout.out).from(today)}
                     </span>
                     <p>
                         Items: {checkout.items.map((item, i) => {
