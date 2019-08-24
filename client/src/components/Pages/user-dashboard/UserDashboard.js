@@ -26,7 +26,7 @@ class UserDashboard extends Component {
 
     componentWillReceiveProps(nextProps) {
         // this.setState({ dashType: nextProps.type })
-        this.sortCheckouts(this.nextProps.sessionUser.checkouts);
+        this.sortCheckouts(nextProps.sessionUser.checkouts);
     }
 
     sortCheckouts(checkouts) {

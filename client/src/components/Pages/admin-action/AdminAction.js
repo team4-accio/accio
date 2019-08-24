@@ -17,7 +17,7 @@ class AdminAction extends Component {
 
     componentDidMount() {
         this.getCheckouts();
-        this.getUsername();
+        //this.getUsername();
         M.AutoInit();
         console.log("Component Did Mount")
     }
