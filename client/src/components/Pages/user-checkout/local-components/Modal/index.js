@@ -51,7 +51,7 @@ class Cart extends Component {
                 }
             })
             .then(
-                function(data) {
+                function (data) {
                     console.log(data);
                     this.props.handlePostSuccess(data);
                 }.bind(this)
@@ -92,7 +92,7 @@ class Cart extends Component {
                     <div className="modal-footer">
                         <button
                             onClick={() => this.handleCheckout()}
-                            className="modal-close waves-effect waves-green btn-flat"
+                            className="modal-close waves-effect waves-green btn btn-blue"
                         >
                             Checkout
                         </button>
