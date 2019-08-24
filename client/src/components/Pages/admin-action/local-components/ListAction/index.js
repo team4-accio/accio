@@ -83,8 +83,12 @@ class ListAction extends React.Component {
             <li className="collection-item avatar">
                 <div id="userInfo" style={userInfoStyle}>
                     <p>
-                        Username:{this.state.name}<br />
-                        Description: {this.state.action.items[0].description} <br />
+                        Username: {this.state.name}<br />
+                        Items: {this.state.action.items.map((item, i) => {
+                            return (i > 0)
+                                ? ", " + item.name
+                                : item.name
+                        })}<br />
                         Checkout Date: {moment(this.state.action.out).add(10, 'days').calendar()} to {moment(this.state.action.return).add(10, 'days').calendar()}<br />
                     </p>
 
