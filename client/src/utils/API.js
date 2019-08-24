@@ -97,15 +97,12 @@ export default {
     },
 
     // AUTH
-    confirmPassword: (email, password) => {
-        return axios.post('/api/auth/password', {
-            headers: {
-                authorization: '86b89440-bb1d-11e9-8a28-0f10265f69af'
-            },
-            body: {
-                email: email,
-                password: password
-            }
+    confirmPassword: (email, password, session) => {
+        console.log(email, password, session)
+        return axios.post('/password', {
+            headers: { 'x-session-token': session },
+            email: email,
+            password: password
         });
     },
     // Retrieve session user from session token

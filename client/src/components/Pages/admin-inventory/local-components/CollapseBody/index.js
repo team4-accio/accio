@@ -8,14 +8,16 @@ class CollapseBody extends Component {
         super(props);
         this.state = {
             type: props.category,
-            items: props.items
+            items: props.items,
+            sessionToken: props.sessionToken
         };
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             type: nextProps.category,
-            items: nextProps.items
+            items: nextProps.items,
+            sessionToken: nextProps.sessionToken
         });
     }
 
