@@ -19,11 +19,11 @@ class CollapseBody extends Component {
     }
 
     passUsername = id => {
-        console.log(this.props)
+        //console.log(this.props)
         this.props.getUsername(id);
     }
-    
-    componentWillReceiveProps(nextProps){
+
+    componentWillReceiveProps(nextProps) {
         this.setState(
             {
                 type: nextProps.category,
@@ -42,23 +42,24 @@ class CollapseBody extends Component {
         return (
             <div className="collapsible-body">
                 <div className="row">
-                <ul className="collection">
-                {
-                    this.state.actions.map((action) => (
-                        <ListAction 
-                            action={action}
-                            type={this.state.type}
-                            passUsername={(id) => this.passUsername(id)}
-                            notifyButton={(userNameID) => this.props.notifyButton(userNameID)}
-                            approveButton={(checkoutID) => this.props.approveButton(checkoutID)}
-                            rejectButton={(checkoutID) => this.props.rejectButton(checkoutID)}
-                            checkinButton={(checkoutID) => this.props.checkinButton(checkoutID)}
-                        />
-                    ))
-                }
-                </ul>
+                    <ul className="collection">
+                        {
+                            this.state.actions.map((action) => (
+                                <ListAction
+                                    action={action}
+                                    type={this.state.type}
+                                    passUsername={(id) => this.passUsername(id)}
+                                    notifyButton={(userNameID) => this.props.notifyButton(userNameID)}
+                                    approveButton={(checkoutID) => this.props.approveButton(checkoutID)}
+                                    rejectButton={(checkoutID) => this.props.rejectButton(checkoutID)}
+                                    checkinButton={(checkoutID) => this.props.checkinButton(checkoutID)}
+                                    sessionToken={this.props.sessionToken}
+                                />
+                            ))
+                        }
+                    </ul>
                 </div>
-               
+
             </div>
         );
     }

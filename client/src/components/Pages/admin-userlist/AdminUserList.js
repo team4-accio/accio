@@ -12,7 +12,7 @@ class AdminUserList extends Component {
         userList: [],
         adminList: [],
         showingAll: true,
-        searchFilter: 'Name',
+        searchFilter: 'name',
         value: '',
         searchData: {}
     };
@@ -28,17 +28,17 @@ class AdminUserList extends Component {
         //console.log(filter, query)
         (filter === 'all'
             ? API.getAllUsers(this.props.sessionToken)
-            : ['Name', 'Email', 'Status'].includes(filter)
-            ? API.getFilteredUsers(filter, query, this.props.sessionToken) //cant have body in get req w/ axios
-            : filter === 'Overdue'
-            ? this.getOverdueUsers()
-            : console.log('Not a valid filter')
+            : ['name', 'email', 'status'].includes(filter)
+                ? API.getFilteredUsers(filter, query, this.props.sessionToken) //cant have body in get req w/ axios
+                : filter === 'Overdue'
+                    ? this.getOverdueUsers()
+                    : console.log('Not a valid filter')
         )
             .then(response => {
                 console.log(response);
                 this.sortUsers(response.data, filter);
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
     }
@@ -77,9 +77,9 @@ class AdminUserList extends Component {
             let overdueUsers = response.data.filter(val => {
                 return val.checkouts.length > 0
                     ? val.checkouts.filter(checkout => {
-                          let returnDate = moment(checkout.return);
-                          return returnDate.isBefore(today);
-                      })
+                        let returnDate = moment(checkout.return);
+                        return returnDate.isBefore(today);
+                    })
                     : false;
             });
             console.log(overdueUsers);
@@ -117,7 +117,7 @@ class AdminUserList extends Component {
     changeSearchFilter(type) {
         if (type === 'all') {
             this.getUsers('all');
-            this.setState({ showingAll: true });
+            this.setState({ showingAll: true, searchFilter: 'name' });
         } else if (type === 'Overdue') {
             this.getUsers('Overdue');
             this.setState({ showingAll: false });
@@ -130,6 +130,8 @@ class AdminUserList extends Component {
     };
     handleFormSubmit = event => {
         event.preventDefault();
+        console.log(this.state.value)
+        this.getUsers(this.state.searchFilter, this.state.value)
     };
     render() {
         return (
@@ -179,7 +181,7 @@ class AdminUserList extends Component {
                                         <a
                                             href="#!"
                                             onClick={() =>
-                                                this.changeSearchFilter('Name')
+                                                this.changeSearchFilter('name')
                                             }
                                             className="waves-effect waves-teal btn-flat"
                                         >
@@ -190,9 +192,9 @@ class AdminUserList extends Component {
                                         <a
                                             href="#!"
                                             onClick={() =>
-                                                this.changeSearchFilter('Email')
+                                                this.changeSearchFilter('email')
                                             }
-                                            className="waves-effect waves-teal btn-flat disabled"
+                                            className="waves-effect waves-teal btn-flat"
                                         >
                                             Email
                                         </a>
@@ -201,12 +203,8 @@ class AdminUserList extends Component {
                                     <li>
                                         <a
                                             href="#!"
-                                            onClick={() =>
-                                                this.changeSearchFilter(
-                                                    'Status'
-                                                )
-                                            }
-                                            className="waves-effect waves-teal btn-flat disabled"
+                                            onClick={() => this.changeSearchFilter('status')}
+                                            className="waves-effect waves-teal btn-flat"
                                         >
                                             Status
                                         </a>

@@ -11,15 +11,14 @@ export default {
         });
     },
     getFilteredUsers: (filter, query, session) => {
+        console.log(filter, query)
         return axios.request(
             {
                 method: 'GET',
                 url: `/api/users`,
                 params: {
                     [filter]: query
-                }
-            },
-            {
+                },
                 headers: {
                     'x-session-token': session
                 }

@@ -226,8 +226,16 @@ class AdminAction extends Component {
         emailjs.send('default_service', 'template_ZNHve5tD', templateParams)
             .then(function (response) {
                 console.log('SUCCESS!', response.status, response.text);
+                M.toast({
+                    html: 'Reminder Email Sent!',
+                    classes: 'greenToast'
+                });
             }, function (error) {
                 console.log('FAILED...', error);
+                M.toast({
+                    html: 'Unable To Send Email',
+                    classes: 'redToast'
+                });
             });
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,8 +255,8 @@ class AdminAction extends Component {
     }
 
     getUsername = userNameID => {
-        console.log("getUsername function has been invoked");
-        console.log(userNameID)
+        // console.log("getUsername function has been invoked");
+        // console.log(userNameID)
         axios.get("/api/users/" + userNameID, {
             headers: {
                 'x-session-token': this.props.sessionToken
@@ -256,7 +264,7 @@ class AdminAction extends Component {
         }
         )
             .then((response) => {
-                console.log(response.data.name);
+                //console.log(response.data.name);
                 return (response.data.name);
             })
             .catch(function (error) {
@@ -295,9 +303,9 @@ class AdminAction extends Component {
             "Overdue": overdue
         }
 
-        console.log(obj)
+        //console.log(obj)
         this.setState({ sortedActions: obj })
-        console.log("sort actions did invoke")
+        // console.log("sort actions did invoke")
     }
 
     render() {
@@ -337,6 +345,7 @@ class AdminAction extends Component {
                                 approveButton={(checkoutID) => this.approveButton(checkoutID)}
                                 rejectButton={(checkoutID) => this.rejectButton(checkoutID)}
                                 checkinButton={(checkoutID) => this.checkinButton(checkoutID)}
+                                sessionToken={this.props.sessionToken}
                             >
                             </CollapseBody>
                         </li>
