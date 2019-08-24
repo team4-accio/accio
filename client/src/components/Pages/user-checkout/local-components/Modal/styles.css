@@ -1,3 +1,7 @@
+.modal {
+    min-height: 33em;
+}
+
 .react-datepicker__input-container {
     padding-left:40px;
 }
