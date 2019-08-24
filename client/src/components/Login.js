@@ -39,40 +39,59 @@ class Login extends Component {
 
             <div className="container">
                 <div className="login">
-                    <div className="row">
-                        <form className="col s12" onSubmit={this.handleSubmit}>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        className="validate"
-                                        onChange={this.handleChange}
-                                    />
-                                    <label htmlFor="email">Email</label>
-                                </div>
-                            </div>
+                    <div className="container s9">
+                        <div className="row">
+                            <div className="card-panel white">
 
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        className="validate"
-                                        onChange={this.handleChange}
-                                    />
-                                    <label htmlFor="password">Password</label>
-                                </div>
-                            </div>
-                            <p>
-                                <button type="submit" className="btn btn-blue">
-                                    Log in
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className="row">
+                                        <div className="input-field col s12">
+                                            <input
+                                                id="email"
+                                                name="email"
+                                                type="email"
+                                                className="validate"
+                                                onChange={this.handleChange}
+                                            />
+                                            <label htmlFor="email">
+                                                Email <span className="req">*</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="input-field col s12">
+                                            <input
+                                                id="password"
+                                                name="password"
+                                                type="password"
+                                                className="validate"
+                                                onChange={this.handleChange}
+                                            />
+                                            <label htmlFor="password">Password</label>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <button type="submit" className="btn btn-blue">
+                                            Log in
                                 </button>
-                            </p>
-                        </form>
+                                    </p>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+
+
                     </div>
+
+
+
+
+
+
+
                 </div>
             </div>
         );
