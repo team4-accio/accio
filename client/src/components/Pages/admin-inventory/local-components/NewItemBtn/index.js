@@ -37,13 +37,30 @@ class NewItemBtn extends Component {
                 data: nextProps.tags,
                 limit: Infinity,
                 minLength: 1
+
+            },
+            onChipSelect: (event, chip) => {
+                console.log('MEHHHH')
+                // let arr = event[0].M_Chips.chipsData.map(a => a.tag);
+                // this.state.formData.tags = arr;
+                // this.forceUpdate();
             },
             onChipAdd: (event, chip) => {
-                let arr = event[0].M_Chips.chipsData.map(a => a.tag);
-                this.state.formData.tags = arr;
+                // Logic for parsing manual input and autocomplete selection
+                let tagArr = this.state.formData.tags;
+
+                event[0].M_Chips.chipsData.map((a) => {
+                    if (!tagArr.includes(a.tag)) tagArr.push(a.tag);
+                })
+
+                if (!tagArr.includes(chip.textContent.slice(0, -5))) tagArr.push(chip.textContent.slice(0, -5));
+
+                this.state.formData.tags = tagArr;
                 this.forceUpdate();
             },
             onChipDelete: (event, chip) => {
+                // NOT FIRING
+                console.log(event)
                 let arr = event[0].M_Chips.chipsData.map(a => a.tag);
                 this.state.formData.tags = arr;
                 this.forceUpdate();
@@ -71,8 +88,8 @@ class NewItemBtn extends Component {
             event.target.value === 'true'
                 ? true
                 : event.target.value === 'false'
-                ? false
-                : event.target.value;
+                    ? false
+                    : event.target.value;
 
         this.state.formData[field] = value;
         this.forceUpdate();
