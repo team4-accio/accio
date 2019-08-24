@@ -78,6 +78,7 @@ export default {
                 'x-session-token': session
             },
             params: {
+                status: "approved",
                 return: {
                     $lt: moment() // Today's datetime
                 }
